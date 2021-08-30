@@ -7,6 +7,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 // const [width, height] = Dimensions.get();
+// new branch
 
 const App = () => {
   const translateY = useSharedValue(-500);
