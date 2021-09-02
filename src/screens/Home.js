@@ -88,7 +88,7 @@ const Home = () => {
       </Animated.View>
       <Animated.View style={styles.homeTransactionView}>
         <Animated.Text style={styles.homeTransactionViewHeader}>
-          Purchases This Week
+          Most Recent Purchases
         </Animated.Text>
         <Animated.View>
           {tempTransactions.map((item, index) => (
