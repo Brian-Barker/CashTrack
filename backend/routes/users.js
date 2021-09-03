@@ -44,17 +44,15 @@ user.post('/create', async (req, res) => {
     return;
   }
 
-  const user = new User({
+  const newUser = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     username: req.body.username,
     email: req.body.email,
     password: hash,
-    year: req.body.year,
-    major: req.body.major,
   });
   try {
-    const saveUser = await user.save();
+    const saveUser = await newUser.save();
     res.json(saveUser);
   } catch (err) {
     res.json({message: err});
@@ -131,9 +129,8 @@ user.post('/getUser', async (req, res) => {
       res.json({message: 'Invalid token recieved!'});
       return;
     }
-    const user = await User.findById(token._id);
-    res.json({user});
-    return;
+    const getUser = await User.findById(token._id);
+    res.json({getUser});
   } catch (err) {
     res.json({message: 'Error: Something is incorrecto!'});
   }

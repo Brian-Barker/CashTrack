@@ -21,25 +21,9 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  major: {
-    type: String,
-    required: true,
-  },
-  year: {
-    type: String,
-    required: true,
-  },
   admin: {
     type: Boolean,
     default: false,
-  },
-  points: {
-    type: Number,
-    default: 0,
-  },
-  attendedEvents: {
-    type: Array,
-    default: [],
   },
 });
 
