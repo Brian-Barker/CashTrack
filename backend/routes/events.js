@@ -20,7 +20,7 @@ event.get('/', async (req, res) => {
 
 event.post('/create', async (req, res) => {
   console.log(req.body);
-  const event = new Event({
+  const newEvent = new Event({
     title: req.body.title,
     description: req.body.description,
     date: req.body.date,
@@ -29,7 +29,7 @@ event.post('/create', async (req, res) => {
     password: req.body.password,
   });
   try {
-    const saveEvent = await event.save();
+    const saveEvent = await newEvent.save();
     res.json(saveEvent);
   } catch (err) {
     res.json({message: err});
@@ -56,9 +56,9 @@ event.post('/attend', async (req, res) => {
     res.json({message: 'Invalid user'});
     return;
   }
-  let event;
+  let existingEvent;
   try {
-    event = await Event.findById(req.body.eventID);
+    existingEvent = await Event.findById(req.body.eventID);
   } catch (err) {
     res.json({message: 'Invalid eventID'});
     return;
@@ -71,21 +71,21 @@ event.post('/attend', async (req, res) => {
     return;
   }
 
-  if (req.body.password !== event.password) {
+  if (req.body.password !== existingEvent.password) {
     res.json({message: 'Incorrect password!'});
     return;
   }
 
   event.attendeesNames.push(user.firstname + user.lastname);
   event.attendees.push(user._id);
-  user.attendedEvents.push(event._id);
+  user.attendedEvents.push(existingEvent._id);
 
-  const eventAttendee = await Event.updateOne(
-    {_id: event._id},
+  await Event.updateOne(
+    {_id: existingEvent._id},
     {
       $set: {
-        attendees: event.attendees,
-        attendeesNames: event.attendeesNames,
+        attendees: existingEvent.attendees,
+        attendeesNames: existingEvent.attendeesNames,
       },
     },
   );
