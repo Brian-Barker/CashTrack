@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const ItemCategorySchema = mongoose.Schema({
+const CategorySchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -17,4 +17,4 @@ const ItemCategorySchema = mongoose.Schema({
     children: [ this ],
 });
 
-export default mongoose.model('ItemCategory', ItemCategory);
+export default mongoose.model('Category', Category);

@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 const PurchaseSchema = mongoose.Schema({
-    itemCategory: {
+    Category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ItemCategory',
+        ref: 'Category',
         required: true,
     },
     amount: {
