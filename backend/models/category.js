@@ -11,10 +11,24 @@ const CategorySchema = mongoose.Schema({
     },
     purchases: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Purchase'
+        ref: 'Purchase',
+        required: false,
     }],
-    parent: [ this ],
-    children: [ this ],
+    parent: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true,
+    },
+    children: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        default: null,
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
+        required: true,
+    }
 });
 
-export default mongoose.model('Category', Category);
+export default mongoose.model('Category', CategorySchema);

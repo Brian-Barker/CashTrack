@@ -21,6 +21,11 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  categoryHead: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    default: null,
+  },
   admin: {
     type: Boolean,
     default: false,
