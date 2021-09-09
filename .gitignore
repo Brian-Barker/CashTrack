@@ -23,7 +23,7 @@ DerivedData
 
 # Android/IntelliJ
 #
-build/
+*build/
 .idea
 .gradle
 local.properties
@@ -57,3 +57,6 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Backend
+*.env
