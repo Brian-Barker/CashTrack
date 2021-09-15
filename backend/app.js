@@ -4,7 +4,7 @@ import cors from 'cors';
 import 'dotenv/config.js';
 import userRoutes from './routes/users.js';
 import eventRoutes from './routes/events.js';
-import categoryRoutes from './routes/categories.js';
+import category from './routes/categories.js';
 import * as path from 'path';
 import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -34,7 +34,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'build')));
 app.use('/users', userRoutes);
 app.use('/events', eventRoutes);
-app.use('/categories', categoryRoutes);
+app.use('/categories', category.categoryRoutes);
 
 // --- Routes ---
 
@@ -62,3 +62,5 @@ mongoose.connect(
 // --- Listen On Port 3001 ---
 
 app.listen(process.env.PORT || 3000);
+
+console.log('Listening on port ' + (process.env.PORT ? process.env.PORT : '3000'));

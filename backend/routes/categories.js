@@ -7,32 +7,25 @@ const category = express.Router();
 
 // --- Create Category Head (returns head) ---
 
-category.post('/createHead', async (req, res) => {
+const createHeader = async (user) => {
     try {
-        let token = verifyToken(req.body.token);
-        if (token === false) {
-            res.json({message: 'Invalid token received.'});
-            return;
-        }
-        const user = await User.findById(token._id);
-
         const head = new Category({
             name: "Budget",
-            budget: req.body.budget ? req.body.budget : 0,
+            budget: 0,
             parent: null,
-            children: [],
             user: user,
         });
 
         const saveHead = await head.save();
 
-        const updateUser = await User.updateOne({_id: user._id}, { $set: { categoryHead : saveHead } });
+        const updateUser = await User.updateOne({_id: user._id}, { $set: { categoryHead : saveHead } })
 
-        res.json(saveHead);
+        return saveHead;
     } catch (err) {
-        res.json({message: err});
+        console.log(err)
+        return err;
     }
-});
+};
 
 // --- Create Category With Parent (returns new Category) ---
 
@@ -47,23 +40,27 @@ category.post('/create', async (req, res) => {
             return;
         }
         const user = await User.findById(token._id);
-
-        const parent = await Category.findById(req.body.parentID);
+        let parent;
+        if (req.body.parentID) {
+            parent = await Category.findById(req.body.parentID);
+        } else {    // -- Default adds Category as child of Head, if no parent is specified
+            parent = await Category.findById(user.categoryHead);
+        }
 
         const newCategory = new Category({
             name: req.body.name,
             budget: req.body.budget ? req.body.budget : 0,
             parent: parent,
-            children: [],
             user: user,
         });
 
-        const saveCategory = await category.save();
+        const saveCategory = await newCategory.save();
 
-        const updateParent = await Category.updateOne({_id: req.body.parentID}, { $push: { children: saveCategory } });
+        const updateParent = await Category.updateOne({_id: parent._id}, { $push: { children: saveCategory } });
 
         res.json(saveCategory);
     } catch (err) {
+    console.log(err)
         res.json({message: err});
     }
 });
@@ -72,26 +69,69 @@ category.post('/create', async (req, res) => {
 
 category.delete('/delete', async (req, res) => {
     try {
-        const categoryToBeDeleted = await Category.findById(req.params.categoryID);
-        if (!categoryToBeDeleted) {
-            res.json({message: 'Category not found.'});
-        } else if (!categoryToBeDeleted.parent) {
-            res.json({message: 'Cannot delete head category.'});
-        }
+        const categoryToBeDeleted = await Category.findById(req.body.categoryID);
 
         const parent = await Category.findById(categoryToBeDeleted.parent._id);
         if (!parent) {
             res.json({message: 'Parent not found.'})
         }
 
-        const updateParent = await Category.updateOne({_id: parent._id}, { $pull: { children: { _id: categoryToBeDeleted._id } } });
+        const updateParent = await Category.updateOne({_id: parent._id}, {
+            $pull: { children: { _id: categoryToBeDeleted._id } }
+        });
 
-        const deleteCategory = await Category.deleteOne({_id: categoryToBeDeleted._id});
-
-        res.json(updateParent);
+        new Promise((resolve, reject) => {
+            deleteCategoryAndChildren(categoryToBeDeleted._id, resolve, reject)
+        }).then(() => { // Success
+            res.json(updateParent);
+        }).catch(() => { // Failure
+            res.json({message: 'Error: Failed to delete category and/ or children'});
+        })
     } catch (err) {
         res.json({message: err});
     }
 });
 
-export default category;
+// --- Helper Function to Recursively Delete a Category and its Children ---
+
+const deleteCategoryAndChildren = async (categoryID, res, rej) => {
+    try {
+        const categoryToBeDeleted = await Category.findById(categoryID);
+
+        if (!categoryToBeDeleted)
+            res();
+
+        let promises = [];
+
+        if (categoryToBeDeleted.children) {
+            categoryToBeDeleted.children.forEach((child) => {
+                promises.push(new Promise((resolve, reject) => {
+                    if(deleteCategoryAndChildren(child, resolve, reject) === -1) {
+                        rej();
+                    }
+                }));
+            });
+        }
+
+        Promise.all(promises).then(async () => {
+            const deleteCategory = await Category.deleteOne({_id: categoryID}, (err) => {
+                if (err) {
+                    console.log(err);
+                    rej();
+                }
+            });
+            res();
+        }).catch(() => rej());
+
+    } catch (err) {
+        console.log(err);
+    }
+
+}
+
+
+const categoryExports = {
+    categoryRoutes: category,
+    createHeader
+};
+export default categoryExports;
