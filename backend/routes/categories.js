@@ -139,10 +139,88 @@ const deleteCategoryAndChildren = async (categoryID, res, rej) => {
 
     } catch (err) {
         console.log(err);
+        rej();
     }
 
 }
 
+// -- Category Updates --
+
+category.post('/update', async (req, res, next) => {
+    if (!req.body.categoryID) {
+        console.log("Error: No categoryID provided");
+        res.json({message: "Error: No category specified"});
+    }
+    next();
+});
+
+// -- Rename --
+
+category.post('/update/rename', async (req, res) => {
+    if (!req.body.name) {
+        console.log("Error: No name provided");
+        res.json({message: "Error: No name provided"});
+    }
+    try {
+        const renameCategory = await Category.updateOneById(req.body.categoryID, { name: req.body.name });
+        res.json(renameCategory);
+    } catch (err) {
+        console.log(err);
+        res.json({message: err});
+    }
+});
+
+// -- Change Budget
+
+category.post('/update/changeBudget', async (req, res) => {
+    if (!req.body.budget) {
+        console.log("Error: No budget provided");
+        res.json({message: "Error: No budget provided"});
+    }
+    try {
+        let amount = Math.round(budget * 100) / 100;
+        if (amount < 0) {
+            res.json({message: "Budget cannot be negative."});
+        }
+        const changeCategoryBudget = await Category.updateOneById(req.body.categoryID, { budget: amount });
+        res.json(changeCategoryBudget);
+    } catch (err) {
+        console.log(err);
+        res.json({message: err});
+    }
+});
+
+// -- Add Purchase
+
+category.post('/update/addPurchase', async (req, res) => {
+    if (!req.body.purchaseID) {
+        console.log("Error: No purchaseID provided");
+        res.json({message: "Error: No purchase provided"});
+    }
+    try {
+        const addPurchaseToCategory = await Category.updateOneById(req.body.categoryID, { $push: { purchases: req.body.purchaseID } });
+        res.json(addPurchaseToCategory);
+    } catch (err) {
+        console.log(err);
+        res.json({message: err});
+    }
+});
+
+// -- Remove Purchase
+
+category.post('/update/removePurchase', async (req, res) => {
+    if (!req.body.purchaseID) {
+        console.log("Error: No purchaseID provided");
+        res.json({message: "Error: No purchase provided"});
+    }
+    try {
+        const addPurchaseToCategory = await Category.updateOneById(req.body.categoryID, { $push: { purchases: req.body.purchaseID } });
+        res.json(addPurchaseToCategory);
+    } catch (err) {
+        console.log(err);
+        res.json({message: err});
+    }
+});
 
 const categoryExports = {
     categoryRoutes: category,
