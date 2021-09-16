@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config.js';
 import verifyToken from './auth.js';
+import category from './categories.js';
 
 const user = express.Router();
 
@@ -52,7 +53,10 @@ user.post('/create', async (req, res) => {
     password: hash,
   });
   try {
-    const saveUser = await newUser.save();
+    const saveUser = await newUser.save((err,user) => {
+        if (err) res.json({message: err});
+        category.createHeader(user);
+    });
     res.json(saveUser);
   } catch (err) {
     res.json({message: err});
