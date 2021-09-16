@@ -31,7 +31,11 @@ const createHeader = async (user) => {
 
 category.post('/create', async (req, res) => {
     if (!req.body.name) {
-        res.json({message: "Invalid name"});
+        console.log("Error: No name provided")
+        res.json({message: "Error: No name provided"});
+    } else if (!req.body.parentID) {
+        console.log("Error: No parentID provided")
+        re.json({message: "Error: No parentID provided"})
     }
     try {
         let token = verifyToken(req.body.token);
@@ -39,7 +43,16 @@ category.post('/create', async (req, res) => {
             res.json({message: 'Invalid token received.'});
             return;
         }
-        const user = await User.findById(token._id);
+        const user = await User.findById(token._id, (err, usr) => {
+            if (err) {
+                console.log(err);
+                res.send({message: "Error while parsing user token."});
+            }
+            if (!usr) {
+                console.log("Error: No user found with provided token");
+                res.send({message: "Error while parsing user token."});
+            }
+        });
         let parent;
         if (req.body.parentID) {
             parent = await Category.findById(req.body.parentID);
@@ -76,8 +89,8 @@ category.delete('/delete', async (req, res) => {
             res.json({message: 'Parent not found.'})
         }
 
-        const updateParent = await Category.updateOne({_id: parent._id}, {
-            $pull: { children: { _id: categoryToBeDeleted._id } }
+        const updateParent = await Category.findByIdAndUpdate(parent._id, {
+            $pull: { children: req.body.categoryID }
         });
 
         new Promise((resolve, reject) => {
@@ -88,6 +101,7 @@ category.delete('/delete', async (req, res) => {
             res.json({message: 'Error: Failed to delete category and/ or children'});
         })
     } catch (err) {
+        console.log(err);
         res.json({message: err});
     }
 });

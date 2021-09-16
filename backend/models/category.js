@@ -17,10 +17,10 @@ const CategorySchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
     },
-    children: {
+    children: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
-    },
+    }],
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users',
