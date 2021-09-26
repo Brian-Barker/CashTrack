@@ -33,9 +33,9 @@ category.post('/create', async (req, res) => {
     if (!req.body.name) {
         console.log("Error: No name provided")
         res.json({message: "Error: No name provided"});
-    } else if (!req.body.parentID) {
-        console.log("Error: No parentID provided")
-        re.json({message: "Error: No parentID provided"})
+    } else if (!req.body.parentId) {
+        console.log("Error: No parentId provided")
+        re.json({message: "Error: No parentId provided"})
     }
     try {
         let token = verifyToken(req.body.token);
@@ -54,8 +54,8 @@ category.post('/create', async (req, res) => {
             }
         });
         let parent;
-        if (req.body.parentID) {
-            parent = await Category.findById(req.body.parentID);
+        if (req.body.parentId) {
+            parent = await Category.findById(req.body.parentId);
         } else {    // -- Default adds Category as child of Head, if no parent is specified
             parent = await Category.findById(user.categoryHead);
         }
@@ -82,7 +82,7 @@ category.post('/create', async (req, res) => {
 
 category.delete('/delete', async (req, res) => {
     try {
-        const categoryToBeDeleted = await Category.findById(req.body.categoryID);
+        const categoryToBeDeleted = await Category.findById(req.body.categoryId);
 
         const parent = await Category.findById(categoryToBeDeleted.parent._id);
         if (!parent) {
@@ -90,7 +90,7 @@ category.delete('/delete', async (req, res) => {
         }
 
         const updateParent = await Category.findByIdAndUpdate(parent._id, {
-            $pull: { children: req.body.categoryID }
+            $pull: { children: req.body.categoryId }
         });
 
         new Promise((resolve, reject) => {
@@ -108,9 +108,9 @@ category.delete('/delete', async (req, res) => {
 
 // --- Helper Function to Recursively Delete a Category and its Children ---
 
-const deleteCategoryAndChildren = async (categoryID, res, rej) => {
+const deleteCategoryAndChildren = async (categoryId, res, rej) => {
     try {
-        const categoryToBeDeleted = await Category.findById(categoryID);
+        const categoryToBeDeleted = await Category.findById(categoryId);
 
         if (!categoryToBeDeleted)
             res();
@@ -128,7 +128,7 @@ const deleteCategoryAndChildren = async (categoryID, res, rej) => {
         }
 
         Promise.all(promises).then(async () => {
-            const deleteCategory = await Category.deleteOne({_id: categoryID}, (err) => {
+            const deleteCategory = await Category.deleteOne({_id: categoryId}, (err) => {
                 if (err) {
                     console.log(err);
                     rej();
@@ -144,11 +144,78 @@ const deleteCategoryAndChildren = async (categoryID, res, rej) => {
 
 }
 
+// -- Get category and children from _id --
+
+category.post('/getChildren', async (req, res) => {
+    if (!req.body.categoryId) {
+        console.log("Error: No categoryId provided");
+        res.json({message: "Error: No category specified"});
+    } else {
+        try {
+            const categories = await getChildren(req.body.categoryId);
+            res.json(categories);
+        } catch (err) {
+            console.log(err)
+            res.json({message: err});
+        }
+    }
+});
+
+// -- Helper function to get all children of category from _id --
+
+const getChildren = async (categoryId, resolve, reject) => {
+    try {
+        const parent = await Category.findById(categoryId);
+        if (!parent.children || parent.children.length === 0) {
+            if (resolve) { resolve({ category: parent, childCategories: null }) }
+            return { category: parent, children: null };
+        } else {
+            let childrenPromises = [];
+            parent.children.forEach( (childId) => {
+                childrenPromises.push(new Promise((res, rej) => {
+                    getChildren(childId, res, rej);
+                }));
+            });
+
+            const family = await Promise.all(childrenPromises).then((children) => {
+                return { category: parent, childCategories: children };
+            }).catch((err) => {
+                console.log(err)
+                if (reject) { reject() }
+                return null
+            });
+            if (resolve) resolve(family);
+            else return family;
+        }
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+
+}
+
+// -- Get one category from _id --
+
+category.post('/getOne', async (req, res) => {
+    if (!req.body.categoryId) {
+        console.log("Error: No categoryId provided");
+        res.json({message: "Error: No category specified"});
+    } else {
+        try {
+            const category = await Category.findById(req.body.categoryId);
+            res.json(category);
+        } catch (err) {
+            console.log(err);
+            res.json({message: err});
+        }
+    }
+});
+
 // -- Category Updates --
 
 category.post('/update/*', async (req, res, next) => {
-    if (!req.body.categoryID) {
-        console.log("Error: No categoryID provided");
+    if (!req.body.categoryId) {
+        console.log("Error: No categoryId provided");
         res.json({message: "Error: No category specified"});
     } else {
         next();
@@ -163,7 +230,7 @@ category.post('/update/rename', async (req, res) => {
         res.json({message: "Error: No name provided"});
     } else {
         try {
-            const renameCategory = await Category.findByIdAndUpdate(req.body.categoryID, { name: req.body.name });
+            const renameCategory = await Category.findByIdAndUpdate(req.body.categoryId, { name: req.body.name });
             res.json(renameCategory);
         } catch (err) {
             console.log(err);
@@ -184,7 +251,7 @@ category.post('/update/changeBudget', async (req, res) => {
             if (amount < 0) {
                 res.json({message: "Budget cannot be negative."});
             }
-            const changeCategoryBudget = await Category.findByIdAndUpdate(req.body.categoryID, { budget: amount });
+            const changeCategoryBudget = await Category.findByIdAndUpdate(req.body.categoryId, { budget: amount });
             res.json(changeCategoryBudget);
         } catch (err) {
             console.log(err);
@@ -196,12 +263,12 @@ category.post('/update/changeBudget', async (req, res) => {
 // -- Add Purchase
 
 category.post('/update/addPurchase', async (req, res) => {
-    if (!req.body.purchaseID) {
-        console.log("Error: No purchaseID provided");
+    if (!req.body.purchaseId) {
+        console.log("Error: No purchaseId provided");
         res.json({message: "Error: No purchase provided"});
     } else {
         try {
-            const addPurchaseToCategory = await Category.findByIdAndUpdate(req.body.categoryID, { $push: { purchases: req.body.purchaseID } });
+            const addPurchaseToCategory = await Category.findByIdAndUpdate(req.body.categoryId, { $push: { purchases: req.body.purchaseId } });
             res.json(addPurchaseToCategory);
         } catch (err) {
             console.log(err);
@@ -213,12 +280,12 @@ category.post('/update/addPurchase', async (req, res) => {
 // -- Remove Purchase
 
 category.post('/update/removePurchase', async (req, res) => {
-    if (!req.body.purchaseID) {
-        console.log("Error: No purchaseID provided");
+    if (!req.body.purchaseId) {
+        console.log("Error: No purchaseId provided");
         res.json({message: "Error: No purchase provided"});
     } else {
         try {
-            const addPurchaseToCategory = await Category.findByIdAndUpdate(req.body.categoryID, { $push: { purchases: req.body.purchaseID } });
+            const addPurchaseToCategory = await Category.findByIdAndUpdate(req.body.categoryId, { $push: { purchases: req.body.purchaseId } });
             res.json(addPurchaseToCategory);
         } catch (err) {
             console.log(err);
