@@ -56,7 +56,7 @@ category.post('/create', async (req, res) => {
         let parent;
         if (req.body.parentId) {
             parent = await Category.findById(req.body.parentId);
-        } else {    // -- Default adds Category as child of Head, if no parent is specified
+        } else {    // Default adds Category as child of Head, if no parent is specified
             parent = await Category.findById(user.categoryHead);
         }
 
@@ -73,7 +73,7 @@ category.post('/create', async (req, res) => {
 
         res.json(saveCategory);
     } catch (err) {
-    console.log(err)
+        console.log(err)
         res.json({message: err});
     }
 });
