@@ -1,11 +1,40 @@
 import express from 'express';
+import Purchase from '../models/purchases.js';
 import Category from '../models/category.js';
 import User from '../models/users.js';
 import verifyToken from './auth.js';
 
 const category = express.Router();
 
-// --- Create Category Head (returns head) ---
+category.use('/', async (req, res, next) => {
+    try {
+        let token = verifyToken(req.body.token);
+        if (token === false) {
+            throw 'Error: Invalid token provided';
+        }
+        res.locals.token = token;
+
+        if (req.body.parentId) {
+            const parent = await Category.findById(req.body.parentId);
+
+            if (parent.user != token._id) throw 'Error: parent specified does not belong to user';
+            res.locals.parent = parent;
+        }
+
+        if (req.body.categoryId) {
+            const category = await Category.findById(req.body.categoryId);
+
+            if (category.user != token._id) throw 'Error: category specified does not belong to user';
+            res.locals.category = category;
+        }
+
+    } catch(err) {
+        console.error(err);
+        res.json({error: err});
+    }
+});
+
+// --- Create Category Head (returns head) To be called as user is created ---
 
 const createHeader = async (user) => {
     try {
@@ -28,7 +57,10 @@ const createHeader = async (user) => {
 };
 
 // --- Create Category With Parent (returns new Category) ---
-
+// token
+// name
+// parentId
+// budget
 category.post('/create', async (req, res) => {
     if (!req.body.name) {
         console.log("Error: No name provided")
@@ -56,7 +88,7 @@ category.post('/create', async (req, res) => {
         let parent;
         if (req.body.parentId) {
             parent = await Category.findById(req.body.parentId);
-        } else {    // -- Default adds Category as child of Head, if no parent is specified
+        } else {    // Default adds Category as child of Head, if no parent is specified
             parent = await Category.findById(user.categoryHead);
         }
 
@@ -73,14 +105,15 @@ category.post('/create', async (req, res) => {
 
         res.json(saveCategory);
     } catch (err) {
-    console.log(err)
+        console.log(err)
         res.json({message: err});
     }
 });
 
 // --- Delete Category (returns parent) ---
-
-category.delete('/delete', async (req, res) => {
+// token
+// categoryId
+category.delete('/', async (req, res) => {
     try {
         const categoryToBeDeleted = await Category.findById(req.body.categoryId);
 
@@ -94,7 +127,7 @@ category.delete('/delete', async (req, res) => {
         });
 
         new Promise((resolve, reject) => {
-            deleteCategoryAndChildren(categoryToBeDeleted._id, resolve, reject)
+            deleteCategoryAndChildren(parent._id, categoryToBeDeleted._id, resolve, reject)
         }).then(() => { // Success
             res.json(updateParent);
         }).catch(() => { // Failure
@@ -108,7 +141,7 @@ category.delete('/delete', async (req, res) => {
 
 // --- Helper Function to Recursively Delete a Category and its Children ---
 
-const deleteCategoryAndChildren = async (categoryId, res, rej) => {
+const deleteCategoryAndChildren = async (topParentId, categoryId, res, rej) => {
     try {
         const categoryToBeDeleted = await Category.findById(categoryId);
 
@@ -120,7 +153,7 @@ const deleteCategoryAndChildren = async (categoryId, res, rej) => {
         if (categoryToBeDeleted.children) {
             categoryToBeDeleted.children.forEach((child) => {
                 promises.push(new Promise((resolve, reject) => {
-                    if(deleteCategoryAndChildren(child, resolve, reject) === -1) {
+                    if(deleteCategoryAndChildren(topParentId, child, resolve, reject) === -1) {
                         rej();
                     }
                 }));
@@ -128,14 +161,22 @@ const deleteCategoryAndChildren = async (categoryId, res, rej) => {
         }
 
         Promise.all(promises).then(async () => {
+            const updateTopParent = await Category.updateOne({_id: topParentId}, {
+                $push: { purchases: { $each: categoryToBeDeleted.purchases } }
+            });
+
+            categoryToBeDeleted.purchases.forEach(purchase => {
+                Purchase.findByIdAndUpdate(purchase._id,
+                    { category: topParentId },
+                    (err) => { if (err) throw err;
+                });
+            });
+
             const deleteCategory = await Category.deleteOne({_id: categoryId}, (err) => {
-                if (err) {
-                    console.log(err);
-                    rej();
-                }
+                if (err) throw err;
             });
             res();
-        }).catch(() => rej());
+        });
 
     } catch (err) {
         console.log(err);
@@ -145,7 +186,8 @@ const deleteCategoryAndChildren = async (categoryId, res, rej) => {
 }
 
 // -- Get category and children from _id --
-
+// token
+// categoryId
 category.post('/getChildren', async (req, res) => {
     if (!req.body.categoryId) {
         console.log("Error: No categoryId provided");
@@ -195,7 +237,8 @@ const getChildren = async (categoryId, resolve, reject) => {
 }
 
 // -- Get one category from _id --
-
+// token
+// categoryId
 category.post('/getOne', async (req, res) => {
     if (!req.body.categoryId) {
         console.log("Error: No categoryId provided");
@@ -223,7 +266,9 @@ category.post('/update/*', async (req, res, next) => {
 });
 
 // -- Rename --
-
+// token
+// categoryId
+// name
 category.post('/update/rename', async (req, res) => {
     if (!req.body.name) {
         console.log("Error: No name provided");
@@ -240,7 +285,9 @@ category.post('/update/rename', async (req, res) => {
 });
 
 // -- Change Budget
-
+// token
+// categoryId
+// budget
 category.post('/update/changeBudget', async (req, res) => {
     if (!req.body.budget) {
         console.log("Error: No budget provided");
@@ -253,40 +300,6 @@ category.post('/update/changeBudget', async (req, res) => {
             }
             const changeCategoryBudget = await Category.findByIdAndUpdate(req.body.categoryId, { budget: amount });
             res.json(changeCategoryBudget);
-        } catch (err) {
-            console.log(err);
-            res.json({message: err});
-        }
-    }
-});
-
-// -- Add Purchase
-
-category.post('/update/addPurchase', async (req, res) => {
-    if (!req.body.purchaseId) {
-        console.log("Error: No purchaseId provided");
-        res.json({message: "Error: No purchase provided"});
-    } else {
-        try {
-            const addPurchaseToCategory = await Category.findByIdAndUpdate(req.body.categoryId, { $push: { purchases: req.body.purchaseId } });
-            res.json(addPurchaseToCategory);
-        } catch (err) {
-            console.log(err);
-            res.json({message: err});
-        }
-    }
-});
-
-// -- Remove Purchase
-
-category.post('/update/removePurchase', async (req, res) => {
-    if (!req.body.purchaseId) {
-        console.log("Error: No purchaseId provided");
-        res.json({message: "Error: No purchase provided"});
-    } else {
-        try {
-            const addPurchaseToCategory = await Category.findByIdAndUpdate(req.body.categoryId, { $push: { purchases: req.body.purchaseId } });
-            res.json(addPurchaseToCategory);
         } catch (err) {
             console.log(err);
             res.json({message: err});

@@ -5,6 +5,7 @@ import 'dotenv/config.js';
 import userRoutes from './routes/users.js';
 import eventRoutes from './routes/events.js';
 import category from './routes/categories.js';
+import purchaseRoutes from './routes/purchases.js';
 import * as path from 'path';
 import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use('/users', userRoutes);
 app.use('/events', eventRoutes);
 app.use('/categories', category.categoryRoutes);
+app.use('/purchases', purchaseRoutes);
 
 // --- Routes ---
 
