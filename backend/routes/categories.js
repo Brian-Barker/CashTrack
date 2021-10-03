@@ -1,4 +1,5 @@
 import express from 'express';
+import Purchase from '../models/purchases.js';
 import Category from '../models/category.js';
 import User from '../models/users.js';
 import verifyToken from './auth.js';
@@ -80,7 +81,7 @@ category.post('/create', async (req, res) => {
 
 // --- Delete Category (returns parent) ---
 
-category.delete('/delete', async (req, res) => {
+category.delete('/', async (req, res) => {
     try {
         const categoryToBeDeleted = await Category.findById(req.body.categoryId);
 
@@ -94,7 +95,7 @@ category.delete('/delete', async (req, res) => {
         });
 
         new Promise((resolve, reject) => {
-            deleteCategoryAndChildren(categoryToBeDeleted._id, resolve, reject)
+            deleteCategoryAndChildren(parent._id, categoryToBeDeleted._id, resolve, reject)
         }).then(() => { // Success
             res.json(updateParent);
         }).catch(() => { // Failure
@@ -108,7 +109,7 @@ category.delete('/delete', async (req, res) => {
 
 // --- Helper Function to Recursively Delete a Category and its Children ---
 
-const deleteCategoryAndChildren = async (categoryId, res, rej) => {
+const deleteCategoryAndChildren = async (topParentId, categoryId, res, rej) => {
     try {
         const categoryToBeDeleted = await Category.findById(categoryId);
 
@@ -120,7 +121,7 @@ const deleteCategoryAndChildren = async (categoryId, res, rej) => {
         if (categoryToBeDeleted.children) {
             categoryToBeDeleted.children.forEach((child) => {
                 promises.push(new Promise((resolve, reject) => {
-                    if(deleteCategoryAndChildren(child, resolve, reject) === -1) {
+                    if(deleteCategoryAndChildren(topParentId, child, resolve, reject) === -1) {
                         rej();
                     }
                 }));
@@ -128,14 +129,22 @@ const deleteCategoryAndChildren = async (categoryId, res, rej) => {
         }
 
         Promise.all(promises).then(async () => {
+            const updateTopParent = await Category.updateOne({_id: topParentId}, {
+                $push: { purchases: { $each: categoryToBeDeleted.purchases } }
+            });
+
+            categoryToBeDeleted.purchases.forEach(purchase => {
+                Purchase.findByIdAndUpdate(purchase._id,
+                    { category: topParentId },
+                    (err) => { if (err) throw err;
+                });
+            });
+
             const deleteCategory = await Category.deleteOne({_id: categoryId}, (err) => {
-                if (err) {
-                    console.log(err);
-                    rej();
-                }
+                if (err) throw err;
             });
             res();
-        }).catch(() => rej());
+        });
 
     } catch (err) {
         console.log(err);

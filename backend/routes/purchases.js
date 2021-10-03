@@ -24,6 +24,17 @@ purchase.use('/', async (req, res, next) => {
                 if (!cat) throw 'Error: invalid categoryId';
             });
 
+            if (req.body.purchaseId) {
+                const purchase = await Purchase.findById(req.body.purchaseId);
+                if (!purchase)
+                    throw 'Error: purchase not found.';
+
+                if (purchase.user != token._id)
+                    throw 'Error: purchase is not owned by user';
+
+                res.locals.purchase = purchase;
+            }
+
             if (category.user != token._id) {
                 throw 'Error: category is not owned by user.'
             } else {
@@ -40,7 +51,7 @@ purchase.use('/', async (req, res, next) => {
 });
 
 // --- Create Purchase ---
-// API:
+// token
 // categoryId (defaults to user head if none specified)
 // store
 // info
@@ -61,7 +72,9 @@ purchase.post('/create', async (req, res) => {
 
         const savePurchase = await newPurchase.save();
 
-        const updateCategory = await Category.updateOne({_id: res.locals.category._id}, { $push: { purchases: savePurchase } });
+        const updateCategory = await Category.updateOne({_id: res.locals.category._id}, {
+            $push: { purchases: savePurchase }
+        });
 
         res.json(savePurchase);
     } catch (err) {
@@ -72,9 +85,78 @@ purchase.post('/create', async (req, res) => {
 });
 
 // --- Delete Purchase ---
+// token
+// purchaseId
+purchase.delete('/', async (req, res) => {
+    try {
+        const updateCategory = await Category.updateOne({_id: res.locals.purchase.category}, {
+            $pull: { purchases: req.body.purchaseId }
+        });
+
+        const deletePurchase = await Purchase.deleteOne({_id: req.body.purchaseId}, (err) => {
+            if (err) {
+                throw err;
+            }
+        });
+
+        res.json({message: 'Success'});
+    } catch (err) {
+        console.error(err)
+        res.json({error: err});
+    }
+
+});
 
 // --- Edit Purchase ---
+// token
+// purchaseId
+// store
+// info
+// amount
+// timestamp
+purchase.post('/update', async (req, res) => {
+    try {
+        const updatePurchase = await Purchase.findByIdAndUpdate(req.body.purchaseId, {
+            store: req.body.store ? req.body.store : res.locals.purchase.store,
+            info: req.body.info ? req.body.info : res.locals.purchase.info,
+            amount: req.body.amount ? req.body.amount : res.locals.purchase.amount,
+            timestamp: req.body.timestamp ? req.body.timestamp : res.locals.purchase.timestamp,
+        }, (err) => { if (err) throw err; });
+
+        res.json({message: 'Success'});
+    } catch (err) {
+        console.error(err)
+        res.json({error: err});
+    }
+});
 
 // --- Move Purchase ---
+// token
+// purchaseId
+// categoryId <- The category the purchase should be moved to
+purchase.post('/move', async (req, res) => {
+    try {
+        if (req.body.categoryId == res.locals.purchase.category) {
+            throw 'Error: attempt to move purchase to its current category. Must specify a category the purchase isn\'t already in.'
+        }
+
+        const updateNewCategory = await Category.findByIdAndUpdate(req.body.categoryId, {
+            $push: { purchases: req.body.purchaseId }
+        }, (err) => { if (err) throw err });
+
+        const updatePurchase = await Purchase.findByIdAndUpdate(req.body.purchaseId, {
+            category: req.body.categoryId
+        }, (err) => { if (err) throw err });
+
+        const updateOldCategory = await Category.findByIdAndUpdate(res.locals.purchase.category, {
+            $pull: { purchases: req.body.purchaseId }
+        }, (err) => { if (err) throw err });
+
+        res.json({message: 'Success'});
+    } catch (err) {
+        console.error(err)
+        res.json({error: err});
+    }
+});
 
 export default purchase;
