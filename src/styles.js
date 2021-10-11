@@ -22,6 +22,7 @@ let styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#18191A',
+    paddingBottom: 70,
   },
   topbar: {
     height: hp('7%'),
@@ -135,7 +136,8 @@ let styles = StyleSheet.create({
     color:'white',
     alignSelf:'center',
     fontFamily: 'PierSans-Regular',
-    paddingTop: 50
+    paddingTop: 30,
+    paddingBottom: 10
   },
   overallMainInfoText:
   {
@@ -148,7 +150,7 @@ let styles = StyleSheet.create({
     fontFamily:'play',
     fontSize:hp('5%'),
     alignSelf:'center',
-    paddingBottom:hp('4%'),
+    paddingBottom:hp('3%'),
     color: '#28C900'
   },
 

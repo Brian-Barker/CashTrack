@@ -64,66 +64,68 @@ const Home = () => {
   }
 
   return (
-    <Animated.View style={styles.homeContainer}>
-             
-      <Animated.Text style={styles.OverallInfoHeaderText}>
-        Remaining Weekly Balance
-      </Animated.Text>
-      <Animated.Text style={styles.overallLeftOverBudgetGreen}>
-        $225.00
-      </Animated.Text>
-
-
-      <Animated.Text style={styles.OverallInfoHeaderText}>
-      Monthly Spending 
-      </Animated.Text>
-      <LineChart
-        data={{
-          labels: ["January","February","March","April"],
-          datasets:[
-            {
-              data:[
-                900,650,340,180
-              ]
-            }
-          ]
-        }}
-        width = {wp('85%')}
-        height= {hp('30%')}
-        yAxisLabel="$"
-        yAxisSuffix=""
-        yAxisInterval={1} // optional, defaults to 1
-        chartConfig={{
-          backgroundColor: "66CC00",
-          backgroundGradientTo: "#007704",
-          backgroundGradientFrom: "#03A608",
-          decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            //borderRadius: hp('4%')
-          },
-          propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: "#ffa726"
-          }
-        }}
-        //bezier
-        style={{
-          marginTop:('5%'),
-          alignItems:'flex-start',
-          borderRadius: hp('1%'),
-          justifyContent:'center',
-          alignSelf:'center'
-        }}
-      />
-
-      <Animated.Text style={styles.RecentPurchsesHeaderText}>
-        Recent Purchases
-      </Animated.Text>
+    <View style={styles.homeContainer}>
 
       <ScrollView>
+             
+        <Animated.Text style={styles.OverallInfoHeaderText}>
+          Remaining Weekly Balance
+        </Animated.Text>
+        <Animated.Text style={styles.overallLeftOverBudgetGreen}>
+          $225.00
+        </Animated.Text>
+
+
+        <Animated.Text style={styles.OverallInfoHeaderText}>
+        Monthly Spending 
+        </Animated.Text>
+        <LineChart
+          data={{
+            labels: ["January","February","March","April"],
+            datasets:[
+              {
+                data:[
+                  900,650,340,180
+                ]
+              }
+            ]
+          }}
+          width = {wp('85%')}
+          height= {hp('30%')}
+          yAxisLabel="$"
+          yAxisSuffix=""
+          yAxisInterval={1} // optional, defaults to 1
+          chartConfig={{
+            backgroundColor: "66CC00",
+            backgroundGradientTo: "#007704",
+            backgroundGradientFrom: "#03A608",
+            decimalPlaces: 2, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+              //borderRadius: hp('4%')
+            },
+            propsForDots: {
+              r: "6",
+              strokeWidth: "2",
+              stroke: "#ffa726"
+            }
+          }}
+          //bezier
+          style={{
+            marginTop:('5%'),
+            alignItems:'flex-start',
+            borderRadius: hp('1%'),
+            justifyContent:'center',
+            alignSelf:'center'
+          }}
+        />
+
+        <Animated.Text style={styles.RecentPurchsesHeaderText}>
+          Recent Purchases
+        </Animated.Text>
+
+      
         <View stype={{marginBottom: 0}}>
         {tempTransactions.map((item, index) => (
           <Transaction key={index} item={item} delay={index} />
@@ -137,7 +139,7 @@ const Home = () => {
 
       </Animated.View>
       
-    </Animated.View>
+    </View>
   );
 };
 
