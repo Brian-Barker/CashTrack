@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Picker } from '@react-native-picker/picker'
 import { withTheme } from "react-native-elements";
 
@@ -60,21 +61,21 @@ const AddPurchase = ({navigation}) => {
             />
 
 
-            <TouchableOpacity style={{paddingTop: 150}}>
+            <TouchableOpacity style={styles.submitStyling} onPress={() => alert('Your Purchase Has Been Added!')}>
                 <Text 
                     style={{
-                        fontSize: 18,
-                        backgroundColor: '#03A608', 
+                        fontSize: hp('2%'),
+                        //backgroundColor: '#03A608', 
                         textAlign: 'center',
                         color: 'white',
-                        height: 50,
-                        width: 300,
-                        borderRadius: 10,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        paddingTop: 14,
-                    }}         
-                    onPress={() => alert('Your Purchase Has Been Added!')}
+                        // height: hp('7%'),
+                        // width: wp('75%'),
+                        // borderRadius: hp('2%'),
+                        // justifyContent: 'center',
+                        // alignItems: 'center',
+                        // textAlign:'center',
+                        // alignSelf:'center'
+                                            }}         
                     >  
                     Submit
                 </Text>
@@ -109,13 +110,23 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     input: {
-        height: 40,
-        width: 300,
-        margin: 12,
+        height: hp('6%'),
+        width: wp('75%'),
+        margin: hp('1%'),
         borderWidth: 1,
         padding: 10,
         color: 'black',
         
         backgroundColor: 'white'
       },
+
+      submitStyling: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: '#03A608',
+        height: hp('7%'),
+        width: wp('75%'),
+        borderRadius: hp('2%'),
+        marginTop: hp('2%')
+      }
 })

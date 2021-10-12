@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import Transaction from '../../components/Transaction';
 
 let tempTransactions = [
-    {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
+    {name: 'Publix Super Markets', category: 'Groceries', amount: '69.53'},
     {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
     {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
     {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
@@ -27,7 +28,7 @@ const transactionsGroceries = ({navigation}) => {
             </Text>
 
             <ScrollView nestedScrollEnabled={true}>
-                <View style={{marginBottom: 60}}>
+                <View style={{marginBottom:hp('5%')}}>
                     {tempTransactions.map((item, index) => (
                     <Transaction key={index} item={item} delay={index} />
                     ))}
@@ -48,9 +49,9 @@ const styles = StyleSheet.create({
     },
     categoryViewHeader: {
         textAlign: 'center',
-        fontSize: 28,
-        padding: 16,
-        marginTop: 16,
+        fontSize: hp('5%'),
+        padding: hp('1%'),
+        marginTop: hp('2%'),
         color: 'white',
     },
 })

@@ -7,6 +7,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import styles from '../styles';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Transaction = props => {
   const opacity = useSharedValue(0);
@@ -34,21 +35,22 @@ const Transaction = props => {
           source={require('../../assets/icons/Groceries.png')}
           resizeMode = 'contain' 
           style={{
-              width: 60,
-              height: 60,
-              backgroundColor: 'white'
+              width: wp('15%'),
+              height: hp('6%'),
+              backgroundColor: 'white',
+              alignSelf:'center'
           }}
       />
       <Animated.View>
-        <Animated.Text style={{color: 'white', paddingLeft: 20}}>
+        <Animated.Text style={{color: 'white', paddingLeft: wp('2%')}}>
           {props.item.name}
         </Animated.Text>
-        <Animated.Text style={{color: 'gray', paddingLeft: 20}}>
+        <Animated.Text style={{color: 'gray', paddingLeft: wp('2%')}}>
           {props.item.category}
         </Animated.Text>
       </Animated.View>
       <Animated.View>
-        <Animated.Text style={{color: 'red', fontSize: 20, paddingLeft: 30}}>
+        <Animated.Text style={{color: 'red', fontSize: hp('3%'), paddingLeft: wp('5%')}}>
           -${props.item.amount}
         </Animated.Text>
       </Animated.View>

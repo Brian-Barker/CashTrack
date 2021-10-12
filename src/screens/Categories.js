@@ -12,6 +12,7 @@ import {
     ContributionGraph,
     StackedBarChart
   } from "react-native-chart-kit";
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Categories = ({navigation}) => {
     
@@ -58,8 +59,8 @@ const Categories = ({navigation}) => {
                     legendFontSize: 15,
                 },
                 ]}
-                width={Dimensions.get('window').width - 16}
-                height={220}
+                width={wp('80%')}
+                height={hp('25%')}
                 chartConfig={{
                 backgroundColor: '#1cc910',
                 backgroundGradientFrom: '#eff3ff',
@@ -67,12 +68,12 @@ const Categories = ({navigation}) => {
                 decimalPlaces: 2,
                 color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                 style: {
-                    borderRadius: 16,
+                    borderRadius: hp('1%'),
                 },
                 }}
                 style={{
-                marginVertical: 8,
-                borderRadius: 16,
+                marginVertical: hp('0.5%'),
+                borderRadius: hp('2%'),
                 }}
                 accessor="percentage"
                 backgroundColor="transparent"
@@ -80,25 +81,19 @@ const Categories = ({navigation}) => {
                 absolute //for the absolute number remove if you want percentage
             />
             
-            <FlatGrid style={styles.gridView}
-                itemDimension={80}
-                data={['Groceries','Dining','Shopping','Transport','Travel','Health','Insurance','Education','Utilities','Finance','Fun-Money', ]}
+            <FlatGrid style={{width:wp('100%')}}
+                itemDimension={150}
+                style={{flex:1}}
+                data={['Groceries','Dining','Shopping','Transport','Travel','Health','Insurance','Education','Utilities','Finance','Fun-Money']}
                 renderItem={({ item }) => (
-                
-                <TouchableOpacity>
+                <View style={{justifyContent:'center',alignItems:'center'}}>
+
+                <TouchableOpacity style={{height:hp('5%'),width:wp('30%'),flex:1,justifyContent:'center', backgroundColor: '#03A608',borderRadius: hp('2%'),alignItems:'center'}}>
                     <Text 
                         style={{
-                            fontSize: 15,
-                            backgroundColor: '#03A608', 
+                            fontSize: hp('3%'),
                             textAlign: 'center',
                             color: 'white',
-                            height: 85,
-                            width: 85,
-                            borderRadius: 10,
-                            flex: 1,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            paddingTop: 35,
                         }}
                         //onPress={() => alert(item + ' Clicked!')}
                         
@@ -107,7 +102,7 @@ const Categories = ({navigation}) => {
                         {item}
                     </Text>
                 </TouchableOpacity>
-                
+                </View>
                 )}
             />
            
@@ -128,16 +123,16 @@ const styles = StyleSheet.create({
     },
     homeCategoryViewHeader: {
         textAlign: 'center',
-        fontSize: 28,
-        padding: 16,
-        marginTop: 16,
+        fontSize: hp('4%'),
+        padding: hp('1%'),
+        marginTop: hp('2%'),
         color: 'white',
     },
     pieChartHeader: {
         textAlign: 'center',
-        fontSize: 18,
-        padding: 16,
-        marginTop: 0,
+        fontSize: hp('3'),
+        padding: hp('2%'),
+        marginTop: hp('1%'),
         color: 'white',
     },
 })
