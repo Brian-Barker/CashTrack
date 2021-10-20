@@ -22,7 +22,6 @@ let styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#18191A',
-    paddingBottom: 70,
   },
   topbar: {
     height: hp('7%'),
@@ -99,14 +98,15 @@ let styles = StyleSheet.create({
   },
   transactionContainer: {
     height: height * 0.07,
-    width: width * 0.9,
+    width: width * 0.8,
     marginVertical: height * 0.01,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    alignContent:'center',
+    alignSelf:'center',
     borderRadius: 5,
-    backgroundColor: '#18191A',
-    paddingLeft: 20
+    backgroundColor: '#40454b',
   },
 
   OverallInfo:
@@ -121,36 +121,22 @@ let styles = StyleSheet.create({
   },
   OverallInfoHeaderText:
   {
-    fontFamily:'play',
     fontSize: hp('3.8%'),
     marginLeft:hp('2%'),
     color:'white',
     alignSelf:'center',
     fontFamily: 'PierSans-Regular'
   },
-  RecentPurchsesHeaderText:
-  {
-    fontFamily:'play',
-    fontSize: hp('3.8%'),
-    marginLeft:hp('2%'),
-    color:'white',
-    alignSelf:'center',
-    fontFamily: 'PierSans-Regular',
-    paddingTop: 30,
-    paddingBottom: 10
-  },
   overallMainInfoText:
   {
-    fontFamily:'play',
     fontSize:hp('2%'),
     textAlign:'center'
   },
   overallLeftOverBudgetGreen:
   {
-    fontFamily:'play',
     fontSize:hp('5%'),
     alignSelf:'center',
-    paddingBottom:hp('3%'),
+    paddingBottom:hp('4%'),
     color: '#28C900'
   },
 
@@ -171,6 +157,20 @@ let styles = StyleSheet.create({
     marginTop:('5%'),
     alignItems:'flex-start'
   },
+  navBarBottom:
+  {
+    height:hp('15%'),
+    width:wp('100%'),
+    backgroundColor: '#5d5d5d',
+  },
+  RecentPurchsesHeaderText: 
+  {
+    alignSelf:'center',
+    color:'white',
+    fontSize: hp('4%'),
+    fontFamily: 'PierSans-Regular',
+    marginTop:hp('1%')
+  }
 
 
 

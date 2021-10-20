@@ -64,10 +64,9 @@ const Home = () => {
   }
 
   return (
+    
     <View style={styles.homeContainer}>
-
-      <ScrollView>
-             
+      <ScrollView>   
         <Animated.Text style={styles.OverallInfoHeaderText}>
           Remaining Weekly Balance
         </Animated.Text>
@@ -108,7 +107,7 @@ const Home = () => {
             propsForDots: {
               r: "6",
               strokeWidth: "2",
-              stroke: "#ffa726"
+              stroke: "black"
             }
           }}
           //bezier
@@ -131,15 +130,11 @@ const Home = () => {
           <Transaction key={index} item={item} delay={index} />
         ))}
         </View>
-      </ScrollView>
         
 
-      <Animated.View style={styles.navBarBottom}>
-
-
-      </Animated.View>
-      
+      </ScrollView>
     </View>
+    
   );
 };
 

@@ -37,7 +37,7 @@ const Transaction = props => {
           style={{
               width: wp('15%'),
               height: hp('6%'),
-              backgroundColor: 'white',
+              backgroundColor: 'transparent',
               alignSelf:'center'
           }}
       />

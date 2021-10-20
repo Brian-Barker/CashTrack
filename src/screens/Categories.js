@@ -28,6 +28,7 @@ const Categories = ({navigation}) => {
                 Expense Breakdown
             </Text>
             
+            <View>
             <PieChart
                 data={[
                 {
@@ -80,6 +81,7 @@ const Categories = ({navigation}) => {
                 paddingLeft="5"
                 absolute //for the absolute number remove if you want percentage
             />
+            </View>
             
             <FlatGrid style={{width:wp('100%')}}
                 itemDimension={150}

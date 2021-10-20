@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { ScrollView } from "react-native-gesture-handler";
 
 const Goal = ({navigation}) => {
     return (
         <View style={styles.container}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <Text style={styles.goalHeader}>
                 Monthly Overview
             </Text>
@@ -47,6 +49,7 @@ const Goal = ({navigation}) => {
                 title="Click Here"
                 onPress={() => alert('Button Clicked!')}
             /> */}
+            </ScrollView>
         </View>
     )
 }
