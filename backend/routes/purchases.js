@@ -140,8 +140,9 @@ purchase.post('/move', async (req, res) => {
         if (req.body.categoryId == res.locals.purchase.category) {
             throw 'Error: attempt to move purchase to its current category. Must specify a category the purchase isn\'t already in.'
         }
-        const updateNewCategory = await Category.findByIdAndUpdate(req.body.categoryId, {
-            $push: { purchases: req.body.purchaseId }
+
+        const updateNewCategory = await Category.updateOne({_id: req.body.categoryId}, {
+            $addToSet: { purchases: req.body.purchaseId }
         }, (err) => { if (err) throw err });
 
         const updatePurchase = await Purchase.findByIdAndUpdate(req.body.purchaseId, {
