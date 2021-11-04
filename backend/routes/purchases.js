@@ -20,9 +20,10 @@ purchase.use('/', async (req, res, next) => {
                 }
             });
 
-            const category = await Category.findById(req.body.categoryId ? req.body.categoryId : user.categoryHead, (err, cat) => {
-                if (!cat) throw 'Error: invalid categoryId';
-            });
+            const category = await Category.findById(req.body.categoryId ? req.body.categoryId : user.categoryHead);
+            if (!category) {
+                throw "Error: invalid categoryId."
+            }
 
             if (req.body.purchaseId) {
                 const purchase = await Purchase.findById(req.body.purchaseId);
@@ -30,7 +31,7 @@ purchase.use('/', async (req, res, next) => {
                     throw 'Error: purchase not found.';
 
                 if (purchase.user != token._id)
-                    throw 'Error: purchase is not owned by user';
+                    throw 'Error: purchase is not owned by user.';
 
                 res.locals.purchase = purchase;
             }
@@ -139,7 +140,6 @@ purchase.post('/move', async (req, res) => {
         if (req.body.categoryId == res.locals.purchase.category) {
             throw 'Error: attempt to move purchase to its current category. Must specify a category the purchase isn\'t already in.'
         }
-
         const updateNewCategory = await Category.findByIdAndUpdate(req.body.categoryId, {
             $push: { purchases: req.body.purchaseId }
         }, (err) => { if (err) throw err });
