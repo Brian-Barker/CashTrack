@@ -12,6 +12,7 @@ import GroceriesScreen from '../screens/PurhcasesByCategory/TransactionsGrocerie
 
 
 import styles from '../styles';
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 
 
 const Tab = createBottomTabNavigator();
@@ -48,9 +49,10 @@ const Tabs = () => {
                     left: 0,
                     right: 0,
                     elevation: 0,
-                    backgroundColor: '#5d5d5d',
-                    borderRadius: 0,
-                    height: 60,
+                    backgroundColor: 'white',
+                    borderTopLeftRadius: heightPercentageToDP('1.5%'),
+                    borderTopRightRadius: heightPercentageToDP('1.5%'),
+                    height: heightPercentageToDP('10%'),
                     ...styles.shadow
                 }
             }}
@@ -62,12 +64,12 @@ const Tabs = () => {
                             source={require('../../assets/icons/Home.png')}
                             resizeMode = 'contain'
                             style={{
-                                width: 35,
-                                height: 35,
-                                tintColor: focused ? '#ADADAD' : 'white',
+                                width: widthPercentageToDP('8%'),
+                                height: widthPercentageToDP('8%'),
+                                tintColor: focused ? '#ADADAD' : 'black',
                             }}
                         />
-                        <Text style={{color: focused ? '#ADADAD' : 'white', fontSize: 14}}>
+                        <Text style={{color: focused ? '#ADADAD' : 'black', fontSize: heightPercentageToDP('2%')}}>
                             Home 
                         </Text>
                     </View>
@@ -81,12 +83,12 @@ const Tabs = () => {
                             source={require('../../assets/icons/Categories.png')}
                             resizeMode = 'contain'
                             style={{
-                                width: 35,
-                                height: 35,
-                                tintColor: focused ? '#ADADAD' : 'white',
+                                width: widthPercentageToDP('8%'),
+                                height: widthPercentageToDP('8%'),
+                                tintColor: focused ? '#ADADAD' : 'black',
                             }}
                         />
-                        <Text style={{color: focused ? '#ADADAD' : 'white', fontSize: 14}}>
+                        <Text style={{color: focused ? '#ADADAD' : 'black', fontSize: heightPercentageToDP('2%')}}>
                             Categories 
                         </Text>
                     </View>
@@ -99,9 +101,9 @@ const Tabs = () => {
                         source={require('../../assets/icons/Add.png')}
                         resizeMode = 'contain'
                         style={{
-                            width: 35,
-                            height: 35,
-                            tintColor: focused ? '#03A608' : 'white',
+                            width: widthPercentageToDP('8%'),
+                            height: widthPercentageToDP('8%'),
+                            tintColor: focused ? '#ADADAD' : 'white',
                         }}
                     />
                 ),
@@ -117,12 +119,12 @@ const Tabs = () => {
                             source={require('../../assets/icons/Goal.png')}
                             resizeMode = 'contain'
                             style={{
-                                width: 35,
-                                height: 35,
-                                tintColor: focused ? '#ADADAD' : 'white',
+                                width: widthPercentageToDP('8%'),
+                                height: widthPercentageToDP('8%'),
+                                tintColor: focused ? '#ADADAD' : 'black',
                             }}
                         />
-                        <Text style={{color: focused ? '#ADADAD' : 'white', fontSize: 14}}>
+                        <Text style={{color: focused ? '#ADADAD' : 'black', fontSize: heightPercentageToDP('2%')}}>
                             Goal 
                         </Text>
                     </View>
@@ -136,12 +138,12 @@ const Tabs = () => {
                             source={require('../../assets/icons/Settings.png')}
                             resizeMode = 'contain'
                             style={{
-                                width: 25,
-                                height: 25,
-                                tintColor: focused ? '#ADADAD' : 'white',
+                                width: widthPercentageToDP('8%'),
+                                height: widthPercentageToDP('8%'),
+                                tintColor: focused ? '#ADADAD' : 'black',
                             }}
                         />
-                        <Text style={{color: focused ? '#ADADAD' : 'white', fontSize: 14}}>
+                        <Text style={{color: focused ? '#ADADAD' : 'black', fontSize: heightPercentageToDP('2%')}}>
                             Settings 
                         </Text>
                     </View>

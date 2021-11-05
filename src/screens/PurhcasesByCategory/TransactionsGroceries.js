@@ -28,7 +28,7 @@ const transactionsGroceries = ({navigation}) => {
             </Text>
 
             <ScrollView nestedScrollEnabled={true}>
-                <View style={{marginBottom:hp('5%'),backgroundColor:'black'}}>
+                <View style={{marginBottom:hp('5%'),backgroundColor:'white'}}>
                     {tempTransactions.map((item, index) => (
                     <Transaction key={index} item={item} delay={index} />
                     ))}
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'black',
-        color:'black'
+        backgroundColor: 'white',
+        color:'white'
     },
     categoryViewHeader: {
         textAlign: 'center',

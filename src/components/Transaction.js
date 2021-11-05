@@ -36,16 +36,16 @@ const Transaction = props => {
           resizeMode = 'contain' 
           style={{
               width: wp('15%'),
-              height: hp('6%'),
+              height: hp('5.5%'),
               backgroundColor: 'transparent',
               alignSelf:'center'
           }}
       />
       <Animated.View>
-        <Animated.Text style={{color: 'white', paddingLeft: wp('2%')}}>
+        <Animated.Text style={{color: 'black', paddingLeft: wp('2%')}}>
           {props.item.name}
         </Animated.Text>
-        <Animated.Text style={{color: 'gray', paddingLeft: wp('2%')}}>
+        <Animated.Text style={{color: 'black', paddingLeft: wp('2%')}}>
           {props.item.category}
         </Animated.Text>
       </Animated.View>

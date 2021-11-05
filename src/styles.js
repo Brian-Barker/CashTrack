@@ -21,7 +21,8 @@ let styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#18191A',
+    backgroundColor:'#d7e1ec'
+    //backgroundColor: '#18191A',
   },
   topbar: {
     height: hp('7%'),
@@ -102,11 +103,22 @@ let styles = StyleSheet.create({
     marginVertical: height * 0.01,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     alignContent:'center',
     alignSelf:'center',
     borderRadius: 5,
-    backgroundColor: '#40454b',
+    backgroundColor: 'white',
+    borderBottomWidth: 0.5,
+    borderColor:'black'
+  },
+
+  CurrentTab: 
+  {
+    fontSize:hp('3%'),
+    fontFamily:'PierSans-Bold',
+    color:'black',
+    alignSelf:'center',
+    marginTop:hp('2%')
   },
 
   OverallInfo:
@@ -121,9 +133,10 @@ let styles = StyleSheet.create({
   },
   OverallInfoHeaderText:
   {
-    fontSize: hp('3.8%'),
+    fontSize: hp('2.5%'),
     marginLeft:hp('2%'),
-    color:'white',
+    marginTop:hp('1%'),
+    color:'black',
     alignSelf:'center',
     fontFamily: 'PierSans-Regular'
   },
@@ -134,9 +147,9 @@ let styles = StyleSheet.create({
   },
   overallLeftOverBudgetGreen:
   {
-    fontSize:hp('5%'),
+    fontSize:hp('3%'),
     alignSelf:'center',
-    paddingBottom:hp('4%'),
+    // paddingBottom:hp('4%'),
     color: '#28C900'
   },
 
@@ -166,8 +179,8 @@ let styles = StyleSheet.create({
   RecentPurchsesHeaderText: 
   {
     alignSelf:'center',
-    color:'white',
-    fontSize: hp('4%'),
+    color:'black',
+    fontSize: hp('3%'),
     fontFamily: 'PierSans-Regular',
     marginTop:hp('1%')
   }

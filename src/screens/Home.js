@@ -8,7 +8,6 @@ import Animated, {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import styles from '../styles';
 import Transaction from '../components/Transaction';
-
 import {
   LineChart,
   BarChart,
@@ -17,6 +16,8 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+//import { LinearGradient } from 'react-native-svg';
+import LinearGradient from 'react-native-linear-gradient';
 const {height, width} = Dimensions.get('window');
 
 let tempTransactions = [
@@ -64,17 +65,26 @@ const Home = () => {
   }
 
   return (
-    
-    <View style={styles.homeContainer}>
-      <ScrollView>   
-        <Animated.Text style={styles.OverallInfoHeaderText}>
-          Remaining Weekly Balance
-        </Animated.Text>
-        <Animated.Text style={styles.overallLeftOverBudgetGreen}>
-          $225.00
-        </Animated.Text>
+    // <View style={styles.homeContainer}>
+    <>
+    {/* <LinearGradient colors={['#e9e9e9','#f6f6f6']} style={{flex:1,backgroundColor:'white'}}> */}
+      {/* <ScrollView> */}
 
 
+
+       
+
+
+        <Animated.View style={{flex:1,flexDirection:'column',justifyContent:'space-evenly'}}>
+        <Animated.View style={{height:hp('8%'),width:wp('100%'),backgroundColor:'white',borderBottomColor:'black',borderBottomWidth:0.5}}>
+        <Animated.Text style={styles.CurrentTab}>
+        Home
+        </Animated.Text>
+        </Animated.View>
+
+
+        <Animated.View style={{flex:1}}>
+        <Animated.View style={{alignSelf:'center', alignItems:'center', height:hp('35%'),width:wp('85%'),backgroundColor:'white',borderRadius:hp('2.5%'),marginTop:hp('1%')}}>
         <Animated.Text style={styles.OverallInfoHeaderText}>
         Monthly Spending 
         </Animated.Text>
@@ -89,18 +99,21 @@ const Home = () => {
               }
             ]
           }}
-          width = {wp('85%')}
-          height= {hp('30%')}
+          width = {wp('80%')}
+          height= {hp('25%')}
           yAxisLabel="$"
           yAxisSuffix=""
+          withVerticalLines={false}
+          withHorizontalLines={false}
+          withShadow={false}
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
-            backgroundColor: "66CC00",
-            backgroundGradientTo: "#007704",
-            backgroundGradientFrom: "#03A608",
+          backgroundColor: "white",
+            backgroundGradientTo: "white",
+            backgroundGradientFrom: "white",
             decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            color: (opacity = 1) => `black`,
+            labelColor: (opacity = 1) => `black`,
             style: {
               //borderRadius: hp('4%')
             },
@@ -108,33 +121,49 @@ const Home = () => {
               r: "6",
               strokeWidth: "2",
               stroke: "black"
-            }
+            },
+            withVerticalLines :"False"
           }}
           //bezier
           style={{
-            marginTop:('5%'),
+            marginTop:('2%'),
             alignItems:'flex-start',
             borderRadius: hp('1%'),
             justifyContent:'center',
             alignSelf:'center'
           }}
         />
+        </Animated.View>
 
+        <Animated.View style = {{alignItems:'center', height:hp('10%'),width:wp('85%'),backgroundColor:'white',justifyContent:'center',alignSelf:'center',marginTop:hp('1%'),borderRadius:hp('2.5%')}}>
+
+        <Animated.Text style={styles.OverallInfoHeaderText}>
+          Remaining Weekly Balance
+        </Animated.Text>
+        <Animated.Text style={styles.overallLeftOverBudgetGreen}>
+          $225.00
+        </Animated.Text>
+
+        </Animated.View>
+
+
+        <Animated.View style = {{height:hp('40%'),width: wp('85%'),backgroundColor:'white',alignSelf:'center',marginTop:hp('1%'),borderTopLeftRadius:hp('2.5%'),borderTopRightRadius:hp('2.5%')}}>
         <Animated.Text style={styles.RecentPurchsesHeaderText}>
           Recent Purchases
         </Animated.Text>
 
       
-        <View stype={{marginBottom: 0}}>
+        <View style={{marginBottom: 0}}>
         {tempTransactions.map((item, index) => (
           <Transaction key={index} item={item} delay={index} />
         ))}
         </View>
-        
-
-      </ScrollView>
-    </View>
-    
+        </Animated.View>
+        </Animated.View>
+        </Animated.View>
+      {/* </ScrollView> */}
+      {/* </LinearGradient> */}
+    </>
   );
 };
 
