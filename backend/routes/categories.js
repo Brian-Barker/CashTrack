@@ -11,23 +11,25 @@ category.use('/', async (req, res, next) => {
         let token = verifyToken(req.body.token);
         if (token === false) {
             throw 'Error: Invalid token provided';
+        } else {
+            res.locals.token = token;
         }
-        res.locals.token = token;
 
         if (req.body.parentId) {
             const parent = await Category.findById(req.body.parentId);
 
             if (parent.user != token._id) throw 'Error: parent specified does not belong to user';
-            res.locals.parent = parent;
+            else res.locals.parent = parent;
         }
 
         if (req.body.categoryId) {
             const category = await Category.findById(req.body.categoryId);
 
             if (category.user != token._id) throw 'Error: category specified does not belong to user';
-            res.locals.category = category;
+            else res.locals.category = category;
         }
 
+        next();
     } catch(err) {
         console.error(err);
         res.json({error: err});
