@@ -11,6 +11,8 @@ place.use('/', async (req, res, next) => {
         let token = verifyToken(req.body.token);
         if (token === false) {
             res.json({message: 'Invalid user token received.'});
+        } else if(!process.env.GOOGLE_MAPS_API_KEY) {
+            res.json({message: 'ERROR: No Google Maps API Key Found.'});
         } else {
             next();
         }
@@ -35,8 +37,11 @@ place.post('/', async (req, res) => {
     };
 
     axios(config).then((res) => {
-        console.log(JSON.stringify(res.data));
-    }).catch((err) => { console.log(err) })
+        res.json(JSON.stringify(res.data));
+    }).catch((err) => {
+        console.log(err);
+        res.json({error: err});
+    })
 })
 
 export default place;
