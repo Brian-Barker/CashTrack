@@ -21,8 +21,10 @@ let styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor:'#d7e1ec'
+    //backgroundColor:'#aabaaf'
     //backgroundColor: '#18191A',
+    //backgroundColor: '#92c6ba',
+    backgroundColor: '#002B19',
   },
   topbar: {
     height: hp('7%'),
@@ -107,9 +109,11 @@ let styles = StyleSheet.create({
     alignContent:'center',
     alignSelf:'center',
     borderRadius: 5,
-    backgroundColor: 'white',
+    //backgroundColor: 'black',
+    backgroundColor: '#407565',
     borderBottomWidth: 0.5,
-    borderColor:'black'
+    //borderColor:'black',
+    borderColor:'white'
   },
 
   CurrentTab: 
@@ -133,12 +137,33 @@ let styles = StyleSheet.create({
   },
   OverallInfoHeaderText:
   {
-    fontSize: hp('2.5%'),
+    fontSize: hp('3%'),
     marginLeft:hp('2%'),
     marginTop:hp('1%'),
-    color:'black',
+    //color:'#18191A',
+    color:'white',
     alignSelf:'center',
     fontFamily: 'PierSans-Regular'
+  },
+  RemainingBalanceHeaderText:
+  {
+    fontSize: hp('3%'),
+    marginLeft:hp('2%'),
+    marginTop:hp('1%'),
+    //color:'#18191A',
+    color:'white',
+    alignSelf:'center',
+    fontFamily: 'PierSans-Regular',
+    paddingBottom:hp('2%'),
+  },
+  RecentPurchsesHeaderText: 
+  {
+    alignSelf:'center',
+    //color:'#18191A',
+    color:'white',
+    fontSize: hp('3%'),
+    fontFamily: 'PierSans-Regular',
+    marginTop:hp('1%')
   },
   overallMainInfoText:
   {
@@ -148,9 +173,14 @@ let styles = StyleSheet.create({
   overallLeftOverBudgetGreen:
   {
     fontSize:hp('3%'),
-    alignSelf:'center',
-    // paddingBottom:hp('4%'),
-    color: '#28C900'
+    textAlign:'center',
+    //color: '#28C900',
+    color: 'white',
+    //backgroundColor:'#407565',
+    height:hp('6%'),
+    width:wp('80%'),
+    borderRadius:hp('0.5%'),
+    paddingTop:hp('1%'),
   },
 
   windowsContainer:
@@ -158,7 +188,6 @@ let styles = StyleSheet.create({
     backgroundColor:'#18191A',
     justifyContent:'center',
     alignItems:'center'
-
   },
   information:
   {
@@ -176,17 +205,40 @@ let styles = StyleSheet.create({
     width:wp('100%'),
     backgroundColor: '#5d5d5d',
   },
-  RecentPurchsesHeaderText: 
-  {
+  
+  monthlySpendingContainer: {
+    alignItems:'center',
+    width:wp('85%'),
+    backgroundColor:'#407565',
+    justifyContent:'center',
     alignSelf:'center',
-    color:'black',
-    fontSize: hp('3%'),
-    fontFamily: 'PierSans-Regular',
-    marginTop:hp('1%')
-  }
+    borderRadius:hp('1.5%'),
+    marginTop:hp('1.75%'),
+    marginBottom:hp('1.75%'),
+  },
 
+  remainingBalanceContainer: {
+    alignItems:'center',
+    height:hp('12%'),
+    width:wp('85%'),
+    backgroundColor:'#407565',
+    justifyContent:'center',
+    alignSelf:'center',
+    borderRadius:hp('1.5%'),
+    marginTop:hp('1.75%'),
+    marginBottom:hp('1.75%'),
+  },
 
-
+  recentPurchasesContainer: {
+    alignItems:'center',
+    width:wp('85%'),
+    backgroundColor:'#407565',
+    justifyContent:'center',
+    alignSelf:'center',
+    borderRadius:hp('1.5%'),
+    marginTop:hp('1.75%'),
+    marginBottom:hp('1.75%'),
+  },
 
 });
 

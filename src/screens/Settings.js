@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Settings = ({navigation}) => {
     return (
@@ -11,11 +12,12 @@ const Settings = ({navigation}) => {
             /> */}
 
 
-            <TouchableOpacity style={{paddingTop: 650}}>
+            <TouchableOpacity style={{paddingTop: hp('80%')}}>
                 <Text 
                     style={{
+                        fontFamily: 'PierSans-Regular',
                         fontSize: 18,
-                        backgroundColor: '#03A608', 
+                        backgroundColor: '#407565', 
                         textAlign: 'center',
                         color: 'white',
                         height: 50,
@@ -23,7 +25,7 @@ const Settings = ({navigation}) => {
                         borderRadius: 10,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        paddingTop: 14,
+                        paddingTop: hp('1.5%'),
                     }}         
                     onPress={() => alert('Signed Out!')}
                     >  
@@ -44,6 +46,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         //justifyContent: 'center',
-        backgroundColor: 'black'
+        backgroundColor: '#002B19'
     },
 })

@@ -34,7 +34,7 @@ const Categories = ({navigation}) => {
                 {
                     name: 'Groceries',
                     percentage: 21,
-                    color: '#00FF11',
+                    color: '#6eaf9c',
                     legendFontColor: 'white',
                     legendFontSize: 15,
                 },
@@ -55,7 +55,7 @@ const Categories = ({navigation}) => {
                 {
                     name: 'Dining',
                     percentage: 11,
-                    color: '#0C7813',
+                    color: '#488472',
                     legendFontColor: 'white',
                     legendFontSize: 15,
                 },
@@ -90,10 +90,11 @@ const Categories = ({navigation}) => {
                 renderItem={({ item }) => (
                 <View style={{justifyContent:'center',alignItems:'center'}}>
 
-                <TouchableOpacity style={{height:hp('5%'),width:wp('30%'),flex:1,justifyContent:'center', backgroundColor: '#03A608',borderRadius: hp('2%'),alignItems:'center'}}>
+                <TouchableOpacity style={{height:hp('5%'),width:wp('35%'),flex:1,justifyContent:'center', backgroundColor: '#407565',borderRadius: hp('1%'),alignItems:'center'}}>
                     <Text 
                         style={{
-                            fontSize: hp('3%'),
+                            fontFamily: 'PierSans-Regular',
+                            fontSize: hp('2.5%'),
                             textAlign: 'center',
                             color: 'white',
                         }}
@@ -121,9 +122,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'black'
+        backgroundColor: '#002B19'
     },
     homeCategoryViewHeader: {
+        fontFamily: 'PierSans-Regular',
         textAlign: 'center',
         fontSize: hp('4%'),
         padding: hp('1%'),
@@ -131,6 +133,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     pieChartHeader: {
+        fontFamily: 'PierSans-Regular',
         textAlign: 'center',
         fontSize: hp('3'),
         padding: hp('2%'),

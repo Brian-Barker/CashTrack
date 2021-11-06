@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Dimensions, StatusBar, ActivityIndicator,SafeAreaView,ScrollView, FlatList, MaskedViewComponent} from 'react-native';
+import {View, Dimensions, StatusBar, ActivityIndicator,SafeAreaView,ScrollView, FlatList, MaskedViewComponent, ImageBackground} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -18,11 +18,10 @@ import {
 } from "react-native-chart-kit";
 //import { LinearGradient } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
+import { Image } from 'react-native';
 const {height, width} = Dimensions.get('window');
 
 let tempTransactions = [
-  {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-  {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
@@ -65,105 +64,94 @@ const Home = () => {
   }
 
   return (
-    // <View style={styles.homeContainer}>
-    <>
-    {/* <LinearGradient colors={['#e9e9e9','#f6f6f6']} style={{flex:1,backgroundColor:'white'}}> */}
-      {/* <ScrollView> */}
+    <View style={styles.homeContainer}>
 
+      {/* <ImageBackground source={require('../../assets/icons/Background,5.png')} style={{width: '110%', height: '110%'}}> */}
 
+      <ScrollView>
 
-       
+        <Animated.View style={styles.remainingBalanceContainer}>
+          <Animated.Text style={styles.RemainingBalanceHeaderText}>
+            Remaining Weekly Balance
+          </Animated.Text>
 
-
-        <Animated.View style={{flex:1,flexDirection:'column',justifyContent:'space-evenly'}}>
-        <Animated.View style={{height:hp('8%'),width:wp('100%'),backgroundColor:'white',borderBottomColor:'black',borderBottomWidth:0.5}}>
-        <Animated.Text style={styles.CurrentTab}>
-        Home
-        </Animated.Text>
+          <Animated.Text style={styles.overallLeftOverBudgetGreen}>
+            $225.00
+          </Animated.Text>
         </Animated.View>
 
 
-        <Animated.View style={{flex:1}}>
-        <Animated.View style={{alignSelf:'center', alignItems:'center', height:hp('35%'),width:wp('85%'),backgroundColor:'white',borderRadius:hp('2.5%'),marginTop:hp('1%')}}>
-        <Animated.Text style={styles.OverallInfoHeaderText}>
-        Monthly Spending 
-        </Animated.Text>
-        <LineChart
-          data={{
-            labels: ["January","February","March","April"],
-            datasets:[
-              {
-                data:[
-                  900,650,340,180
-                ]
-              }
-            ]
-          }}
-          width = {wp('80%')}
-          height= {hp('25%')}
-          yAxisLabel="$"
-          yAxisSuffix=""
-          withVerticalLines={false}
-          withHorizontalLines={false}
-          withShadow={false}
-          yAxisInterval={1} // optional, defaults to 1
-          chartConfig={{
-          backgroundColor: "white",
-            backgroundGradientTo: "white",
-            backgroundGradientFrom: "white",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `black`,
-            labelColor: (opacity = 1) => `black`,
-            style: {
-              //borderRadius: hp('4%')
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "black"
-            },
-            withVerticalLines :"False"
-          }}
-          //bezier
-          style={{
-            marginTop:('2%'),
-            alignItems:'flex-start',
-            borderRadius: hp('1%'),
-            justifyContent:'center',
-            alignSelf:'center'
-          }}
-        />
+        <Animated.View style={styles.monthlySpendingContainer}>  
+          <Animated.Text style={styles.OverallInfoHeaderText}>
+            Weekly Spending 
+          </Animated.Text>
+
+          <LineChart
+            data={{
+              labels: ["Week 1"," Week 2","Week 3","Week 4"],
+              datasets:[
+                {
+                  data:[
+                    900,650,340,180
+                  ]
+                }
+              ]
+            }}
+            width = {wp('80%')}
+            height= {hp('25%')}
+            yAxisLabel="$"
+            yAxisSuffix=""
+            withVerticalLines={false}
+            withHorizontalLines={false}
+            withShadow={false}
+            yAxisInterval={1} // optional, defaults to 1
+            chartConfig={{
+            backgroundColor: "#407565",
+              backgroundGradientTo: "#407565",
+              backgroundGradientFrom: "#407565",
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `white`,
+              labelColor: (opacity = 1) => `white`,
+              style: {
+                //borderRadius: hp('4%')
+              },
+              propsForDots: {
+                r: "6",
+                strokeWidth: "4",
+                stroke: "#407565"
+              },
+              withVerticalLines :"False"
+            }}
+            //bezier
+            style={{
+              marginTop:('2%'),
+              alignItems:'flex-start',
+              borderRadius: hp('1%'),
+              justifyContent:'center',
+              alignSelf:'center'
+            }}
+          />
         </Animated.View>
 
-        <Animated.View style = {{alignItems:'center', height:hp('10%'),width:wp('85%'),backgroundColor:'white',justifyContent:'center',alignSelf:'center',marginTop:hp('1%'),borderRadius:hp('2.5%')}}>
-
-        <Animated.Text style={styles.OverallInfoHeaderText}>
-          Remaining Weekly Balance
-        </Animated.Text>
-        <Animated.Text style={styles.overallLeftOverBudgetGreen}>
-          $225.00
-        </Animated.Text>
-
+        <Animated.View style={styles.recentPurchasesContainer}>
+          <Animated.Text style={styles.RecentPurchsesHeaderText}>
+            Recent Purchases
+          </Animated.Text>
+        
+          <View stype={{marginBottom: 0}}>
+          {tempTransactions.map((item, index) => (
+            <Transaction key={index} item={item} delay={index} />
+          ))}
+          </View>
         </Animated.View>
 
 
-        <Animated.View style = {{height:hp('40%'),width: wp('85%'),backgroundColor:'white',alignSelf:'center',marginTop:hp('1%'),borderTopLeftRadius:hp('2.5%'),borderTopRightRadius:hp('2.5%')}}>
-        <Animated.Text style={styles.RecentPurchsesHeaderText}>
-          Recent Purchases
-        </Animated.Text>
+      </ScrollView>
+{/*       
+      </ImageBackground> */}
 
-      
-        <View style={{marginBottom: 0}}>
-        {tempTransactions.map((item, index) => (
-          <Transaction key={index} item={item} delay={index} />
-        ))}
-        </View>
-        </Animated.View>
-        </Animated.View>
-        </Animated.View>
-      {/* </ScrollView> */}
-      {/* </LinearGradient> */}
-    </>
+    </View>
+    
   );
 };
 

@@ -35,22 +35,23 @@ const Transaction = props => {
           source={require('../../assets/icons/Groceries.png')}
           resizeMode = 'contain' 
           style={{
-              width: wp('15%'),
+              width: wp('12%'),
               height: hp('5.5%'),
               backgroundColor: 'transparent',
-              alignSelf:'center'
+              alignSelf:'center',
+              tintColor: 'white',
           }}
       />
       <Animated.View>
-        <Animated.Text style={{color: 'black', paddingLeft: wp('2%')}}>
+        <Animated.Text style={{color: 'white', paddingLeft: wp('2%')}}>
           {props.item.name}
         </Animated.Text>
-        <Animated.Text style={{color: 'black', paddingLeft: wp('2%')}}>
+        <Animated.Text style={{color: 'white', paddingLeft: wp('2%')}}>
           {props.item.category}
         </Animated.Text>
       </Animated.View>
       <Animated.View>
-        <Animated.Text style={{color: 'red', fontSize: hp('3%'), paddingLeft: wp('5%')}}>
+        <Animated.Text style={{color: '#fa4c4c', fontSize: hp('3%'), paddingLeft: wp('5%')}}>
           -${props.item.amount}
         </Animated.Text>
       </Animated.View>

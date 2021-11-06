@@ -31,7 +31,7 @@ const AddPurchaseTabButton = ({children, onPress}) => (
             width: 54,
             height: 54,
             borderRadius: 10,
-            backgroundColor: 'black',
+            backgroundColor: '#407565',
         }}>
             {children}
         </View>
@@ -49,7 +49,7 @@ const Tabs = () => {
                     left: 0,
                     right: 0,
                     elevation: 0,
-                    backgroundColor: 'white',
+                    backgroundColor: '#002B19',
                     borderTopLeftRadius: heightPercentageToDP('1.5%'),
                     borderTopRightRadius: heightPercentageToDP('1.5%'),
                     height: heightPercentageToDP('10%'),
@@ -66,17 +66,17 @@ const Tabs = () => {
                             style={{
                                 width: widthPercentageToDP('8%'),
                                 height: widthPercentageToDP('8%'),
-                                tintColor: focused ? '#ADADAD' : 'black',
+                                tintColor: focused ? '#ADADAD' : 'white',
                             }}
                         />
-                        <Text style={{color: focused ? '#ADADAD' : 'black', fontSize: heightPercentageToDP('2%')}}>
+                        <Text style={{color: focused ? '#ADADAD' : 'white', fontSize: heightPercentageToDP('2%')}}>
                             Home 
                         </Text>
                     </View>
                 ),
             }}/>
 
-            <Tab.Screen name="Categories" component={CategoriesScreen} options={{
+            <Tab.Screen name="Section" component={CategoriesScreen} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center', top: 0}}>
                         <Image
@@ -85,11 +85,11 @@ const Tabs = () => {
                             style={{
                                 width: widthPercentageToDP('8%'),
                                 height: widthPercentageToDP('8%'),
-                                tintColor: focused ? '#ADADAD' : 'black',
+                                tintColor: focused ? '#ADADAD' : 'white',
                             }}
                         />
-                        <Text style={{color: focused ? '#ADADAD' : 'black', fontSize: heightPercentageToDP('2%')}}>
-                            Categories 
+                        <Text style={{color: focused ? '#ADADAD' : 'white', fontSize: heightPercentageToDP('2%')}}>
+                            Section 
                         </Text>
                     </View>
                 ),
@@ -121,10 +121,10 @@ const Tabs = () => {
                             style={{
                                 width: widthPercentageToDP('8%'),
                                 height: widthPercentageToDP('8%'),
-                                tintColor: focused ? '#ADADAD' : 'black',
+                                tintColor: focused ? '#ADADAD' : 'white',
                             }}
                         />
-                        <Text style={{color: focused ? '#ADADAD' : 'black', fontSize: heightPercentageToDP('2%')}}>
+                        <Text style={{color: focused ? '#ADADAD' : 'white', fontSize: heightPercentageToDP('2%')}}>
                             Goal 
                         </Text>
                     </View>
@@ -140,10 +140,10 @@ const Tabs = () => {
                             style={{
                                 width: widthPercentageToDP('8%'),
                                 height: widthPercentageToDP('8%'),
-                                tintColor: focused ? '#ADADAD' : 'black',
+                                tintColor: focused ? '#ADADAD' : 'white',
                             }}
                         />
-                        <Text style={{color: focused ? '#ADADAD' : 'black', fontSize: heightPercentageToDP('2%')}}>
+                        <Text style={{color: focused ? '#ADADAD' : 'white', fontSize: heightPercentageToDP('2%')}}>
                             Settings 
                         </Text>
                     </View>

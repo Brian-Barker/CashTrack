@@ -64,6 +64,7 @@ const AddPurchase = ({navigation}) => {
             <TouchableOpacity style={styles.submitStyling} onPress={() => alert('Your Purchase Has Been Added!')}>
                 <Text 
                     style={{
+                        fontFamily: 'PierSans-Regular',
                         fontSize: hp('2%'),
                         //backgroundColor: '#03A608', 
                         textAlign: 'center',
@@ -91,10 +92,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         //justifyContent: 'center',
-        backgroundColor: 'black',
+        backgroundColor: '#002B19',
         paddingTop: 60,
     },
     addPurchaseHeader: {
+        fontFamily: 'PierSans-Regular',
         textAlign: 'center',
         fontSize: 28,
         padding: 16,
@@ -103,6 +105,7 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
     },
     addPurchaseSubHeader: {
+        fontFamily: 'PierSans-Regular',
         textAlign: 'center',
         fontSize: 20,
         padding: 0,
@@ -110,20 +113,21 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     input: {
+        fontFamily: 'PierSans-Regular',
         height: hp('6%'),
         width: wp('75%'),
         margin: hp('1%'),
         borderWidth: 1,
         padding: 10,
         color: 'black',
-        
+        borderRadius: hp('1.5%'),
         backgroundColor: 'white'
       },
 
-      submitStyling: {
+    submitStyling: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: '#03A608',
+        backgroundColor: '#407565',
         height: hp('7%'),
         width: wp('75%'),
         borderRadius: hp('2%'),
