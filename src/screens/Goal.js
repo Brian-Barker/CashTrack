@@ -13,9 +13,9 @@ const Goal = ({navigation}) => {
         <View style={styles.container}>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             
-            <Text style={styles.goalHeader}>
+            {/* <Text style={styles.goalHeader}>
                 Monthly Overview
-            </Text>
+            </Text> */}
 
             <Animated.View style={styles.subSectionsContainer}>
                 <Text style={styles.goalSubHeader}>
@@ -76,8 +76,8 @@ export default Goal;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        //justifyContent: 'center',
         backgroundColor: '#002B19'
     },
     goalHeader: {
@@ -113,14 +113,14 @@ const styles = StyleSheet.create({
     },
     subSectionsContainer: {
         alignItems:'center',
-        height:hp('11%'),
+        height:hp('13%'),
         width:wp('85%'),
         backgroundColor:'#407565',
         justifyContent:'center',
         alignSelf:'center',
         borderRadius:hp('1.5%'),
         paddingTop:hp('2.5%'),
-        marginTop:hp('1.5%'),
+        marginTop:hp('1.75%'),
         marginBottom:hp('1.75%'),
     },
 })

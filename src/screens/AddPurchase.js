@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity } from 'rea
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Picker } from '@react-native-picker/picker'
 import { withTheme } from "react-native-elements";
+import Animated from "react-native-reanimated";
 
 const AddPurchase = ({navigation}) => {
 
@@ -12,6 +13,8 @@ const AddPurchase = ({navigation}) => {
 
     return (
         <View style={styles.container}>
+
+            <Animated.View style={styles.addPurchaseContainer}>
             <Text style={styles.addPurchaseHeader}>
                 Add A Purchase
             </Text>
@@ -61,26 +64,14 @@ const AddPurchase = ({navigation}) => {
             />
 
 
-            <TouchableOpacity style={styles.submitStyling} onPress={() => alert('Your Purchase Has Been Added!')}>
-                <Text 
-                    style={{
-                        fontFamily: 'PierSans-Regular',
-                        fontSize: hp('2%'),
-                        //backgroundColor: '#03A608', 
-                        textAlign: 'center',
-                        color: 'white',
-                        // height: hp('7%'),
-                        // width: wp('75%'),
-                        // borderRadius: hp('2%'),
-                        // justifyContent: 'center',
-                        // alignItems: 'center',
-                        // textAlign:'center',
-                        // alignSelf:'center'
-                                            }}         
-                    >  
+            <TouchableOpacity style={styles.submitContainer} onPress={() => alert('Your Purchase Has Been Added!')}>
+                <Text style={styles.submitText}>  
                     Submit
                 </Text>
             </TouchableOpacity>
+        
+            </Animated.View>
+
         </View>
     )
 }
@@ -93,23 +84,33 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         //justifyContent: 'center',
         backgroundColor: '#002B19',
-        paddingTop: 60,
+        paddingTop: hp('7%'),
+    },
+    addPurchaseContainer: {
+        alignItems:'center',
+        height:hp('70'),
+        width:wp('85%'),
+        backgroundColor:'#407565',
+        justifyContent:'center',
+        alignSelf:'center',
+        borderRadius:hp('1.5%'),
+        marginTop:hp('1.75%'),
+        marginBottom:hp('1.75%'),
     },
     addPurchaseHeader: {
         fontFamily: 'PierSans-Regular',
         textAlign: 'center',
-        fontSize: 28,
-        padding: 16,
-        marginTop: 16,
+        fontSize: hp('3.5%'),
+        padding: hp('1.5%'),
+        marginTop: hp('1%'),
         color: 'white',
-        paddingBottom: 30,
+        paddingBottom: hp('3%'),
     },
     addPurchaseSubHeader: {
         fontFamily: 'PierSans-Regular',
         textAlign: 'center',
-        fontSize: 20,
-        padding: 0,
-        marginTop: 16,
+        fontSize: hp('2.5%'),
+        marginTop: hp('2%'),
         color: 'white',
     },
     input: {
@@ -117,20 +118,27 @@ const styles = StyleSheet.create({
         height: hp('6%'),
         width: wp('75%'),
         margin: hp('1%'),
-        borderWidth: 1,
-        padding: 10,
+        padding: hp('2%'),
         color: 'black',
         borderRadius: hp('1.5%'),
         backgroundColor: 'white'
-      },
-
-    submitStyling: {
+    },
+    submitContainer: {
         justifyContent: "center",
+        fontSize: hp('2%'),
         alignItems: "center",
-        backgroundColor: '#407565',
+        backgroundColor: '#002B19',
         height: hp('7%'),
         width: wp('75%'),
         borderRadius: hp('2%'),
-        marginTop: hp('2%')
-      }
+        marginTop: hp('5%')
+    },
+    submitText: {
+        fontFamily: 'PierSans-Regular',
+        fontSize: hp('2.5%'),
+        //backgroundColor: '#03A608', 
+        textAlign: 'center',
+        color: 'white',
+        // textAlign:'center'
+    }
 })

@@ -24,7 +24,9 @@ let styles = StyleSheet.create({
     //backgroundColor:'#aabaaf'
     //backgroundColor: '#18191A',
     //backgroundColor: '#92c6ba',
-    backgroundColor: '#002B19',
+    backgroundColor: '#002B19', //Highland
+    //backgroundColor: '#b2decf', //SurfnTurf
+    //backgroundColor: '#c0e0d5' //RobinsNest
   },
   topbar: {
     height: hp('7%'),

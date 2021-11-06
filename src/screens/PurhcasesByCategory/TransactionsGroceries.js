@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     transactionModifierButton: {
-        fontSize: 19,
+        fontSize: hp('3%'),
         backgroundColor: '#03A608', 
         textAlign: 'center',
         color: 'white',
