@@ -127,9 +127,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#002B19', //Highland
+        //backgroundColor: '#002B19', //Highland
         //backgroundColor: '#b2decf', //SurfnTurf
         //backgroundColor: '#c0e0d5' //RobinsNest
+        backgroundColor: '#d8ede6', //SpringMint
+        //backgroundColor: 'white'
     },
     homeCategoryTextContainer: {
         textAlign: 'center',

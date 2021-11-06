@@ -78,7 +78,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#002B19'
+        //backgroundColor: '#002B19' //Highland
+        backgroundColor: '#d8ede6', //SpringMint
+        //backgroundColor: 'white'
     },
     goalHeader: {
         fontFamily: 'PierSans-Regular',

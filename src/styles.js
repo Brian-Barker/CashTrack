@@ -24,9 +24,11 @@ let styles = StyleSheet.create({
     //backgroundColor:'#aabaaf'
     //backgroundColor: '#18191A',
     //backgroundColor: '#92c6ba',
-    backgroundColor: '#002B19', //Highland
+    //backgroundColor: '#002B19', //Highland
     //backgroundColor: '#b2decf', //SurfnTurf
-    //backgroundColor: '#c0e0d5' //RobinsNest
+    //backgroundColor: '#c0e0d5', //RobinsNest
+    backgroundColor: '#d8ede6',
+    //backgroundColor: 'white'
   },
   topbar: {
     height: hp('7%'),

@@ -31,9 +31,13 @@ const AddPurchaseTabButton = ({children, onPress}) => (
         <View style={{
             width: 54,
             height: 54,
-            borderRadius: 10,
+            borderRadius: hp('2%'),
+            // borderWidth: hp('0.2%'),
+            // borderColor: 'black',
             backgroundColor: '#407565',
+            //backgroundColor: 'white',
             //backgroundColor: '#002B19', //Highland
+            //backgroundColor: '#d8ede6', //SpringMint
         }}>
             {children}
         </View>
@@ -52,7 +56,9 @@ const Tabs = () => {
                     right: 0,
                     elevation: 0,
                     //backgroundColor: '#407565',
-                    backgroundColor: '#002B19', //Highland
+                    //backgroundColor: '#002B19', //Highland
+                    backgroundColor: '#d8ede6', //SpringMint
+                    //backgroundColor: 'white'
                     borderTopLeftRadius: hp('1.5%'),
                     borderTopRightRadius: hp('1.5%'),
                     height: hp('10%'),
@@ -62,17 +68,17 @@ const Tabs = () => {
         >
             <Tab.Screen name="Home" component={HomeScreen} options={{
                 tabBarIcon: ({focused}) => (
-                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0, borderBottomWidth: 1.5, borderColor: focused ? 'white' : '#002B19'}}>
+                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0, borderBottomWidth: 1.5, borderColor: focused ? '#002B19' : '#d8ede6'}}>
                         <Image
                             source={require('../../assets/icons/Home.png')}
                             resizeMode = 'contain'
                             style={{
                                 width: wp('8%'),
                                 height: wp('8%'),
-                                tintColor: focused ? 'white' : '#BABABA',
+                                tintColor: focused ? '#002B19' : '#949494',
                             }}
                         />
-                        <Text style={{color: focused ? 'white' : '#BABABA', fontSize: hp('2%')}}>
+                        <Text style={{color: focused ? '#002B19' : '#949494', fontSize: hp('2%')}}>
                             Home 
                         </Text>
                     </View>
@@ -81,17 +87,17 @@ const Tabs = () => {
 
             <Tab.Screen name="Section" component={CategoriesScreen} options={{
                 tabBarIcon: ({focused}) => (
-                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0, borderBottomWidth: 1.5, borderColor: focused ? 'white' : '#002B19'}}>
+                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0, borderBottomWidth: 1.5, borderColor: focused ? '#002B19' : '#d8ede6'}}>
                         <Image
                             source={require('../../assets/icons/Categories.png')}
                             resizeMode = 'contain'
                             style={{
                                 width: wp('8%'),
                                 height: wp('8%'),
-                                tintColor: focused ? 'white' : '#BABABA',
+                                tintColor: focused ? '#002B19' : '#949494',
                             }}
                         />
-                        <Text style={{color: focused ? 'white' : '#BABABA', fontSize: hp('2%')}}>
+                        <Text style={{color: focused ? '#002B19' : '#949494', fontSize: hp('2%')}}>
                             Section 
                         </Text>
                     </View>
@@ -106,7 +112,7 @@ const Tabs = () => {
                         style={{
                             width: wp('8.5%'),
                             height: wp('8.5%'),
-                            tintColor: focused ? 'white' : '#BABABA',
+                            tintColor: focused ? '#002B19' : 'white',
                         }}
                     />
                 ),
@@ -117,17 +123,17 @@ const Tabs = () => {
 
             <Tab.Screen name="Goal" component={GoalScreen} options={{
                 tabBarIcon: ({focused}) => (
-                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0, borderBottomWidth: 1.5, borderColor: focused ? 'white' : '#002B19'}}>
+                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0, borderBottomWidth: 1.5, borderColor: focused ? '#002B19' : '#d8ede6'}}>
                         <Image
                             source={require('../../assets/icons/Goal.png')}
                             resizeMode = 'contain'
                             style={{
                                 width: wp('8%'),
                                 height: wp('8%'),
-                                tintColor: focused ? 'white' : '#BABABA',
+                                tintColor: focused ? '#002B19' : '#949494',
                             }}
                         />
-                        <Text style={{color: focused ? 'white' : '#BABABA', fontSize: hp('2%')}}>
+                        <Text style={{color: focused ? '#002B19' : '#949494', fontSize: hp('2%')}}>
                             Goal 
                         </Text>
                     </View>
@@ -136,17 +142,17 @@ const Tabs = () => {
 
             <Tab.Screen name="Settings" component={SettingsScreen} options={{
                 tabBarIcon: ({focused}) => (
-                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0, borderBottomWidth: 1.5, borderColor: focused ? 'white' : '#002B19'}}>
+                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0, borderBottomWidth: 1.5, borderColor: focused ? '#002B19' : '#d8ede6'}}>
                         <Image
                             source={require('../../assets/icons/Settings.png')}
                             resizeMode = 'contain'
                             style={{
                                 width: wp('8%'),
                                 height: wp('8%'),
-                                tintColor: focused ? 'white' : '#BABABA',
+                                tintColor: focused ? '#002B19' : '#949494',
                             }}
                         />
-                        <Text style={{color: focused ? 'white' : '#BABABA', fontSize: hp('2%')}}>
+                        <Text style={{color: focused ? '#002B19' : '#949494', fontSize: hp('2%')}}>
                             Settings 
                         </Text>
                     </View>
