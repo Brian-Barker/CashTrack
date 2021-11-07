@@ -41,7 +41,7 @@ const transactionsGroceries = ({navigation}) => {
             </Text>
 
             <ScrollView nestedScrollEnabled={true}>
-                <View style={{marginBottom:hp('10%'),backgroundColor:'#407565',borderRadius:hp('1.5%')}}>
+                <View style={{marginBottom:hp('10%'),backgroundColor:'#E5FAF3',borderRadius:hp('1.5%')}}>
                     {tempTransactions.map((item, index) => (
                         <TouchableOpacity  onPress={toggleModal}>
                             <Transaction key={index} item={item} delay={index} />           
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#002B19',
+        backgroundColor: '#E5FAF3',
         color:'white'
     },
     categoryViewHeader: {
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         fontSize: hp('4%'),
         padding: hp('1%'),
         marginTop: hp('2%'),
-        color: 'white',
+        color: '#002B19',
     },
     transactionModifierButton: {
         fontSize: hp('3%'),

@@ -70,16 +70,16 @@ const Home = () => {
 
       <ScrollView>
 
+        <Animated.View style={styles.dashboardContainer}>
         <Animated.View style={styles.remainingBalanceContainer}>
           <Animated.Text style={styles.RemainingBalanceHeaderText}>
-            Remaining Weekly Balance
+            Remaining Balance
           </Animated.Text>
 
           <Animated.Text style={styles.overallLeftOverBudgetGreen}>
             $225.00
           </Animated.Text>
-        </Animated.View>
-
+        
 
         <Animated.View style={styles.monthlySpendingContainer}>  
           <Animated.Text style={styles.OverallInfoHeaderText}>
@@ -106,19 +106,19 @@ const Home = () => {
             withShadow={false}
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-            backgroundColor: "#407565",
-              backgroundGradientTo: "#407565",
-              backgroundGradientFrom: "#407565",
+            backgroundColor: "white",
+              backgroundGradientTo: "white",
+              backgroundGradientFrom: "white",
               decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `white`,
-              labelColor: (opacity = 1) => `white`,
+              color: (opacity = 1) => `#002B19`,
+              labelColor: (opacity = 1) => `#002B19`,
               style: {
                 //borderRadius: hp('4%')
               },
               propsForDots: {
                 r: "6",
                 strokeWidth: "4",
-                stroke: "#407565"
+                stroke: "white"
               },
               withVerticalLines :"False"
             }}
@@ -131,6 +131,8 @@ const Home = () => {
               alignSelf:'center'
             }}
           />
+        </Animated.View>
+        </Animated.View>
         </Animated.View>
 
         <Animated.View style={styles.recentPurchasesContainer}>

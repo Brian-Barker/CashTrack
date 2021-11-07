@@ -57,8 +57,9 @@ const Tabs = () => {
                     elevation: 0,
                     //backgroundColor: '#407565',
                     //backgroundColor: '#002B19', //Highland
-                    backgroundColor: '#d8ede6', //SpringMint
-                    //backgroundColor: 'white'
+                    //backgroundColor: '#d8ede6', //SpringMint
+                    //backgroundColor: '#E5FAF3',
+                    backgroundColor: 'white',
                     borderTopLeftRadius: hp('1.5%'),
                     borderTopRightRadius: hp('1.5%'),
                     height: hp('10%'),

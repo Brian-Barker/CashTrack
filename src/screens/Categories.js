@@ -38,28 +38,28 @@ const Categories = ({navigation}) => {
                         name: 'Groceries',
                         percentage: 21,
                         color: '#7BBCA9',
-                        legendFontColor: 'white',
+                        legendFontColor: '#002B19',
                         legendFontSize: 15,
                     },
                     {
                         name: 'Utilities',
                         percentage: 28,
                         color: '#A1E2CF',
-                        legendFontColor: 'white',
+                        legendFontColor: '#002B19',
                         legendFontSize: 15,
                     },
                     {
                         name: 'Shopping',
                         percentage: 8,
                         color: '#2E6F5C',
-                        legendFontColor: 'white',
+                        legendFontColor: '#002B19',
                         legendFontSize: 15,
                     },
                     {
                         name: 'Dining',
                         percentage: 11,
                         color: '#559683',
-                        legendFontColor: 'white',
+                        legendFontColor: '#002B19',
                         legendFontSize: 15,
                     },
                     ]}
@@ -88,19 +88,19 @@ const Categories = ({navigation}) => {
             
             <Animated.View style={styles.categoryContainer}>
                 <FlatGrid style={{width:wp('100%')}}
-                    itemDimension={150}
+                    itemDimension={120}
                     style={{flex:1}}
                     data={['Groceries','Dining','Shopping','Transport','Travel','Health','Insurance','Education','Utilities','Finance','Fun-Money']}
                     renderItem={({ item }) => (
                     <View style={{justifyContent:'center',alignItems:'center'}}>
 
-                        <TouchableOpacity style={{height:hp('5%'),width:wp('35%'),flex:1,justifyContent:'center', backgroundColor: '#407565',borderRadius: hp('1.5'),alignItems:'center', borderBottomWidth: 1.5, borderColor:'white'}}>
+                        <TouchableOpacity style={{height:hp('5%'),width:wp('35%'),flex:1,justifyContent:'center', backgroundColor: '#E5FAF3',borderRadius: hp('1.5'),alignItems:'center', borderBottomWidth: 1.5, borderColor:'#002B19'}}>
                             <Text 
                                 style={{
                                     fontFamily: 'PierSans-Regular',
                                     fontSize: hp('2.5%'),
                                     textAlign: 'center',
-                                    color: 'white',
+                                    color: '#002B19',
                                 }}
                                 //onPress={() => alert(item + ' Clicked!')}
                                 
@@ -130,7 +130,8 @@ const styles = StyleSheet.create({
         //backgroundColor: '#002B19', //Highland
         //backgroundColor: '#b2decf', //SurfnTurf
         //backgroundColor: '#c0e0d5' //RobinsNest
-        backgroundColor: '#d8ede6', //SpringMint
+        //backgroundColor: '#d8ede6', //SpringMint
+        backgroundColor: '#E5FAF3',
         //backgroundColor: 'white'
     },
     homeCategoryTextContainer: {
@@ -159,7 +160,9 @@ const styles = StyleSheet.create({
         marginBottom:hp('2.75%'),
         borderRadius:hp('1.5%'),
         color: 'white',
-        backgroundColor:'#407565',
+        backgroundColor:'#E5FAF3',
+        // borderWidth:hp('0.2%'),
+        // borderColor: '#002B19',
     },
     pieChartHeader: {
         fontFamily: 'PierSans-Regular',
@@ -167,18 +170,20 @@ const styles = StyleSheet.create({
         fontSize: hp('3'),
         marginTop: hp('1%'),
         borderRadius:hp('1.5%'),
-        color: 'white',
-        backgroundColor:'#407565',
+        color: '#002B19',
+        backgroundColor:'#E5FAF3',
     },
     categoryContainer: {
         alignItems:'center',
         height:hp('40'),
         width:wp('85%'),
-        backgroundColor:'#407565',
+        backgroundColor:'#E5FAF3',
         justifyContent:'center',
         alignSelf:'center',
         borderRadius:hp('1.5%'),
         marginTop:hp('1.75%'),
         marginBottom:hp('1.75%'),
+        // borderWidth:hp('0.2%'),
+        // borderColor: '#002B19',
     },
 })

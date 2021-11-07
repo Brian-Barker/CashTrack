@@ -27,7 +27,8 @@ let styles = StyleSheet.create({
     //backgroundColor: '#002B19', //Highland
     //backgroundColor: '#b2decf', //SurfnTurf
     //backgroundColor: '#c0e0d5', //RobinsNest
-    backgroundColor: '#d8ede6',
+    //backgroundColor: '#d8ede6', //SpringMint
+    backgroundColor: '#E5FAF3',
     //backgroundColor: 'white'
   },
   topbar: {
@@ -114,10 +115,10 @@ let styles = StyleSheet.create({
     alignSelf:'center',
     borderRadius: 5,
     //backgroundColor: 'black',
-    backgroundColor: '#407565',
+    backgroundColor: 'white',
     borderBottomWidth: 0.5,
     //borderColor:'black',
-    borderColor:'white'
+    borderColor:'#002B19'
   },
 
   CurrentTab: 
@@ -138,55 +139,12 @@ let styles = StyleSheet.create({
     backgroundColor: '#18191A',
     marginTop:('5%'),
     alignItems:'flex-start'
-  },
-  OverallInfoHeaderText:
-  {
-    fontSize: hp('3%'),
-    marginLeft:hp('2%'),
-    marginTop:hp('1%'),
-    //color:'#18191A',
-    color:'white',
-    alignSelf:'center',
-    fontFamily: 'PierSans-Regular'
-  },
-  RemainingBalanceHeaderText:
-  {
-    fontSize: hp('3%'),
-    marginLeft:hp('2%'),
-    marginTop:hp('1%'),
-    //color:'#18191A',
-    color:'white',
-    alignSelf:'center',
-    fontFamily: 'PierSans-Regular',
-    paddingBottom:hp('2%'),
-  },
-  RecentPurchsesHeaderText: 
-  {
-    alignSelf:'center',
-    //color:'#18191A',
-    color:'white',
-    fontSize: hp('3%'),
-    fontFamily: 'PierSans-Regular',
-    marginTop:hp('1%')
-  },
+  },  
   overallMainInfoText:
   {
     fontSize:hp('2%'),
     textAlign:'center'
   },
-  overallLeftOverBudgetGreen:
-  {
-    fontSize:hp('3%'),
-    textAlign:'center',
-    //color: '#28C900',
-    color: 'white',
-    //backgroundColor:'#407565',
-    height:hp('6%'),
-    width:wp('80%'),
-    borderRadius:hp('0.5%'),
-    paddingTop:hp('1%'),
-  },
-
   windowsContainer:
   {
     backgroundColor:'#18191A',
@@ -209,39 +167,131 @@ let styles = StyleSheet.create({
     width:wp('100%'),
     backgroundColor: '#5d5d5d',
   },
-  
-  monthlySpendingContainer: {
-    alignItems:'center',
-    width:wp('85%'),
-    backgroundColor:'#407565',
-    justifyContent:'center',
-    alignSelf:'center',
-    borderRadius:hp('1.5%'),
-    marginTop:hp('1.75%'),
-    marginBottom:hp('1.75%'),
+  dashboardContainer: {
+    height:hp('50%'),
+    width:wp('100%'),
+    backgroundColor:'#E5FAF3',
   },
 
-  remainingBalanceContainer: {
+  monthlySpendingContainer: {
     alignItems:'center',
-    height:hp('12%'),
+    height:hp('32%'),
     width:wp('85%'),
-    backgroundColor:'#407565',
+    backgroundColor:'white',
     justifyContent:'center',
     alignSelf:'center',
     borderRadius:hp('1.5%'),
-    marginTop:hp('1.75%'),
+    marginTop:hp('1%'),
     marginBottom:hp('1.75%'),
+    // borderWidth:hp('0.2%'),
+    // borderColor: '#002B19',
+    
+  },
+  OverallInfoHeaderText:
+  {
+    fontSize: hp('3%'),
+    marginLeft:hp('2%'),
+    marginTop:hp('1%'),
+    //color:'#18191A',
+    color:'#002B19',
+    alignSelf:'center',
+    fontFamily: 'PierSans-Regular'
+  },
+  remainingBalanceContainer: {
+    //flexDirection: 'row',
+    //alignItems:'center',
+    height:hp('23%'),
+    width:wp('100%'),
+    //backgroundColor:'#E5FAF3',
+    backgroundColor: '#407565',
+    //justifyContent:'center',
+    alignSelf:'center',
+    //borderRadius:hp('1.5%'),
+    //marginTop:hp('1.75%'),
+    marginBottom:hp('1.75%'),
+    // borderWidth:hp('0.2%'),
+    // borderColor: '#002B19',
+  },
+  RemainingBalanceHeaderText:
+  {
+    // fontSize: hp('3%'),
+    // // marginLeft:hp('2%'),
+    // marginTop:hp('1%'),
+    // //color:'#18191A',
+    // //color:'#002B19', Highland
+    // color: 'white',
+    // // alignSelf:'center',
+    // // textAlign:'center',
+    // fontFamily: 'PierSans-Regular',
+    // paddingTop:hp('1%'),
+    // paddingBottom:hp('2%'),
+    // paddingRight:hp('3%'),
+
+
+    fontSize: hp('2.75%'),
+    // marginLeft:hp('2%'),
+    marginTop:hp('1%'),
+    //color:'#18191A',
+    //color:'#002B19', Highland
+    color: 'white',
+    // alignSelf:'center',
+    // textAlign:'center',
+    fontFamily: 'PierSans-Regular',
+    paddingTop:hp('1%'),
+    paddingLeft:hp('3%'),
+    // paddingBottom:hp('2%'),
+    //paddingRight:hp('3%'),
+  },
+  overallLeftOverBudgetGreen:
+  {
+    // fontSize:hp('3.75%'),
+    // textAlign:'center',
+    // marginTop:hp('1%'),
+    // //color: '#28C900',
+    // //color: '#002B19',
+    // color: 'white',
+    // //backgroundColor:'#407565',
+    // // height:hp('6%'),
+    // // width:wp('40%'),
+    // //borderRadius:hp('0.5%'),
+    // paddingTop:hp('1%'),
+    // paddingBottom:hp('2%'),
+
+    fontSize:hp('4.25%'),
+    //textAlign:'center',
+    marginTop:hp('1%'),
+    //color: '#28C900',
+    //color: '#002B19',
+    color: 'white',
+    //backgroundColor:'#407565',
+    // height:hp('6%'),
+    // width:wp('40%'),
+    //borderRadius:hp('0.5%'),
+    // paddingTop:hp('1%'),
+    paddingLeft:hp('3%'),
+    paddingBottom:hp('1.75%'),
   },
 
   recentPurchasesContainer: {
     alignItems:'center',
     width:wp('85%'),
-    backgroundColor:'#407565',
+    backgroundColor:'white',
     justifyContent:'center',
     alignSelf:'center',
     borderRadius:hp('1.5%'),
     marginTop:hp('1.75%'),
     marginBottom:hp('1.75%'),
+    // borderWidth:hp('0.2%'),
+    // borderColor: '#002B19',
+  },
+  RecentPurchsesHeaderText: 
+  {
+    alignSelf:'center',
+    //color:'#18191A',
+    color:'#002B19',
+    fontSize: hp('3%'),
+    fontFamily: 'PierSans-Regular',
+    marginTop:hp('1%')
   },
 
 });

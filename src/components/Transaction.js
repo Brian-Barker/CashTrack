@@ -39,19 +39,19 @@ const Transaction = props => {
               height: hp('5.5%'),
               backgroundColor: 'transparent',
               alignSelf:'center',
-              tintColor: 'white',
+              tintColor: '#002B19',
           }}
       />
       <Animated.View>
-        <Animated.Text style={{color: 'white', paddingLeft: wp('2%')}}>
+        <Animated.Text style={{color: '#002B19', paddingLeft: wp('2%')}}>
           {props.item.name}
         </Animated.Text>
-        <Animated.Text style={{color: 'white', paddingLeft: wp('2%')}}>
+        <Animated.Text style={{color: '#002B19', paddingLeft: wp('2%')}}>
           {props.item.category}
         </Animated.Text>
       </Animated.View>
       <Animated.View>
-        <Animated.Text style={{color: '#fa4c4c', fontSize: hp('3%'), paddingLeft: wp('5%')}}>
+        <Animated.Text style={{color: '#407565', fontSize: hp('3%'), paddingLeft: wp('5%')}}>
           -${props.item.amount}
         </Animated.Text>
       </Animated.View>
