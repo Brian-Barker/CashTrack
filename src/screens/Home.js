@@ -71,68 +71,68 @@ const Home = () => {
       <ScrollView>
 
         <Animated.View style={styles.dashboardContainer}>
-        <Animated.View style={styles.remainingBalanceContainer}>
-          <Animated.Text style={styles.RemainingBalanceHeaderText}>
-            Remaining Balance
-          </Animated.Text>
+          <Animated.View style={styles.remainingBalanceContainer}>
+            <Animated.Text style={styles.RemainingBalanceHeaderText}>
+              Remaining Balance
+            </Animated.Text>
 
-          <Animated.Text style={styles.overallLeftOverBudgetGreen}>
-            $225.00
-          </Animated.Text>
-        
+            <Animated.Text style={styles.overallLeftOverBudgetGreen}>
+              $225.00
+            </Animated.Text>
+          
 
-        <Animated.View style={styles.monthlySpendingContainer}>  
-          <Animated.Text style={styles.OverallInfoHeaderText}>
-            Weekly Spending 
-          </Animated.Text>
+            <Animated.View style={styles.monthlySpendingContainer}>  
+              <Animated.Text style={styles.OverallInfoHeaderText}>
+                Weekly Spending 
+              </Animated.Text>
 
-          <LineChart
-            data={{
-              labels: ["Week 1"," Week 2","Week 3","Week 4"],
-              datasets:[
-                {
-                  data:[
-                    900,650,340,180
+              <LineChart
+                data={{
+                  labels: ["Week 1"," Week 2","Week 3","Week 4"],
+                  datasets:[
+                    {
+                      data:[
+                        900,650,340,180
+                      ]
+                    }
                   ]
-                }
-              ]
-            }}
-            width = {wp('80%')}
-            height= {hp('25%')}
-            yAxisLabel="$"
-            yAxisSuffix=""
-            withVerticalLines={false}
-            withHorizontalLines={false}
-            withShadow={false}
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={{
-            backgroundColor: "white",
-              backgroundGradientTo: "white",
-              backgroundGradientFrom: "white",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `#002B19`,
-              labelColor: (opacity = 1) => `#002B19`,
-              style: {
-                //borderRadius: hp('4%')
-              },
-              propsForDots: {
-                r: "6",
-                strokeWidth: "4",
-                stroke: "white"
-              },
-              withVerticalLines :"False"
-            }}
-            //bezier
-            style={{
-              marginTop:('2%'),
-              alignItems:'flex-start',
-              borderRadius: hp('1%'),
-              justifyContent:'center',
-              alignSelf:'center'
-            }}
-          />
-        </Animated.View>
-        </Animated.View>
+                }}
+                width = {wp('80%')}
+                height= {hp('25%')}
+                yAxisLabel="$"
+                yAxisSuffix=""
+                withVerticalLines={false}
+                withHorizontalLines={false}
+                withShadow={false}
+                yAxisInterval={1} // optional, defaults to 1
+                chartConfig={{
+                backgroundColor: "white",
+                  backgroundGradientTo: "white",
+                  backgroundGradientFrom: "white",
+                  decimalPlaces: 2, // optional, defaults to 2dp
+                  color: (opacity = 1) => `#002B19`,
+                  labelColor: (opacity = 1) => `#002B19`,
+                  style: {
+                    //borderRadius: hp('4%')
+                  },
+                  propsForDots: {
+                    r: "6",
+                    strokeWidth: "4",
+                    stroke: "white"
+                  },
+                  withVerticalLines :"False"
+                }}
+                //bezier
+                style={{
+                  marginTop:('2%'),
+                  alignItems:'flex-start',
+                  borderRadius: hp('1%'),
+                  justifyContent:'center',
+                  alignSelf:'center'
+                }}
+              />
+            </Animated.View>
+          </Animated.View>
         </Animated.View>
 
         <Animated.View style={styles.recentPurchasesContainer}>
@@ -149,8 +149,6 @@ const Home = () => {
 
 
       </ScrollView>
-{/*       
-      </ImageBackground> */}
 
     </View>
     

@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator();
 const AddPurchaseTabButton = ({children, onPress}) => (
     <TouchableOpacity
     style={{
-        top: 0,
+        top: hp('0%'),
         justifyContent: 'center',
         alignItems: 'center',
         ...styles.shadow
@@ -29,9 +29,9 @@ const AddPurchaseTabButton = ({children, onPress}) => (
         onPress={onPress}
     >
         <View style={{
-            width: 54,
-            height: 54,
-            borderRadius: hp('2%'),
+            width: hp('7.5%'),
+            height: hp('7.5%'),
+            borderRadius: hp('5%'),
             // borderWidth: hp('0.2%'),
             // borderColor: 'black',
             backgroundColor: '#407565',
@@ -108,11 +108,11 @@ const Tabs = () => {
             <Tab.Screen name="Add" component={AddPurchaseScreen} options={{
                 tabBarIcon: ({focused}) => (
                     <Image
-                        source={require('../../assets/icons/Add.png')}
+                        source={require('../../assets/icons/CashTrackLogo.png')}
                         resizeMode = 'contain'
                         style={{
-                            width: wp('8.5%'),
-                            height: wp('8.5%'),
+                            width: wp('12%'),
+                            height: wp('12%'),
                             tintColor: focused ? '#002B19' : 'white',
                         }}
                     />

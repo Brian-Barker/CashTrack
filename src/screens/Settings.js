@@ -12,17 +12,17 @@ const Settings = ({navigation}) => {
             /> */}
 
 
-            <TouchableOpacity style={{paddingTop: hp('80%')}}>
+            <TouchableOpacity style={{paddingTop: hp('79%')}}>
                 <Text 
                     style={{
                         fontFamily: 'PierSans-Regular',
-                        fontSize: 18,
+                        fontSize: hp('2.5%'),
                         backgroundColor: '#407565', 
                         textAlign: 'center',
                         color: 'white',
-                        height: 50,
-                        width: 300,
-                        borderRadius: 10,
+                        height: hp('6%'),
+                        width: wp('80%'),
+                        borderRadius: hp('1.5%'),
                         justifyContent: 'center',
                         alignItems: 'center',
                         paddingTop: hp('1.5%'),

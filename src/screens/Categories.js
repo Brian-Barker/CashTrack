@@ -94,7 +94,7 @@ const Categories = ({navigation}) => {
                     renderItem={({ item }) => (
                     <View style={{justifyContent:'center',alignItems:'center'}}>
 
-                        <TouchableOpacity style={{height:hp('5%'),width:wp('35%'),flex:1,justifyContent:'center', backgroundColor: '#E5FAF3',borderRadius: hp('1.5'),alignItems:'center', borderBottomWidth: 1.5, borderColor:'#002B19'}}>
+                        <TouchableOpacity style={{height:hp('5%'),width:wp('35%'),flex:1,justifyContent:'center', backgroundColor: 'white',borderRadius: hp('0.75'),alignItems:'center', borderLeftWidth: 1.5, borderRightWidth: 1.5, borderColor:'#002B19'}}>
                             <Text 
                                 style={{
                                     fontFamily: 'PierSans-Regular',
@@ -115,7 +115,6 @@ const Categories = ({navigation}) => {
             </Animated.View>
            
         </View>
-
 
     )
 }
@@ -160,9 +159,7 @@ const styles = StyleSheet.create({
         marginBottom:hp('2.75%'),
         borderRadius:hp('1.5%'),
         color: 'white',
-        backgroundColor:'#E5FAF3',
-        // borderWidth:hp('0.2%'),
-        // borderColor: '#002B19',
+        backgroundColor:'white',
     },
     pieChartHeader: {
         fontFamily: 'PierSans-Regular',
@@ -171,19 +168,17 @@ const styles = StyleSheet.create({
         marginTop: hp('1%'),
         borderRadius:hp('1.5%'),
         color: '#002B19',
-        backgroundColor:'#E5FAF3',
+        backgroundColor:'transparent',
     },
     categoryContainer: {
         alignItems:'center',
         height:hp('40'),
         width:wp('85%'),
-        backgroundColor:'#E5FAF3',
+        backgroundColor:'white',
         justifyContent:'center',
         alignSelf:'center',
         borderRadius:hp('1.5%'),
         marginTop:hp('1.75%'),
         marginBottom:hp('1.75%'),
-        // borderWidth:hp('0.2%'),
-        // borderColor: '#002B19',
     },
 })
