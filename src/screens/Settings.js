@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         // color: '#32CD32',
         fontSize:hp('3%'),
-        color: '#407565',
+        color: '#002B19', //Highland
         //backgroundColor:'#407565',
         borderRadius:hp('0.5%'),
     },
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         // color: '#32CD32',
         fontSize:hp('3%'),
-        color: '#407565',
+        color: '#002B19', //Highland
         //backgroundColor:'#407565',
         borderRadius:hp('0.5%'),
     },
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         // color: '#32CD32',
         fontSize:hp('3%'),
-        color: '#407565',
+        color: '#002B19', //Highland
         //backgroundColor:'#407565',
         borderRadius:hp('0.5%'),
     },
