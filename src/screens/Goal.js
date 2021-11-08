@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         //backgroundColor: '#002B19' //Highland
-        backgroundColor: '#d8ede6', //SpringMint
+        //backgroundColor: '#d8ede6', //SpringMint
+        backgroundColor: '#E5FAF3',
         //backgroundColor: 'white'
     },
     goalInfoContainer: {
