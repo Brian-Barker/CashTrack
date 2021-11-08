@@ -5,6 +5,7 @@ import Modal from "react-native-modal";
 import { Picker } from '@react-native-picker/picker'
 
 import Transaction from '../../components/Transaction';
+import Animated from "react-native-reanimated";
 
 let tempTransactions = [
     {name: 'Publix Super Markets', category: 'Groceries', amount: '69.53'},
@@ -36,121 +37,124 @@ const transactionsGroceries = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Text style ={styles.categoryViewHeader}> 
-                Grocery Tranactions
-            </Text>
+            <Animated.View style={styles.categoryContainer}>
+                <Text style ={styles.categoryViewHeader}> 
+                    Grocery Tranactions
+                </Text>
 
-            <ScrollView nestedScrollEnabled={true}>
-                <View style={{marginBottom:hp('10%'),backgroundColor:'#E5FAF3',borderRadius:hp('1.5%')}}>
-                    {tempTransactions.map((item, index) => (
-                        <TouchableOpacity  onPress={toggleModal}>
-                            <Transaction key={index} item={item} delay={index} />           
-                        </TouchableOpacity>
-                    ))}
-                </View>
-
-                <Modal 
-                    onBackdropPress={ ()=> toggleModal()}
-                    isVisible={isModalVisible}
-                    animationIn='fadeIn'
-                    animationOut='fadeOut'
-                >
-                    <View style={{
-                        backgroundColor:'#407565',
-                        height: hp('60%'),
-                        width: wp('70%'),
-                        alignSelf: 'center'
-                    }}>
-                        
-                        <Text style={styles.subMenuText}>
-                            Edit Purchase Location
-                        </Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={onChangeText}
-                            value={text}
-                            placeholder="Enter New Location"
-                            keyboardType="default"
-                        />
-
-                        <Text style={styles.subMenuText}>
-                            Edit Purchase Category
-                        </Text>
-                        <Picker
-                            selectedValue={selectedValue}
-                            style={styles.input}
-                            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                            >
-                            <Picker.Item label="Groceries" value="groceries" />
-                            <Picker.Item label="Dining" value="dining" />
-                            <Picker.Item label="Shopping" value="shopping" />
-                            <Picker.Item label="Transport" value="transport" />
-                            <Picker.Item label="Travel" value="travel" />
-                            <Picker.Item label="Health" value="health" />
-                            <Picker.Item label="Insurance" value="insurance" />
-                            <Picker.Item label="Education" value="education" />
-                            <Picker.Item label="Utilities" value="utilities" />
-                            <Picker.Item label="Finance" value="finance" />
-                            <Picker.Item label="Fun-Money" value="funMoney" />
-                        </Picker>
-
-
-                        <Text style={styles.subMenuText}>
-                            Edit Purchase Amount
-                        </Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={onChangeNumber}
-                            value={number}
-                            placeholder="Enter New Amount"
-                            keyboardType="numeric"
-                        />
-
-
-                        <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
-                            <Text 
-                                style={{
-                                    fontFamily: 'PierSans-Regular',
-                                    fontSize: hp('2%'),
-                                    backgroundColor: '#03A608', 
-                                    alignSelf: 'center',
-                                    color: 'white',
-                                    height: hp('5%'),
-                                    width: wp('60%'),
-                                    textAlign: 'center',
-                                    padding: hp('1%'),
-                                    margin: hp('1%'),
-                                    borderRadius: hp('1.5%'),
-                                }}         
-                                >  
-                                Update Purchase
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
-                            <Text 
-                                style={{
-                                    fontFamily: 'PierSans-Regular',
-                                    fontSize: hp('2%'),
-                                    backgroundColor: 'red', 
-                                    alignSelf: 'center',
-                                    color: 'white',
-                                    height: hp('5%'),
-                                    width: wp('60%'),
-                                    textAlign: 'center',
-                                    padding: hp('1%'),
-                                    margin: hp('1%'),
-                                    borderRadius: hp('1.5%'),
-                                }}         
-                                >  
-                                Remove Purchase
-                            </Text>
-                        </TouchableOpacity>
-                            
+                <ScrollView nestedScrollEnabled={true}>
+                    <View style={{backgroundColor:'white',borderRadius:hp('1.5%')}}>
+                        {tempTransactions.map((item, index) => (
+                            <TouchableOpacity  onPress={toggleModal}>
+                                <Transaction key={index} item={item} delay={index} />           
+                            </TouchableOpacity>
+                        ))}
                     </View>
 
-                </Modal>
+                    <Modal 
+                        onBackdropPress={ ()=> toggleModal()}
+                        isVisible={isModalVisible}
+                        animationIn='fadeIn'
+                        animationOut='fadeOut'
+                    >
+                        <View style={{
+                            backgroundColor:'#407565',
+                            height: hp('60%'),
+                            width: wp('70%'),
+                            alignSelf: 'center',
+                            borderRadius: hp('1.5%')
+                        }}>
+                            
+                            <Text style={styles.subMenuText}>
+                                Edit Purchase Location
+                            </Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={onChangeText}
+                                value={text}
+                                placeholder="Enter New Location"
+                                keyboardType="default"
+                            />
 
-            </ScrollView>
+                            <Text style={styles.subMenuText}>
+                                Edit Purchase Category
+                            </Text>
+                            <Picker
+                                selectedValue={selectedValue}
+                                style={styles.input}
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                                >
+                                <Picker.Item label="Groceries" value="groceries" />
+                                <Picker.Item label="Dining" value="dining" />
+                                <Picker.Item label="Shopping" value="shopping" />
+                                <Picker.Item label="Transport" value="transport" />
+                                <Picker.Item label="Travel" value="travel" />
+                                <Picker.Item label="Health" value="health" />
+                                <Picker.Item label="Insurance" value="insurance" />
+                                <Picker.Item label="Education" value="education" />
+                                <Picker.Item label="Utilities" value="utilities" />
+                                <Picker.Item label="Finance" value="finance" />
+                                <Picker.Item label="Fun-Money" value="funMoney" />
+                            </Picker>
+
+
+                            <Text style={styles.subMenuText}>
+                                Edit Purchase Amount
+                            </Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={onChangeNumber}
+                                value={number}
+                                placeholder="Enter New Amount"
+                                keyboardType="numeric"
+                            />
+
+
+                            <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
+                                <Text 
+                                    style={{
+                                        fontFamily: 'PierSans-Regular',
+                                        fontSize: hp('2%'),
+                                        backgroundColor: '#03A608', 
+                                        alignSelf: 'center',
+                                        color: 'white',
+                                        height: hp('5%'),
+                                        width: wp('60%'),
+                                        textAlign: 'center',
+                                        padding: hp('1%'),
+                                        margin: hp('1%'),
+                                        borderRadius: hp('1.5%'),
+                                    }}         
+                                    >  
+                                    Update Purchase
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
+                                <Text 
+                                    style={{
+                                        fontFamily: 'PierSans-Regular',
+                                        fontSize: hp('2%'),
+                                        backgroundColor: 'red', 
+                                        alignSelf: 'center',
+                                        color: 'white',
+                                        height: hp('5%'),
+                                        width: wp('60%'),
+                                        textAlign: 'center',
+                                        padding: hp('1%'),
+                                        margin: hp('1%'),
+                                        borderRadius: hp('1.5%'),
+                                    }}         
+                                    >  
+                                    Remove Purchase
+                                </Text>
+                            </TouchableOpacity>
+                                
+                        </View>
+
+                    </Modal>
+
+                </ScrollView>
+            </Animated.View>
         </View>
     )
 }
@@ -165,10 +169,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#E5FAF3',
         color:'white'
     },
+    categoryContainer: {
+        backgroundColor: 'white',
+        borderRadius: hp('1.5%'),
+        marginTop: hp('2%'),
+        marginBottom: hp('12%'),
+    },
     categoryViewHeader: {
         fontFamily: 'PierSans-Regular',
         textAlign: 'center',
-        fontSize: hp('4%'),
+        fontSize: hp('3.5%'),
         padding: hp('1%'),
         marginTop: hp('2%'),
         color: '#002B19',
@@ -180,7 +190,7 @@ const styles = StyleSheet.create({
         color: 'white',
         height: hp('10%'),
         width: wp('65%'),
-        borderRadius: 10,
+        borderRadius: hp('1.5%'),
         margin: hp('1%'),
         alignContent: 'center',
         paddingTop: hp('3%')
@@ -190,7 +200,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: hp('2.5%'),
         padding: 0,
-        marginTop: 16,
+        marginTop: hp('2%'),
         color: 'white',
         backgroundColor: '#407565',
     },
@@ -198,8 +208,9 @@ const styles = StyleSheet.create({
         height: hp('6%'),
         width: wp('65%'),
         margin: hp('1%'),
-        borderWidth: 1,
-        padding: 1,
+        borderColor: '#002B19',
+        borderWidth: hp('0.1%'),
+        padding: hp('1%'),
         color: 'black',
         alignContent: 'center',
         backgroundColor: 'white',
