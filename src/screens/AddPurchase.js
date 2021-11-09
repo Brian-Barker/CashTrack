@@ -84,8 +84,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         //justifyContent: 'center',
         //backgroundColor: '#002B19', //Highland
-        backgroundColor: '#d8ede6', //SpringMint
+        //backgroundColor: '#d8ede6', //SpringMint
         //backgroundColor: 'white'
+        backgroundColor: '#E5FAF3',
         paddingTop: hp('7%'),
     },
     addPurchaseContainer: {

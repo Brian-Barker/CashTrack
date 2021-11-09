@@ -29,8 +29,8 @@ const AddPurchaseTabButton = ({children, onPress}) => (
         onPress={onPress}
     >
         <View style={{
-            width: hp('7.5%'),
-            height: hp('7.5%'),
+            width: hp('6.75%'),
+            height: hp('6.75%'),
             borderRadius: hp('5%'),
             // borderWidth: hp('0.2%'),
             // borderColor: 'black',
@@ -107,15 +107,18 @@ const Tabs = () => {
 
             <Tab.Screen name="Add" component={AddPurchaseScreen} options={{
                 tabBarIcon: ({focused}) => (
-                    <Image
-                        source={require('../../assets/icons/CashTrackLogo.png')}
-                        resizeMode = 'contain'
-                        style={{
-                            width: wp('12%'),
-                            height: wp('12%'),
-                            tintColor: focused ? '#002B19' : 'white',
-                        }}
-                    />
+                    <View style={{alignItems: 'center', justifyContent: 'center', top: 0,  width: wp('16%'), height: wp('16%'), borderWidth: 2, borderRadius: hp('5%'), borderColor: focused ? '#002B19' : '#d8ede6'}}>
+                        <Image
+                            source={require('../../assets/icons/CashTrackLogo.png')}
+                            resizeMode = 'contain'
+                            style={{
+                                width: wp('12%'),
+                                height: wp('12%'),
+                                tintColor: focused ? 'white' : '#BABABA',
+                                //tintColor: 'white',
+                            }}
+                        />
+                    </View>
                 ),
                 tabBarButton: (props) => (
                     <AddPurchaseTabButton {...props} />
