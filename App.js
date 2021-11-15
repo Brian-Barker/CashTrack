@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './src/navigation/tabs';
 import Home from './src/screens/Home';
 
+
 const App = () => {
   return(
     <NavigationContainer>
@@ -13,5 +14,6 @@ const App = () => {
   ); 
   
 }
+
 
 export default App;
