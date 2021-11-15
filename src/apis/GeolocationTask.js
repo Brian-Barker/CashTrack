@@ -1,4 +1,5 @@
 import PushNotification from 'react-native-push-notification';
+import {fetchPlaceData, loginUser} from './Backend';
 
 module.exports = async taskData => {
   if (PushNotification.getChannels() === undefined) {
@@ -8,21 +9,26 @@ module.exports = async taskData => {
     });
   }
 
-  let currentTime = new Date();
+  console.log('Task Data', taskData);
+
+  let token = await loginUser('mdirocco', 'cockandballs');
+  let res = await fetchPlaceData(
+    token.token,
+    taskData.latitude,
+    taskData.longitude,
+  );
 
   PushNotification.cancelAllLocalNotifications();
 
   PushNotification.localNotification({
     channelId: 'test-channel',
-    title: currentTime.toISOString(),
-    message:
-      'Longitude: ' + taskData.longitude + ' Latitude: ' + taskData.latitude,
+    title: 'Keep Track with Ca$hTrack!',
+    message: res[0].name,
     allowWhileIdle: true,
     visibility: 'public',
     importance: 'high',
   });
 
-  console.log(currentTime.toISOString());
   console.log('Firing from Java!');
   console.log(taskData);
 };

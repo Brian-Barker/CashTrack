@@ -76,20 +76,6 @@ public class GeolocationWorker extends ListenableWorker
                     mContext.startService(service);
                 }
 
-//                mContext.bindService(service, new ServiceConnection()
-//                {
-//                    @Override
-//                    public void onServiceConnected(ComponentName componentName, IBinder iBinder)
-//                    {
-//                        Log.i("Geolocation Worker", "Service Connected!");
-//                    }
-//
-//                    @Override
-//                    public void onServiceDisconnected(ComponentName componentName)
-//                    {
-//                        Log.i("Geolocation Worker", "Service Disconnected!");
-//                    }
-//                }, Context.BIND_AUTO_CREATE);
                 HeadlessJsTaskService.acquireWakeLockNow(getApplicationContext());
 
                 mFusedLocationClient.removeLocationUpdates(fusedTrackerCallback);
