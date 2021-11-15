@@ -1,27 +1,19 @@
 import React from 'react';
+//import Home from './src/screens/Home';
+//import Animated from 'react-native-reanimated';
+import { NavigationContainer } from '@react-navigation/native';
+import Tabs from './src/navigation/tabs';
 import Home from './src/screens/Home';
-import Login from './src/test/Login';
-import Test from './src/test/Test';
-import Animated from 'react-native-reanimated';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 
-const Stack = createStackNavigator();
 
 const App = () => {
-  // // return <Home />;
-  // return <Login />;
-  return (
+  return(
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name={'Login'} component={Login} />
-        <Stack.Screen name={'Test'} component={Test} />
-      </Stack.Navigator>
+      <Tabs />
     </NavigationContainer>
-  );
-};
+  ); 
+  
+}
+
 
 export default App;

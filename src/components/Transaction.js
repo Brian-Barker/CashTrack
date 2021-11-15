@@ -6,6 +6,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import styles from '../styles';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Transaction = props => {
   const opacity = useSharedValue(0);
@@ -26,17 +28,30 @@ const Transaction = props => {
 
   return (
     <Animated.View style={[opacityStyle, styles.transactionContainer]}>
-      <Animated.View
+      {/* <Animated.View
         style={[styles.homeSummaryPhotoView, {backgroundColor: 'green'}]}
+      /> */}
+      <Image
+          source={require('../../assets/icons/Groceries.png')}
+          resizeMode = 'contain' 
+          style={{
+              width: wp('12%'),
+              height: hp('5.5%'),
+              backgroundColor: 'transparent',
+              alignSelf:'center',
+              tintColor: '#002B19',
+          }}
       />
       <Animated.View>
-        <Animated.Text>{props.item.name}</Animated.Text>
-        <Animated.Text style={{color: 'gray'}}>
+        <Animated.Text style={{color: '#002B19', paddingLeft: wp('2%')}}>
+          {props.item.name}
+        </Animated.Text>
+        <Animated.Text style={{color: '#002B19', paddingLeft: wp('2%')}}>
           {props.item.category}
         </Animated.Text>
       </Animated.View>
       <Animated.View>
-        <Animated.Text style={{color: 'red', fontSize: 20}}>
+        <Animated.Text style={{color: '#407565', fontSize: hp('3%'), paddingLeft: wp('5%')}}>
           -${props.item.amount}
         </Animated.Text>
       </Animated.View>
