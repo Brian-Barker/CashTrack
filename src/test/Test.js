@@ -24,6 +24,7 @@ const Test = () => {
   let [longitude, setLongitude] = useState(0);
   let [latitude, setLatitude] = useState(0);
   let [backendResponse, setBackendResponse] = useState([]);
+  let [serviceStatus, setServiceStatus] = useState('Halted');
 
   useEffect(() => {
     const fetchPermissions = async () => {
@@ -124,9 +125,14 @@ const Test = () => {
           </TouchableOpacity>
         </Animated.View>
       </Modal>
+      <Animated.Text
+        style={{color: 'white', fontSize: 30, marginBottom: height * 0.1}}>
+        Service Status: {serviceStatus}
+      </Animated.Text>
       <TouchableOpacity
         onPress={async () => {
           GeolocationModule.startWorker();
+          setServiceStatus('Running');
         }}
         style={{
           backgroundColor: '#333333',
@@ -165,6 +171,7 @@ const Test = () => {
         onPress={async () => {
           // await BackgroundService.stop();
           GeolocationModule.clearQueue();
+          setServiceStatus('Halted');
         }}
         style={{
           backgroundColor: '#333333',
@@ -182,7 +189,7 @@ const Test = () => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={async () => {
-          let token = await loginUser('mdirocco', 'cockandballs');
+          let token = await loginUser('mdirocco', 'password');
           await Geolocation.getCurrentPosition(
             async result => {
               setLongitude(result.coords.longitude);

@@ -9,7 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import styles from '../styles';
 import {Dimensions, StatusBar, TextInput, TouchableOpacity} from 'react-native';
-import {loginUser} from '../apis/Backend';
+import {fetchUserToken, loginUser} from '../apis/Backend';
 
 const {height, width} = Dimensions.get('window');
 
@@ -57,6 +57,15 @@ const Login = ({navigation}) => {
   });
 
   useEffect(() => {
+    const checkLogin = async () => {
+      let res = await fetchUserToken();
+      if (res !== null) {
+        navigation.navigate('Tabs');
+      }
+    };
+
+    checkLogin().done();
+
     // Logo height and width
 
     logoSpinnerHeight.value = withTiming(height * 0.2, {duration: 1000});
@@ -164,7 +173,7 @@ const Login = ({navigation}) => {
           onPress={async () => {
             let res = await loginUser(username, password);
             if (res.token !== undefined) {
-              navigation.navigate('Test');
+              navigation.navigate('Tabs');
             }
           }}
           style={{

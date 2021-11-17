@@ -1,11 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {View, Dimensions, StatusBar, ActivityIndicator,SafeAreaView,ScrollView, FlatList, MaskedViewComponent, ImageBackground} from 'react-native';
+import {
+  View,
+  Dimensions,
+  StatusBar,
+  ActivityIndicator,
+  SafeAreaView,
+  ScrollView,
+  FlatList,
+  MaskedViewComponent,
+  ImageBackground,
+} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import styles from '../styles';
 import Transaction from '../components/Transaction';
 import {
@@ -14,11 +27,11 @@ import {
   PieChart,
   ProgressChart,
   ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
+  StackedBarChart,
+} from 'react-native-chart-kit';
 //import { LinearGradient } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
-import { Image } from 'react-native';
+import {Image} from 'react-native';
 const {height, width} = Dimensions.get('window');
 
 let tempTransactions = [
@@ -65,11 +78,9 @@ const Home = () => {
 
   return (
     <View style={styles.homeContainer}>
-
       {/* <ImageBackground source={require('../../assets/icons/Background,5.png')} style={{width: '110%', height: '110%'}}> */}
 
       <ScrollView>
-
         <Animated.View style={styles.dashboardContainer}>
           <Animated.View style={styles.remainingBalanceContainer}>
             <Animated.Text style={styles.RemainingBalanceHeaderText}>
@@ -79,26 +90,23 @@ const Home = () => {
             <Animated.Text style={styles.overallLeftOverBudgetGreen}>
               $225.00
             </Animated.Text>
-          
 
-            <Animated.View style={styles.monthlySpendingContainer}>  
+            <Animated.View style={styles.monthlySpendingContainer}>
               <Animated.Text style={styles.OverallInfoHeaderText}>
-                Weekly Spending 
+                Weekly Spending
               </Animated.Text>
 
               <LineChart
                 data={{
-                  labels: ["Week 1"," Week 2","Week 3","Week 4"],
-                  datasets:[
+                  labels: ['Week 1', ' Week 2', 'Week 3', 'Week 4'],
+                  datasets: [
                     {
-                      data:[
-                        900,650,340,180
-                      ]
-                    }
-                  ]
+                      data: [900, 650, 340, 180],
+                    },
+                  ],
                 }}
-                width = {wp('80%')}
-                height= {hp('25%')}
+                width={wp('80%')}
+                height={hp('25%')}
                 yAxisLabel="$"
                 yAxisSuffix=""
                 withVerticalLines={false}
@@ -106,29 +114,29 @@ const Home = () => {
                 withShadow={false}
                 yAxisInterval={1} // optional, defaults to 1
                 chartConfig={{
-                backgroundColor: "white",
-                  backgroundGradientTo: "white",
-                  backgroundGradientFrom: "white",
+                  backgroundColor: 'white',
+                  backgroundGradientTo: 'white',
+                  backgroundGradientFrom: 'white',
                   decimalPlaces: 2, // optional, defaults to 2dp
-                  color: (opacity = 1) => `#002B19`,
-                  labelColor: (opacity = 1) => `#002B19`,
+                  color: (opacity = 1) => '#002B19',
+                  labelColor: (opacity = 1) => '#002B19',
                   style: {
                     //borderRadius: hp('4%')
                   },
                   propsForDots: {
-                    r: "6",
-                    strokeWidth: "4",
-                    stroke: "white"
+                    r: '6',
+                    strokeWidth: '4',
+                    stroke: 'white',
                   },
-                  withVerticalLines :"False"
+                  withVerticalLines: 'False',
                 }}
                 //bezier
                 style={{
-                  marginTop:('2%'),
-                  alignItems:'flex-start',
+                  marginTop: '2%',
+                  alignItems: 'flex-start',
                   borderRadius: hp('1%'),
-                  justifyContent:'center',
-                  alignSelf:'center'
+                  justifyContent: 'center',
+                  alignSelf: 'center',
                 }}
               />
             </Animated.View>
@@ -139,19 +147,15 @@ const Home = () => {
           <Animated.Text style={styles.RecentPurchsesHeaderText}>
             Recent Purchases
           </Animated.Text>
-        
+
           <View stype={{marginBottom: 0}}>
-          {tempTransactions.map((item, index) => (
-            <Transaction key={index} item={item} delay={index} />
-          ))}
+            {tempTransactions.map((item, index) => (
+              <Transaction key={index} item={item} delay={index} />
+            ))}
           </View>
         </Animated.View>
-
-
       </ScrollView>
-
     </View>
-    
   );
 };
 

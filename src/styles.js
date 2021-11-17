@@ -1,5 +1,8 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const {height, width} = Dimensions.get('window');
 
@@ -38,7 +41,7 @@ let styles = StyleSheet.create({
     elevation: 3,
   },
   HeaderText: {
-    textAlign:'center',
+    textAlign: 'center',
     color: 'white',
     fontSize: hp('5%'),
     fontFamily: 'PierSans-Bold',
@@ -111,132 +114,121 @@ let styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    alignContent:'center',
-    alignSelf:'center',
+    alignContent: 'center',
+    alignSelf: 'center',
     borderRadius: 5,
     //backgroundColor: 'black',
     backgroundColor: 'white',
     borderBottomWidth: 0.5,
     //borderColor:'black',
-    borderColor:'#002B19'
+    borderColor: '#002B19',
   },
 
-  CurrentTab: 
-  {
-    fontSize:hp('3%'),
-    fontFamily:'PierSans-Bold',
-    color:'black',
-    alignSelf:'center',
-    marginTop:hp('2%')
+  CurrentTab: {
+    fontSize: hp('3%'),
+    fontFamily: 'PierSans-Bold',
+    color: 'black',
+    alignSelf: 'center',
+    marginTop: hp('2%'),
   },
 
-  OverallInfo:
-  {
+  OverallInfo: {
     height: hp('15%'),
     width: hp('50%'),
     borderRadius: hp('1%'),
     borderWidth: 1,
     backgroundColor: '#18191A',
-    marginTop:('5%'),
-    alignItems:'flex-start'
-  },  
-  overallMainInfoText:
-  {
-    fontSize:hp('2%'),
-    textAlign:'center'
+    marginTop: '5%',
+    alignItems: 'flex-start',
   },
-  windowsContainer:
-  {
-    backgroundColor:'#18191A',
-    justifyContent:'center',
-    alignItems:'center'
+  overallMainInfoText: {
+    fontSize: hp('2%'),
+    textAlign: 'center',
   },
-  information:
-  {
+  windowsContainer: {
+    backgroundColor: '#18191A',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  information: {
     height: hp('30%'),
     width: hp('50%'),
     borderRadius: hp('4%'),
     borderWidth: 1,
     backgroundColor: '#FFFFFF',
-    marginTop:('5%'),
-    alignItems:'flex-start'
+    marginTop: '5%',
+    alignItems: 'flex-start',
   },
-  navBarBottom:
-  {
-    height:hp('15%'),
-    width:wp('100%'),
+  navBarBottom: {
+    height: hp('15%'),
+    width: wp('100%'),
     backgroundColor: '#5d5d5d',
   },
   dashboardContainer: {
-    height:hp('50%'),
-    width:wp('100%'),
-    backgroundColor:'#E5FAF3',
+    height: hp('50%'),
+    width: wp('100%'),
+    backgroundColor: '#E5FAF3',
   },
 
   monthlySpendingContainer: {
-    alignItems:'center',
-    height:hp('32%'),
-    width:wp('85%'),
-    backgroundColor:'white',
-    justifyContent:'center',
-    alignSelf:'center',
-    borderRadius:hp('1.5%'),
-    marginTop:hp('1%'),
-    marginBottom:hp('1.75%'),   
+    alignItems: 'center',
+    height: hp('32%'),
+    width: wp('85%'),
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderRadius: hp('1.5%'),
+    marginTop: hp('1%'),
+    marginBottom: hp('1.75%'),
   },
-  OverallInfoHeaderText:
-  {
+  OverallInfoHeaderText: {
     fontSize: hp('3%'),
-    marginLeft:hp('2%'),
-    marginTop:hp('1%'),
-    color:'#002B19',
-    alignSelf:'center',
-    fontFamily: 'PierSans-Regular'
+    marginLeft: hp('2%'),
+    marginTop: hp('1%'),
+    color: '#002B19',
+    alignSelf: 'center',
+    fontFamily: 'PierSans-Regular',
   },
   remainingBalanceContainer: {
-    height:hp('23%'),
-    width:wp('100%'),
+    height: hp('23%'),
+    width: wp('100%'),
     backgroundColor: '#407565',
-    alignSelf:'center',
-    marginBottom:hp('1.75%'),
+    alignSelf: 'center',
+    marginBottom: hp('1.75%'),
   },
-  RemainingBalanceHeaderText:
-  {
+  RemainingBalanceHeaderText: {
     fontSize: hp('2.75%'),
-    marginTop:hp('1%'),
+    marginTop: hp('1%'),
     color: 'white',
     fontFamily: 'PierSans-Regular',
-    paddingTop:hp('1%'),
-    paddingLeft:hp('3%'),
+    paddingTop: hp('1%'),
+    paddingLeft: hp('3%'),
   },
-  overallLeftOverBudgetGreen:
-  {
-    fontSize:hp('4.25%'),
-    marginTop:hp('1%'),
+  overallLeftOverBudgetGreen: {
+    fontSize: hp('4.25%'),
+    marginTop: hp('1%'),
     color: 'white',
-    paddingLeft:hp('3%'),
-    paddingBottom:hp('1.75%'),
+    paddingLeft: hp('3%'),
+    paddingBottom: hp('1.75%'),
   },
 
   recentPurchasesContainer: {
-    alignItems:'center',
-    width:wp('85%'),
-    backgroundColor:'white',
-    justifyContent:'center',
-    alignSelf:'center',
-    borderRadius:hp('1.5%'),
-    marginTop:hp('1.75%'),
-    marginBottom:hp('1.75%'),
+    alignItems: 'center',
+    width: wp('85%'),
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderRadius: hp('1.5%'),
+    marginTop: hp('1.75%'),
+    marginBottom: hp('1.75%'),
   },
-  RecentPurchsesHeaderText: 
-  {
-    alignSelf:'center',
-    color:'#002B19',
+  RecentPurchsesHeaderText: {
+    alignSelf: 'center',
+    color: '#002B19',
     fontSize: hp('3%'),
     fontFamily: 'PierSans-Regular',
-    marginTop:hp('1%')
+    marginTop: hp('1%'),
   },
-
 });
 
 export default styles;

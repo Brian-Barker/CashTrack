@@ -1,4 +1,4 @@
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const request = async (method, body) => {
   let res = await fetch('http://66.231.152.109/' + method, {
@@ -19,13 +19,18 @@ export const request = async (method, body) => {
   return res;
 };
 
-export const fetchUserToken = async () => {};
+export const fetchUserToken = async () => {
+  return await AsyncStorage.getItem('token');
+};
 
 export const loginUser = async (username, password) => {
-  let res = request('users/login', {
+  console.log(username, password);
+  let res = await request('users/login', {
     username: username,
     password: password,
   });
+  await AsyncStorage.setItem('token', res.token);
+  console.log(res);
   return res;
 };
 

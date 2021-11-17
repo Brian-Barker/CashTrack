@@ -59,7 +59,6 @@ const createHeader = async user => {
       {_id: user._id},
       {$set: {categoryHead: saveHead}},
     );
-
     return saveHead;
   } catch (err) {
     console.log(err);
@@ -78,7 +77,7 @@ category.post('/create', async (req, res) => {
     res.json({message: 'Error: No name provided'});
   } else if (!req.body.parentId) {
     console.log('Error: No parentId provided');
-    re.json({message: 'Error: No parentId provided'});
+    res.json({message: 'Error: No parentId provided'});
   }
   try {
     let token = verifyToken(req.body.token);

@@ -11,7 +11,7 @@ module.exports = async taskData => {
 
   console.log('Task Data', taskData);
 
-  let token = await loginUser('mdirocco', 'cockandballs');
+  let token = await loginUser('mdirocco', 'password');
   let res = await fetchPlaceData(
     token.token,
     taskData.latitude,
