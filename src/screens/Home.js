@@ -69,8 +69,7 @@ const Home = () => {
           barStyle={'dark-content'}
         />
         <Animated.View style={styles.loadingScreenContainer}>
-          <Animated.Text style={styles.loadingText}>Ca$hTrac</Animated.Text>
-          <ActivityIndicator size={'large'} color={'#4f08aa'} />
+          <ActivityIndicator size={'large'} color={'#002b19'} />
         </Animated.View>
       </Animated.View>
     );

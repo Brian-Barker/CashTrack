@@ -93,8 +93,8 @@ const Login = ({navigation}) => {
   });
 
   return (
-    <Animated.View style={[styles.safeArea, {backgroundColor: '#18191a'}]}>
-      <StatusBar backgroundColor={'#18191a'} />
+    <Animated.View style={[styles.safeArea, {backgroundColor: '#407565'}]}>
+      <StatusBar backgroundColor={'#407565'} />
       <Animated.View
         style={[
           logoPositionAnimation,
@@ -102,14 +102,14 @@ const Login = ({navigation}) => {
           {position: 'absolute'},
         ]}>
         <Animated.Image
-          source={require('./assets/spinner_transparent.png')}
+          source={require('./assets/spinner_transparent_recolor.png')}
           style={[
             logoSpinnerRotationAnimation,
             {height: height * 0.2, width: height * 0.2, position: 'absolute'},
           ]}
         />
         <Animated.Image
-          source={require('./assets/1024_transparent.png')}
+          source={require('./assets/1024_transparent_recolor.png')}
           style={[
             logoCenterAnimation,
             {
@@ -126,8 +126,9 @@ const Login = ({navigation}) => {
           {
             alignItems: 'center',
             justifyContent: 'center',
-            // backgroundColor: '#181e1a',
+            backgroundColor: '#407565',
             // elevation: 5,
+            marginTop: 50,
             height: height * 0.5,
             width: width * 0.8,
             borderRadius: 10,
@@ -141,12 +142,12 @@ const Login = ({navigation}) => {
             width: width * 0.7,
             margin: 6,
             // borderWidth: 1,
-            borderRadius: 100,
+            borderRadius: 15,
             borderColor: 'white',
             paddingHorizontal: 20,
-            color: 'white',
+            color: '#002b19',
             fontSize: 16,
-            backgroundColor: '#272a2a',
+            backgroundColor: 'white',
           }}
           placeholder={'Your Username'}
           placeholderTextColor="#BBBBBB"
@@ -158,12 +159,12 @@ const Login = ({navigation}) => {
             width: width * 0.7,
             margin: 6,
             // borderWidth: 1,
-            borderRadius: 100,
+            borderRadius: 15,
             borderColor: 'white',
             paddingHorizontal: 20,
-            color: 'white',
+            color: '#002b19',
             fontSize: 16,
-            backgroundColor: '#272a2a',
+            backgroundColor: 'white',
           }}
           placeholder={'Your Password'}
           placeholderTextColor="#BBBBBB"
@@ -183,14 +184,14 @@ const Login = ({navigation}) => {
             width: width * 0.7,
             marginTop: 24,
             marginBottom: 6,
-            borderRadius: 100,
-            backgroundColor: 'green',
+            borderRadius: 15,
+            backgroundColor: '#002b19',
           }}>
           <Animated.Text style={{color: 'white', fontSize: 20}}>
             Login
           </Animated.Text>
         </TouchableOpacity>
-        <Animated.Text style={{marginTop: height * 0.01, color: 'white'}}>
+        <Animated.Text style={{marginTop: height * 0.01, color: '#e5faf3'}}>
           Forgot Password?
         </Animated.Text>
         <Animated.View
@@ -199,10 +200,10 @@ const Login = ({navigation}) => {
             justifyContent: 'center',
             translateY: height * 0.2,
           }}>
-          <Animated.Text style={{color: 'white'}}>
+          <Animated.Text style={{color: 'black'}}>
             Don't have an account?
           </Animated.Text>
-          <Animated.Text style={{marginTop: height * 0.01, color: 'green'}}>
+          <Animated.Text style={{marginTop: height * 0.01, color: '#e5faf3'}}>
             Register Now!
           </Animated.Text>
         </Animated.View>

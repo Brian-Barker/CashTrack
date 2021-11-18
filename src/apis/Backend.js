@@ -23,6 +23,8 @@ export const fetchUserToken = async () => {
   return await AsyncStorage.getItem('token');
 };
 
+// Login and store user token
+
 export const loginUser = async (username, password) => {
   console.log(username, password);
   let res = await request('users/login', {
@@ -43,13 +45,19 @@ export const fetchPlaceData = async (token, latitude, longitude) => {
   });
 };
 
-export const createUser = async () => {
+export const createUser = async (
+  firstname,
+  lastname,
+  username,
+  password,
+  email,
+) => {
   let res = await request('users/create', {
-    firstname: 'Max',
-    lastname: 'D',
-    username: 'mdirocco',
-    password: 'big_cock',
-    email: 'big_nuts@tor.org',
+    firstname: firstname,
+    lastname: lastname,
+    username: username,
+    password: password,
+    email: email,
   });
   return res;
 };
