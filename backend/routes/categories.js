@@ -103,12 +103,6 @@ const createPresets = async user => {
       parent: saveHead,
       user: user,
     });
-    const Travel = new Category({
-      name: 'Travel',
-      budget: 0,
-      parent: saveHead,
-      user: user,
-    });
     const Finance = new Category({
       name: 'Finance',
       budget: 0,
