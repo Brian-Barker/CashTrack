@@ -42,9 +42,9 @@ category.use('/', async (req, res, next) => {
   }
 });
 
-// --- Create Category Head (returns head) To be called as user is created ---
+// --- Create Preset Categories (returns head) To be called as user is created ---
 
-const createHeader = async user => {
+const createPresets = async user => {
   try {
     const head = new Category({
       name: 'Budget',
@@ -54,6 +54,92 @@ const createHeader = async user => {
     });
 
     const saveHead = await head.save();
+
+    const Shopping = new Category({
+      name: 'Shopping',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Entertainment = new Category({
+      name: 'Entertainment',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Groceries = new Category({
+      name: 'Groceries',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Dining = new Category({
+      name: 'Dining',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Transit = new Category({
+      name: 'Transit',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Household = new Category({
+      name: 'Household',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Utilities = new Category({
+      name: 'Utilities',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Travel = new Category({
+      name: 'Travel',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Travel = new Category({
+      name: 'Travel',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Finance = new Category({
+      name: 'Finance',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Personal = new Category({
+      name: 'Personal',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+    const Other = new Category({
+      name: 'Other',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
+
+    const saveShopping = await Shopping.save();
+    const saveEntertainment = await Entertainment.save();
+    const saveGroceries = await Groceries.save();
+    const saveDining = await Dining.save();
+    const saveTransit = await Transit.save();
+    const saveHousehold = await Household.save();
+    const saveHealth = await Health.save();
+    const saveUtilities = await Utilities.save();
+    const saveTravel = await Travel.save();
+    const saveFinance = await Finance.save();
+    const savePersonal = await Personal.save();
+    const saveOther = await Other.save();
 
     const updateUser = await User.updateOne(
       {_id: user._id},
@@ -367,6 +453,6 @@ category.post('/update/changeBudget', async (req, res) => {
 
 const categoryExports = {
   categoryRoutes: category,
-  createHeader,
+  createPresets,
 };
 export default categoryExports;

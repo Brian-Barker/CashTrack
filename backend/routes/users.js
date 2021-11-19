@@ -55,7 +55,7 @@ user.post('/create', async (req, res) => {
   try {
     const saveUser = await newUser.save((err,user) => {
         if (err) res.json({message: err});
-        category.createHeader(user);
+        category.createPresets(user);
     });
     res.json(saveUser);
   } catch (err) {
@@ -67,7 +67,6 @@ user.post('/create', async (req, res) => {
 
 user.get('/:userId', async (req, res) => {
   try {
-    console.log(req.params.userId);
     const users = await User.findById(req.params.userId);
     res.json(users);
   } catch (err) {

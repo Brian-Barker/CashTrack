@@ -34,6 +34,10 @@ const CategorySchema = mongoose.Schema({
     type: String,
     default: 'blue',
   },
+  presetType: {
+    type: String,
+    required: false,
+  },
 });
 
 export default mongoose.model('Category', CategorySchema);

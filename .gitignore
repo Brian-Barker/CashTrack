@@ -60,3 +60,6 @@ buck-out/
 
 # Backend
 *.env
+src/test/assets/1024_transparent_recolor.png
+src/test/assets/spinner_transparent_recolor.png
+android/java_pid21396.hprof
