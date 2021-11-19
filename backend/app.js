@@ -5,6 +5,8 @@ import 'dotenv/config.js';
 import userRoutes from './routes/users.js';
 import eventRoutes from './routes/events.js';
 import category from './routes/categories.js';
+import purchaseRoutes from './routes/purchases.js';
+import placeRoutes from './routes/places.js';
 import * as path from 'path';
 import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -14,7 +16,7 @@ const app = express();
 app.use(cors());
 
 app.use('*', async (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://swe-at.herokuapp.com/');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/');
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -35,6 +37,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use('/users', userRoutes);
 app.use('/events', eventRoutes);
 app.use('/categories', category.categoryRoutes);
+app.use('/purchases', purchaseRoutes);
+app.use('/places', placeRoutes);
 
 // --- Routes ---
 
@@ -63,4 +67,6 @@ mongoose.connect(
 
 app.listen(process.env.PORT || 3000);
 
-console.log('Listening on port ' + (process.env.PORT ? process.env.PORT : '3000'));
+console.log(
+  'Listening on port ' + (process.env.PORT ? process.env.PORT : '3000'),
+);
