@@ -110,8 +110,8 @@ let styles = StyleSheet.create({
     marginVertical: height * 0.01,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    alignContent:'center',
+    justifyContent: 'space-between',
+    // alignContent:'center',
     alignSelf:'center',
     borderRadius: 5,
     //backgroundColor: 'black',
@@ -217,7 +217,6 @@ let styles = StyleSheet.create({
     paddingLeft:hp('3%'),
     paddingBottom:hp('1.75%'),
   },
-
   recentPurchasesContainer: {
     alignItems:'center',
     width:wp('85%'),
@@ -226,7 +225,7 @@ let styles = StyleSheet.create({
     alignSelf:'center',
     borderRadius:hp('1.5%'),
     marginTop:hp('1.75%'),
-    marginBottom:hp('1.75%'),
+    marginBottom: hp('12%'),
   },
   RecentPurchsesHeaderText: 
   {

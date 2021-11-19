@@ -1,8 +1,10 @@
-import React from "react";
-import { View, Text, Button, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import React, {useState} from "react";
+import { View, Text, Button, TextInput, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 
 import {ScrollView} from 'react-native-gesture-handler';
 import {FlatGrid} from 'react-native-super-grid';
+import Modal from "react-native-modal";
+import { Picker } from '@react-native-picker/picker'
 
 import {
     LineChart,
@@ -17,6 +19,15 @@ import Animated from "react-native-reanimated";
 
 const Categories = ({navigation}) => {
     
+    const [text, onChangeText] = React.useState(null);
+    const [selectedValue, setSelectedValue] = React.useState("Select Category");
+
+    let [isModalVisible, setModalVisible] = useState(false);
+
+    function toggleModal() {
+        setModalVisible(!isModalVisible);
+    }
+
     return (
 
         <View style={styles.container}>
@@ -90,21 +101,22 @@ const Categories = ({navigation}) => {
                 <FlatGrid style={{width:wp('100%')}}
                     itemDimension={120}
                     style={{flex:1}}
-                    data={['Groceries','Dining','Shopping','Transport','Travel','Health','Insurance','Education','Utilities','Finance','Fun-Money']}
+                    //Brian
+                    data={['Shopping','Entertainment','Groceries','Dining','Transit','Household','Health','Utilities','Travel','Finance','Personal','Other']}
                     renderItem={({ item }) => (
                     <View style={{justifyContent:'center',alignItems:'center'}}>
 
-                        <TouchableOpacity style={{height:hp('5%'),width:wp('35%'),flex:1,justifyContent:'center', backgroundColor: 'white',borderRadius: hp('0.75'),alignItems:'center', borderLeftWidth: 1.5, borderRightWidth: 1.5, borderColor:'#002B19'}}>
+                        <TouchableOpacity style={styles.categoryButtons}>
                             <Text 
                                 style={{
                                     fontFamily: 'PierSans-Regular',
                                     fontSize: hp('2.5%'),
                                     textAlign: 'center',
-                                    color: '#002B19',
+                                    color: 'white',
                                 }}
                                 //onPress={() => alert(item + ' Clicked!')}
                                 
-                                onPress={() => navigation.navigate('transactions'+item)}
+                                onPress={() => navigation.navigate('CategoricTransactions')}
                             >
                                 {item}
                             </Text>
@@ -112,8 +124,89 @@ const Categories = ({navigation}) => {
                     </View>
                     )}
                 />
+
+                {/* Brian */}
+                <Animated.View style={styles.createCategoryContainer}>
+                    <TouchableOpacity style={{paddingBottom: hp('1.5%')}}>
+                        <Text
+                            style={styles.createCategoryText}
+                            onPress={() => toggleModal()}
+                        >
+                            Create Category
+                        </Text>
+                    </TouchableOpacity>
+
+                    <Modal 
+                        onBackdropPress={ ()=> toggleModal()}
+                        isVisible={isModalVisible}
+                        animationIn='fadeIn'
+                        animationOut='fadeOut'
+                    >
+                        <View style={{
+                            backgroundColor:'#407565',
+                            height: hp('39%'),
+                            width: wp('70%'),
+                            alignSelf: 'center',
+                            borderRadius: hp('1.5%')
+                        }}>
+                            <Text style={styles.subMenuText}>
+                                Enter New Category
+                            </Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={onChangeText}
+                                value={text}
+                                placeholder="New Category Name"
+                                keyboardType="default"
+                            />
+
+                            <Text style={styles.subMenuText}>
+                                Select Parent Category
+                            </Text>
+                            <Picker
+                                selectedValue={selectedValue}
+                                style={styles.input}
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                                >
+                                <Picker.Item label="None" value="none" />
+                                <Picker.Item label="Groceries" value="groceries" />
+                                <Picker.Item label="Dining" value="dining" />
+                                <Picker.Item label="Shopping" value="shopping" />
+                                <Picker.Item label="Transport" value="transport" />
+                                <Picker.Item label="Travel" value="travel" />
+                                <Picker.Item label="Health" value="health" />
+                                <Picker.Item label="Insurance" value="insurance" />
+                                <Picker.Item label="Education" value="education" />
+                                <Picker.Item label="Utilities" value="utilities" />
+                                <Picker.Item label="Finance" value="finance" />
+                                <Picker.Item label="Fun-Money" value="funMoney" />
+                            </Picker>
+
+                            <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
+                                <Text 
+                                    style={{
+                                        fontFamily: 'PierSans-Regular',
+                                        fontSize: hp('2.25%'),
+                                        backgroundColor: '#002B19', //Highland
+                                        alignSelf: 'center',
+                                        color: 'white',
+                                        height: hp('5%'),
+                                        width: wp('60%'),
+                                        textAlign: 'center',
+                                        paddingTop: hp('1%'),
+                                        //marginBottom: hp('1%'),
+                                        borderRadius: hp('1.5%'),
+                                    }}         
+                                    >  
+                                    Add Category
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Modal>
+
+                </Animated.View>
             </Animated.View>
-           
+
         </View>
 
     )
@@ -155,7 +248,7 @@ const styles = StyleSheet.create({
         fontSize: hp('3'),
         height:hp('30'),
         width:wp('85%'),
-        marginTop:hp('5.75%'),
+        marginTop:hp('3.75%'),
         marginBottom:hp('2.75%'),
         borderRadius:hp('1.5%'),
         color: 'white',
@@ -172,7 +265,7 @@ const styles = StyleSheet.create({
     },
     categoryContainer: {
         alignItems:'center',
-        height:hp('40'),
+        height:hp('46%'),
         width:wp('85%'),
         backgroundColor:'white',
         justifyContent:'center',
@@ -181,4 +274,63 @@ const styles = StyleSheet.create({
         marginTop:hp('1.75%'),
         marginBottom:hp('1.75%'),
     },
+    categoryButtons: {
+        height:hp('5%'),
+        width:wp('36%'),
+        flex:1,
+        justifyContent:'center', 
+        backgroundColor: '#407565',
+        borderRadius: hp('0.75'),
+        alignItems:'center', 
+        // borderLeftWidth: 1.5, 
+        // borderRightWidth: 1.5,
+        borderColor:'#002B19'
+    },
+    createCategoryContainer: {
+        alignItems:'center',
+        height:hp('5.5%'),
+        width:wp('45%'),
+        //backgroundColor:'#002B19', //Highland
+        backgroundColor: 'white',
+        justifyContent:'center',
+        alignSelf:'center',
+        borderRadius:hp('1.5%'),
+        paddingTop:hp('0.75%'),
+        marginBottom:hp('1%'),
+        // borderWidth: 1.5,
+        // borderColor:'#002B19'
+    },
+    createCategoryText: {
+        fontFamily: 'PierSans-Regular',
+        textAlign: 'center',
+        fontSize:hp('2.35%'),
+        color: '#407565',
+    },
+    subMenuText: {
+        fontFamily: 'PierSans-Regular',
+        textAlign: 'center',
+        fontSize: hp('2.5%'),
+        paddingTop: hp('1%'),
+        paddingBottom: hp('1%'),
+        marginTop: hp('1%'),
+        color: 'white',
+        backgroundColor: '#407565',
+    },
+    input: {
+        height: hp('6%'),
+        width: wp('65%'),
+        margin: hp('1.2%'),
+        borderColor: '#002B19',
+        borderWidth: hp('0.1%'),
+        color: 'black',
+        alignContent: 'center',
+        backgroundColor: 'white',
+        paddingBottom: hp('1%'),
+        marginBottom: hp('1%'),
+        textAlign: 'center',
+        borderRadius: hp('1.5%')
+    },
+    submitStyling: {
+        paddingTop: hp('2%'),
+    }
 })

@@ -38,6 +38,7 @@ const AddPurchase = ({navigation}) => {
                 style={styles.input}
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                 >
+                
                 <Picker.Item label="Groceries" value="groceries" />
                 <Picker.Item label="Dining" value="dining" />
                 <Picker.Item label="Shopping" value="shopping" />

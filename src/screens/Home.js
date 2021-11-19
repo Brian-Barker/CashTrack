@@ -21,13 +21,17 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Image } from 'react-native';
 const {height, width} = Dimensions.get('window');
 
-let tempTransactions = [
-  {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-  {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-  {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-];
+import {tempTransactions} from '../components/Purchases';
+
+// let tempTransactions = [
+//   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
+//   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
+//   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
+// ];
 
 const Home = () => {
+  const numOfTransactions = tempTransactions.length;
+
   let [isLoading, setIsLoading] = useState(true);
   let [sunday, setSunday] = useState(new Date());
 
@@ -140,8 +144,8 @@ const Home = () => {
             Recent Purchases
           </Animated.Text>
         
-          <View stype={{marginBottom: 0}}>
-          {tempTransactions.map((item, index) => (
+          <View style={{marginBottom: 0}}>
+          {tempTransactions.slice(numOfTransactions-3,numOfTransactions).map((item, index) => (
             <Transaction key={index} item={item} delay={index} />
           ))}
           </View>
