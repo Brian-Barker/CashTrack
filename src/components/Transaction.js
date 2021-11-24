@@ -31,27 +31,33 @@ const Transaction = props => {
       {/* <Animated.View
         style={[styles.homeSummaryPhotoView, {backgroundColor: 'green'}]}
       /> */}
-      <Image
-          source={require('../../assets/icons/Groceries.png')}
-          resizeMode = 'contain' 
-          style={{
-              width: wp('12%'),
-              height: hp('5.5%'),
-              backgroundColor: 'transparent',
-              alignSelf:'center',
-              tintColor: '#002B19',
-          }}
-      />
-      <Animated.View>
-        <Animated.Text style={{color: '#002B19', paddingLeft: wp('2%')}}>
-          {props.item.name}
-        </Animated.Text>
-        <Animated.Text style={{color: '#002B19', paddingLeft: wp('2%')}}>
-          {props.item.category}
-        </Animated.Text>
+      <Animated.View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+        
+        <Image
+            source={require('../../assets/icons/Groceries.png')}
+            resizeMode = 'contain' 
+            style={{
+                width: wp('12%'),
+                height: hp('5.5%'),
+                backgroundColor: 'transparent',
+                // alignSelf:'center',
+                marginLeft: wp('3%'),
+                tintColor: '#002B19',
+            }}
+        />
+
+        <Animated.View>
+          <Animated.Text style={{color: '#002B19', paddingLeft: wp('3%')}}>
+            {props.item.name}
+          </Animated.Text>
+          <Animated.Text style={{color: '#002B19', paddingLeft: wp('3%')}}>
+            {props.item.category}
+          </Animated.Text>
+        </Animated.View>
       </Animated.View>
-      <Animated.View>
-        <Animated.Text style={{color: '#407565', fontSize: hp('3%'), paddingLeft: wp('5%')}}>
+
+      <Animated.View style={{justifyContent: 'space-between'}}>
+        <Animated.Text style={{color: '#407565', fontSize: hp('3%'), paddingRight: wp('4%')}}>
           -${props.item.amount}
         </Animated.Text>
       </Animated.View>

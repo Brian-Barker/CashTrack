@@ -102,14 +102,14 @@ const Login = ({navigation}) => {
           {position: 'absolute'},
         ]}>
         <Animated.Image
-          source={require('./assets/spinner_transparent_recolor.png')}
+          source={require('../../assets/spinner_transparent_recolor.png')}
           style={[
             logoSpinnerRotationAnimation,
             {height: height * 0.2, width: height * 0.2, position: 'absolute'},
           ]}
         />
         <Animated.Image
-          source={require('./assets/1024_transparent_recolor.png')}
+          source={require('../../assets/1024_transparent_recolor.png')}
           style={[
             logoCenterAnimation,
             {

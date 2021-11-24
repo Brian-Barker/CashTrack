@@ -113,15 +113,15 @@ let styles = StyleSheet.create({
     marginVertical: height * 0.01,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignSelf: 'center',
+    justifyContent: 'space-between',
+    // alignContent:'center',
+    alignSelf:'center',
     borderRadius: 5,
     //backgroundColor: 'black',
     backgroundColor: 'white',
     borderBottomWidth: 0.5,
     //borderColor:'black',
-    borderColor: '#002B19',
+    borderColor:'#002B19'
   },
 
   CurrentTab: {
