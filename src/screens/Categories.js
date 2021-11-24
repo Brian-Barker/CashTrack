@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { View, Text, Button, TextInput, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+
+import { requestWithToken} from "../apis/Backend.js";
 
 import {ScrollView} from 'react-native-gesture-handler';
 import {FlatGrid} from 'react-native-super-grid';
@@ -7,29 +9,71 @@ import Modal from "react-native-modal";
 import { Picker } from '@react-native-picker/picker'
 
 import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart,
-} from 'react-native-chart-kit';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import Animated from 'react-native-reanimated';
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+  } from "react-native-chart-kit";
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import Animated from "react-native-reanimated";
 
 const Categories = ({navigation}) => {
+
+    const [text, onChangeText] = React.useState(null);
+    const [selectedValue, setSelectedValue] = React.useState("Select Category");
+    const [updateCategories, setUpdateCategories] = React.useState(true);
+    const [allCategories, setAllCategories] = React.useState([]);
+
+    useEffect(() => {
+        if (updateCategories) {
+            setUpdateCategories(false);
+            fetchCategories();
+        }
+        //console.log(getFieldFromCategories("name"))
+    });
+
+    let [isModalVisible, setModalVisible] = useState(false);
+
+    function toggleModal() {
+        setModalVisible(!isModalVisible);
+    }
+
+    function fetchCategories() {
+        requestWithToken("categories/getCategoriesFromToken", {})
+        .then((res) => {
+            let cats = {
+                budget: res.category,
+                childCategories: res.childCategories
+            }
+            setAllCategories(cats);
+        });
+    }
+
+    function getFieldFromCategories(key) {
+        let fields = [];
+        if (allCategories.budget) {
+            fields.push(allCategories.budget.name);
+        }
+        return fields;
+    }
+
+    return (
+
+        <View style={styles.container}>
+
+            {/* <Animated.View style={styles.homeCategoryTextContainer}>
                 <Text style={styles.homeCategoryTextHeader}>
                     Purchases By Category
                 </Text>
             </Animated.View> */}
+
             <Animated.View style={styles.pieChartContainer}>
                 <Text style={styles.pieChartHeader}>
                     Expense Breakdown
                 </Text>
-            
+
                 <PieChart
                     data={[
                     {
@@ -83,18 +127,18 @@ const Categories = ({navigation}) => {
                     absolute //for the absolute number remove if you want percentage
                 />
             </Animated.View>
-            
+
             <Animated.View style={styles.categoryContainer}>
                 <FlatGrid style={{width:wp('100%')}}
                     itemDimension={120}
                     style={{flex:1}}
                     //Brian
-                    data={['Shopping','Entertainment','Groceries','Dining','Transit','Household','Health','Utilities','Travel','Finance','Personal','Other']}
+                    data={getFieldFromCategories("name")}
                     renderItem={({ item }) => (
                     <View style={{justifyContent:'center',alignItems:'center'}}>
 
                         <TouchableOpacity style={styles.categoryButtons}>
-                            <Text 
+                            <Text
                                 style={{
                                     fontFamily: 'PierSans-Regular',
                                     fontSize: hp('2.5%'),
@@ -102,7 +146,7 @@ const Categories = ({navigation}) => {
                                     color: 'white',
                                 }}
                                 //onPress={() => alert(item + ' Clicked!')}
-                                
+
                                 onPress={() => navigation.navigate('CategoricTransactions')}
                             >
                                 {item}
@@ -123,7 +167,7 @@ const Categories = ({navigation}) => {
                         </Text>
                     </TouchableOpacity>
 
-                    <Modal 
+                    <Modal
                         onBackdropPress={ ()=> toggleModal()}
                         isVisible={isModalVisible}
                         animationIn='fadeIn'
@@ -170,7 +214,7 @@ const Categories = ({navigation}) => {
                             </Picker>
 
                             <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
-                                <Text 
+                                <Text
                                     style={{
                                         fontFamily: 'PierSans-Regular',
                                         fontSize: hp('2.25%'),
@@ -183,8 +227,8 @@ const Categories = ({navigation}) => {
                                         paddingTop: hp('1%'),
                                         //marginBottom: hp('1%'),
                                         borderRadius: hp('1.5%'),
-                                    }}         
-                                    >  
+                                    }}
+                                    >
                                     Add Category
                                 </Text>
                             </TouchableOpacity>
@@ -196,17 +240,8 @@ const Categories = ({navigation}) => {
 
         </View>
 
-                  onPress={() => navigation.navigate('transactions' + item)}>
-                  {item}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-      </Animated.View>
-    </View>
-  );
-};
+    )
+}
 
 export default Categories;
 

@@ -307,6 +307,20 @@ const deleteCategoryAndChildren = async (topParentId, categoryId, res, rej) => {
   }
 };
 
+// -- Get all categories from user token --
+// token
+category.post('/getCategoriesFromToken', async (req, res) => {
+    try {
+      const user = await User.findById(res.locals.token);
+
+      const categories = await getChildren(user.categoryHead);
+      res.json(categories);
+    } catch (err) {
+      console.log(err);
+      res.json({message: err});
+    }
+});
+
 // -- Get category and children from _id --
 // token
 // categoryId
@@ -334,7 +348,7 @@ const getChildren = async (categoryId, resolve, reject) => {
       if (resolve) {
         resolve({category: parent, childCategories: null});
       }
-      return {category: parent, children: null};
+      return {category: parent, childCategories: null};
     } else {
       let childrenPromises = [];
       parent.children.forEach(childId => {
