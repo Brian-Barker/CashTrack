@@ -8,7 +8,7 @@ import Animated, {
   withDelay,
 } from 'react-native-reanimated';
 import styles from '../styles';
-import {Dimensions, StatusBar, TextInput, TouchableOpacity} from 'react-native';
+import {Dimensions, StatusBar, TextInput, TouchableOpacity, Button} from 'react-native';
 import {fetchUserToken, loginUser} from '../apis/Backend';
 
 const {height, width} = Dimensions.get('window');
@@ -203,9 +203,14 @@ const Login = ({navigation}) => {
           <Animated.Text style={{color: 'black'}}>
             Don't have an account?
           </Animated.Text>
-          <Animated.Text style={{marginTop: height * 0.01, color: '#e5faf3'}}>
-            Register Now!
-          </Animated.Text>
+          <TouchableOpacity
+            onPress={() => { navigation.navigate('Register')}}
+            //onPress={() => alert('Clicked!')}
+          >
+            <Animated.Text style={{marginTop: height * 0.01, color: '#e5faf3'}}>
+              Register Now!
+            </Animated.Text>
+          </TouchableOpacity>
         </Animated.View>
       </Animated.View>
     </Animated.View>

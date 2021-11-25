@@ -10,6 +10,8 @@ import AddPurchaseScreen from '../screens/AddPurchase';
 import GoalScreen from '../screens/Goal';
 import GroceriesScreen from '../screens/PurhcasesByCategory/TransactionsGroceries';
 import CategoricTransactScreen from '../screens/CategoricTransactions';
+import RegisterScreen from '../screens/Register';
+import BudgetConfigScreen from '../screens/BudgetConfig';
 
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -170,6 +172,16 @@ const Tabs = () => {
             }}/>
 
             <Tab.Screen name="CategoricTransactions" component={CategoricTransactScreen} options={{
+                tabBarButton: () => null,
+                tabBarVisibility: false,
+            }}/>
+
+            <Tab.Screen name="Register" component={RegisterScreen} options={{
+                tabBarButton: () => null,
+                tabBarVisibility: false,
+            }}/>
+
+            <Tab.Screen name="BudgetConfig" component={BudgetConfigScreen} options={{
                 tabBarButton: () => null,
                 tabBarVisibility: false,
             }}/>

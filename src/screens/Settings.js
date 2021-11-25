@@ -31,8 +31,10 @@ const Settings = ({navigation}) => {
       </Animated.View>
 
       <Animated.View style={styles.placehold1Container}>
-        <TouchableOpacity style={{paddingTop: hp('1%')}}>
-          <Text style={styles.placehold1Text}>Placehold 1 ></Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('BudgetConfig')}
+          style={{paddingTop: hp('1%')}}>
+          <Text style={styles.placehold1Text}>Adjust Budget ></Text>
         </TouchableOpacity>
       </Animated.View>
 
@@ -40,7 +42,7 @@ const Settings = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Test')}
           style={{paddingTop: hp('1%')}}>
-          <Text style={styles.placehold2Text}>Placehold 2 ></Text>
+          <Text style={styles.placehold2Text}>Placehold 1 ></Text>
         </TouchableOpacity>
       </Animated.View>
 
