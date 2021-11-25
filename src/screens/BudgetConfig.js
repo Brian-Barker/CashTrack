@@ -156,7 +156,7 @@ const BudgetConfig = ({navigation}) =>
                     onPress={()=> console.log(firstValue,transitValue,diningValue,otherValue)}
                     style={styles.SubmitButtonContainer}>
                     <Animated.Text style={styles.SubmitButtonText}>
-                        Submit
+                        Enter
                     </Animated.Text>
                 </TouchableOpacity>
             </Animated.View>
@@ -184,24 +184,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius:hp('1.5%'),
         backgroundColor: '#E5FAF3',
+        //backgroundColor: 'white',
         marginTop: hp('3%'),
         marginBottom: hp('1%'),
     },
     BudgetInputContainer: {
-        //backgroundColor:'#E5FAF3',
+        backgroundColor:'#E5FAF3',
         marginTop:hp('1%'),
     },
     BudgetHeaderText: {
+        fontFamily: 'PierSans-Regular',
         color: 'white',
+        //color: '#002B19', //Highland
         fontSize: hp('4%'),
         alignSelf:'center',
         marginTop:hp('3%'),
     },
     BudgetInputText: {
+        fontFamily: 'PierSans-Regular',
         fontSize:hp('2.5%'),
         height:hp('7%'),
         width:wp('80%'),
         backgroundColor:'#E5FAF3',
+        //backgroundColor:'white',
         marginTop:hp('1%'),
         alignSelf:'center',
         borderRadius:hp('1.5%'),
@@ -211,6 +216,7 @@ const styles = StyleSheet.create({
     SliderContainer: {
         marginTop:hp('3%'),
         backgroundColor:'#E5FAF3',
+        //backgroundColor:'white',
         borderRadius:hp('1.5%'),
         height:hp('45%'),
         width:wp('85%'),
@@ -222,12 +228,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     SliderCategoryHeaderText: {
+        fontFamily: 'PierSans-Regular',
         fontSize:hp('3%'),
         alignSelf:'center',
         color: '#002B19', //Highland
         marginLeft: wp('3%'),
     },
     SliderCategoryAmountText: {
+        fontFamily: 'PierSans-Regular',
         fontSize:hp('3%'),
         alignSelf:'center',
         color:'#407565',
@@ -244,10 +252,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     RemainingUnallocatedText: {
+        fontFamily: 'PierSans-Regular',
         fontSize:hp('2.5%'),
         color: '#002B19', //Highland
     },
     RemainingUnallocatedAmountText: {
+        fontFamily: 'PierSans-Regular',
         fontSize:hp('3%'),
         alignSelf:'center',
         color:'#407565',
@@ -262,9 +272,11 @@ const styles = StyleSheet.create({
         // marginBottom: 6,
         borderRadius:hp('1.5%'),
         backgroundColor: '#002B19', //Highland
+        //backgroundColor:'#407565',
     },
     SubmitButtonText: {
+        fontFamily: 'PierSans-Regular',
         color: 'white',
-        fontSize: 20,
+        fontSize: hp('3%'),
     },
 });
