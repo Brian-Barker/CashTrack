@@ -18,9 +18,18 @@ const CategoricTransactions = ({navigation}) => {
     const [selectedValue, setSelectedValue] = React.useState("Select Category");
 
     let [isModalVisible, setModalVisible] = useState(false);
-
     function toggleModal() {
         setModalVisible(!isModalVisible);
+    }
+
+    let [isEditModalVisible, setEditModalVisible] = useState(false);
+    function toggleEditModal() {
+        setEditModalVisible(!isEditModalVisible);
+    }
+
+    let [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+    function toggleDeleteModal() {
+        setDeleteModalVisible(!isDeleteModalVisible);
     }
 
     return (
@@ -36,11 +45,13 @@ const CategoricTransactions = ({navigation}) => {
                     </Text>
                 </Animated.View>
 
+                {/* Edit Category Page Button and Menu */}
+
                 <Animated.View style={styles.categoryModifierButtonContainer}>
-                    <TouchableOpacity style={styles.editContainer} onPress={() => alert('Are you sure you want to edit the category?')}>
-                        {/* <Text style={styles.submitText}>  
-                            Edit Category
-                        </Text> */}
+                    <TouchableOpacity
+                        style={styles.editContainer}
+                        onPress={toggleEditModal}
+                    >
                         <Image
                                 source={require('../../assets/icons/Edit.png')}
                                 resizeMode = 'contain'
@@ -52,10 +63,50 @@ const CategoricTransactions = ({navigation}) => {
                                 }}
                             />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.deleteContainer} onPress={() => alert('Are you sure you want to delete the category?')}>
-                        {/* <Text style={styles.submitText}>  
-                            Delete Category
-                        </Text> */}
+                    <Modal 
+                        onBackdropPress={ ()=> toggleEditModal()}
+                        isVisible={isEditModalVisible}
+                        animationIn='fadeIn'
+                        animationOut='fadeOut'
+                    >
+                        <View style={{
+                            backgroundColor:'#407565',
+                            height: hp('30%'),
+                            width: wp('70%'),
+                            alignSelf: 'center',
+                            borderRadius: hp('1.5%')
+                        }}>
+                            {/* Call Backend */}
+                            <Text style={styles.subMenuText}>
+                                Edit Category Name
+                            </Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={onChangeText}
+                                value={text}
+                                placeholder="Enter New Name"
+                                keyboardType="default"
+                            />
+                            {/* Call Backend */}
+                            <TouchableOpacity style={styles.submitStyling} onPress={toggleEditModal}>
+                                <Text style={styles.applyButtonContainer}>
+                                    Apply Changes
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.submitStyling} onPress={toggleEditModal}>
+                                <Text style={styles.cancelButtonContainer}> 
+                                    Cancel
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Modal>
+
+                    {/* Delete Category Page Button and Menu */}
+
+                    <TouchableOpacity
+                        style={styles.deleteContainer}
+                        onPress={toggleDeleteModal}
+                    >
                         <Image
                                 source={require('../../assets/icons/TrashCan.png')}
                                 resizeMode = 'contain'
@@ -67,6 +118,59 @@ const CategoricTransactions = ({navigation}) => {
                                 }}
                             />
                     </TouchableOpacity>
+                    <Modal 
+                        onBackdropPress={ ()=> toggleDeleteModal()}
+                        isVisible={isDeleteModalVisible}
+                        animationIn='fadeIn'
+                        animationOut='fadeOut'
+                    >
+                        <View style={{
+                            backgroundColor:'#407565',
+                            height: hp('50%'),
+                            width: wp('70%'),
+                            alignSelf: 'center',
+                            borderRadius: hp('1.5%')
+                        }}>
+                            <Text style={styles.subMenuText}>
+                                Are you sure you wish to delete this category?
+                            </Text>
+                            <Text style={styles.subMenuText2}>
+                                If so, please select category to migrate your purchases to below before continuing.
+                            </Text>
+                            <Text style={styles.subMenuText}>
+                                Select Inheriting Category
+                            </Text>
+                            {/* Call Backend */}
+                            <Picker
+                                selectedValue={selectedValue}
+                                style={styles.input}
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                                >
+                                <Picker.Item label="Groceries" value="groceries" />
+                                <Picker.Item label="Dining" value="dining" />
+                                <Picker.Item label="Shopping" value="shopping" />
+                                <Picker.Item label="Transport" value="transport" />
+                                <Picker.Item label="Travel" value="travel" />
+                                <Picker.Item label="Health" value="health" />
+                                <Picker.Item label="Insurance" value="insurance" />
+                                <Picker.Item label="Education" value="education" />
+                                <Picker.Item label="Utilities" value="utilities" />
+                                <Picker.Item label="Finance" value="finance" />
+                                <Picker.Item label="Fun-Money" value="funMoney" />
+                            </Picker>
+                            {/* Call Backend */}
+                            <TouchableOpacity style={styles.submitStyling} onPress={toggleDeleteModal}>
+                                <Text style={styles.applyButtonContainer}>
+                                    Apply Changes
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.submitStyling} onPress={toggleDeleteModal}>
+                                <Text style={styles.cancelButtonContainer}> 
+                                    Cancel
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Modal>
                 </Animated.View>
             </Animated.View>
 
@@ -112,6 +216,7 @@ const CategoricTransactions = ({navigation}) => {
                             <Text style={styles.subMenuText}>
                                 Edit Purchase Category
                             </Text>
+                            {/* Call Backend */}
                             <Picker
                                 selectedValue={selectedValue}
                                 style={styles.input}
@@ -144,40 +249,12 @@ const CategoricTransactions = ({navigation}) => {
 
 
                             <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
-                                <Text 
-                                    style={{
-                                        fontFamily: 'PierSans-Regular',
-                                        fontSize: hp('2%'),
-                                        backgroundColor: '#03A608', 
-                                        alignSelf: 'center',
-                                        color: 'white',
-                                        height: hp('5%'),
-                                        width: wp('60%'),
-                                        textAlign: 'center',
-                                        padding: hp('1%'),
-                                        margin: hp('1%'),
-                                        borderRadius: hp('1.5%'),
-                                    }}         
-                                    >  
+                                <Text style={styles.applyButtonContainer}>  
                                     Update Purchase
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
-                                <Text 
-                                    style={{
-                                        fontFamily: 'PierSans-Regular',
-                                        fontSize: hp('2%'),
-                                        backgroundColor: 'red', 
-                                        alignSelf: 'center',
-                                        color: 'white',
-                                        height: hp('5%'),
-                                        width: wp('60%'),
-                                        textAlign: 'center',
-                                        padding: hp('1%'),
-                                        margin: hp('1%'),
-                                        borderRadius: hp('1.5%'),
-                                    }}         
-                                    >  
+                                <Text style={styles.cancelButtonContainer}>  
                                     Remove Purchase
                                 </Text>
                             </TouchableOpacity>
@@ -264,6 +341,15 @@ const styles = StyleSheet.create({
         color: 'white',
         backgroundColor: '#407565',
     },
+    subMenuText2: {
+        fontFamily: 'PierSans-Regular',
+        textAlign: 'center',
+        fontSize: hp('2.25%'),
+        padding: hp('0.5%'),
+        marginTop: hp('2%'),
+        color: 'white',
+        backgroundColor: '#407565',
+    },
     input: {
         height: hp('6%'),
         width: wp('65%'),
@@ -308,6 +394,32 @@ const styles = StyleSheet.create({
         borderRadius: hp('9%'),
         marginTop: hp('1%'),
         marginBottom: hp('1%'),
+    },
+    applyButtonContainer: {
+        fontFamily: 'PierSans-Regular',
+        fontSize: hp('2%'),
+        backgroundColor: '#03A608', 
+        alignSelf: 'center',
+        color: 'white',
+        height: hp('5%'),
+        width: wp('60%'),
+        textAlign: 'center',
+        padding: hp('1%'),
+        margin: hp('1%'),
+        borderRadius: hp('1.5%'),
+    },
+    cancelButtonContainer: {
+        fontFamily: 'PierSans-Regular',
+        fontSize: hp('2%'),
+        backgroundColor: 'red', 
+        alignSelf: 'center',
+        color: 'white',
+        height: hp('5%'),
+        width: wp('60%'),
+        textAlign: 'center',
+        padding: hp('1%'),
+        margin: hp('1%'),
+        borderRadius: hp('1.5%'),
     },
     submitText: {
         fontFamily: 'PierSans-Regular',
