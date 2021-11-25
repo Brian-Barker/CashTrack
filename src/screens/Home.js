@@ -34,13 +34,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Image} from 'react-native';
 const {height, width} = Dimensions.get('window');
 
-let tempTransactions = [
-  {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-  {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-  {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-];
+//Pull from Database
+import {tempTransactions} from '../components/Purchases';
 
 const Home = () => {
+  const numOfTransactions = tempTransactions.length;
+
+  //Pull from Database
+  const budgetAmount = 900;
+
   let [isLoading, setIsLoading] = useState(true);
   let [sunday, setSunday] = useState(new Date());
 
@@ -77,8 +79,6 @@ const Home = () => {
 
   return (
     <View style={styles.homeContainer}>
-      {/* <ImageBackground source={require('../../assets/icons/Background,5.png')} style={{width: '110%', height: '110%'}}> */}
-
       <ScrollView>
         <Animated.View style={styles.dashboardContainer}>
           <Animated.View style={styles.remainingBalanceContainer}>
@@ -100,7 +100,8 @@ const Home = () => {
                   labels: ['Week 1', ' Week 2', 'Week 3', 'Week 4'],
                   datasets: [
                     {
-                      data: [900, 650, 340, 180],
+                      // data: [900, 650, 340, 180],
+                      data: [budgetAmount, (budgetAmount*4)/5, (budgetAmount)/2, (budgetAmount*3)/9],
                     },
                   ],
                 }}
@@ -147,10 +148,10 @@ const Home = () => {
             Recent Purchases
           </Animated.Text>
 
-          <View stype={{marginBottom: 0}}>
-            {tempTransactions.map((item, index) => (
-              <Transaction key={index} item={item} delay={index} />
-            ))}
+          <View style={{marginBottom: 0}}>
+          {tempTransactions.slice(numOfTransactions-3,numOfTransactions).map((item, index) => (
+            <Transaction key={index} item={item} delay={index} />
+          ))}
           </View>
         </Animated.View>
       </ScrollView>

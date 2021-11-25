@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: height * 0.07,
         width: width * 0.8,
-        marginTop: hp('3%'),
+        marginTop: hp('2.5%'),
         // marginBottom: 6,
         borderRadius:hp('1.5%'),
         backgroundColor: '#002B19', //Highland
