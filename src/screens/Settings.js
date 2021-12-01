@@ -42,7 +42,7 @@ const Settings = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Test')}
           style={{paddingTop: hp('1%')}}>
-          <Text style={styles.placehold2Text}>Placehold 1 ></Text>
+          <Text style={styles.placehold2Text}>Geolocation Settings ></Text>
         </TouchableOpacity>
       </Animated.View>
 
