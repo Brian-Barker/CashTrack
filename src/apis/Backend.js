@@ -24,7 +24,7 @@ export const requestWithToken = async (method, body) => {
         body.token = await fetchUserToken();
     } else {
         body = { token: await fetchUserToken() };
-    }
+    } 
 
     let res = await fetch('http://66.231.152.109/' + method, {
       credentials: 'same-origin',
