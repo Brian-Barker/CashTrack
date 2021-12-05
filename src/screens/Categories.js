@@ -22,16 +22,22 @@ import Animated from "react-native-reanimated";
 const Categories = ({navigation}) => {
 
     const [text, onChangeText] = React.useState(null);
-    const [selectedValue, setSelectedValue] = React.useState("Select Category");
+    const [newCategoryBudget, setNewCategoryBudget] = React.useState(null);
+    const [selectedValue, setSelectedValue] = React.useState(null);
     const [updateCategories, setUpdateCategories] = React.useState(true);
     const [allCategories, setAllCategories] = React.useState([]);
+    const [topFourCategories, setTopFourCategories] = React.useState([]);
+    const [updateTopFourCategories, setUpdateTopFourCategories] = useState(false);
 
     useEffect(() => {
         if (updateCategories) {
             setUpdateCategories(false);
             fetchCategories();
         }
-        //console.log(getFieldFromCategories("name"))
+        if (updateTopFourCategories && allCategories.childCategories) {
+            setUpdateTopFourCategories(false);
+            getTopFourCategories();
+        }
     });
 
     let [isModalVisible, setModalVisible] = useState(false);
@@ -48,91 +54,122 @@ const Categories = ({navigation}) => {
                 childCategories: res.childCategories
             }
             setAllCategories(cats);
+            setSelectedValue(res.category._id);
+            setUpdateTopFourCategories(true);
         });
+    }
+
+    function getTopFourCategories() {
+        let top4 = [];
+        allCategories.childCategories.forEach(cat => {
+            for (let i = 0; i < 4; ++i) {
+                if ((!top4[i] || cat.category.budget > top4[i].category.budget) && cat.category.budget > 0) {
+                    top4.splice(i, 0, cat);
+                    break;
+                }
+            }
+        });
+        if (top4.length === 0) {
+            top4.push({
+                category: {
+                    name: "Nothing To Show",
+                    budget: 0,
+                    pieColor: '#7BBCA9',
+                }
+            })
+        }
+        top4.length = Math.min(4, top4.length);
+        if (top4[0]) top4[0].category.pieColor = '#7BBCA9';
+        if (top4[1]) top4[1].category.pieColor = '#A1E2CF';
+        if (top4[2]) top4[2].category.pieColor = '#2E6F5C';
+        if (top4[3]) top4[3].category.pieColor = '#559683';
+        console.log(top4[0].category.pieColor);
+        setTopFourCategories(top4);
     }
 
     function getFieldFromCategories(key) {
         let fields = [];
         if (allCategories.budget) {
-            fields.push(allCategories.budget.name);
+            for (let i = 0; i < allCategories.childCategories.length; ++i) {
+                fields.push(allCategories.childCategories[i].category[key]);
+            }
         }
         return fields;
+    }
+
+    function handleCreateCategory(e) {
+        console.log(text)
+        console.log(selectedValue)
+        console.log(newCategoryBudget)
+        requestWithToken("categories/create", {
+            name: text,
+            parentId: selectedValue,
+            budget: newCategoryBudget,
+        }).then((res) => {
+            console.log(res)
+            onChangeText(null);
+            setNewCategoryBudget(null);
+            setSelectedValue(allCategories.budget._id);
+            fetchCategories();
+            toggleModal();
+        })
     }
 
     return (
 
         <View style={styles.container}>
 
-            {/* <Animated.View style={styles.homeCategoryTextContainer}>
-                <Text style={styles.homeCategoryTextHeader}>
-                    Purchases By Category
-                </Text>
-            </Animated.View> */}
-
             <Animated.View style={styles.pieChartContainer}>
-                <Text style={styles.pieChartHeader}>
-                    Expense Breakdown
-                </Text>
+                    <Text style={styles.pieChartHeader}>
+                        Expense Breakdown
+                    </Text>
 
-                <PieChart
-                    data={[
-                    {
-                        name: 'Groceries',
-                        percentage: 21,
-                        color: '#7BBCA9',
-                        legendFontColor: '#002B19',
-                        legendFontSize: 15,
-                    },
-                    {
-                        name: 'Utilities',
-                        percentage: 28,
-                        color: '#A1E2CF',
-                        legendFontColor: '#002B19',
-                        legendFontSize: 15,
-                    },
-                    {
-                        name: 'Shopping',
-                        percentage: 8,
-                        color: '#2E6F5C',
-                        legendFontColor: '#002B19',
-                        legendFontSize: 15,
-                    },
-                    {
-                        name: 'Dining',
-                        percentage: 11,
-                        color: '#559683',
-                        legendFontColor: '#002B19',
-                        legendFontSize: 15,
-                    },
-                    ]}
-                    width={wp('85%')}
-                    height={hp('25%')}
-                    chartConfig={{
-                    backgroundColor: '#1cc910',
-                    backgroundGradientFrom: '#eff3ff',
-                    backgroundGradientTo: '#efefef',
-                    decimalPlaces: 2,
-                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                    style: {
-                        borderRadius: hp('1%'),
-                    },
-                    }}
-                    style={{
-                    marginVertical: hp('0.5%'),
-                    borderRadius: hp('2%'),
-                    }}
-                    accessor="percentage"
-                    backgroundColor="transparent"
-                    paddingLeft="8"
-                    absolute //for the absolute number remove if you want percentage
-                />
-            </Animated.View>
+                    <PieChart
+                        data={topFourCategories[0] ? topFourCategories.map((item) => {
+                            return ({
+                                name: item.category.name,
+                                percentage: item.category.budget,
+                                color: item.category.pieColor,
+                                legendFontColor: '#002B19',
+                                legendFontSize: 15,
+                            })
+                        }) : [
+                            {
+                                name: 'Groceries',
+                                percentage: 21,
+                                color: '#7BBCA9',
+                                legendFontColor: '#002B19',
+                                legendFontSize: 15,
+                            }
+                        ]}
+                        width={wp('85%')}
+                        height={hp('25%')}
+                        chartConfig={{
+                        backgroundColor: '#1cc910',
+                        backgroundGradientFrom: '#eff3ff',
+                        backgroundGradientTo: '#efefef',
+                        decimalPlaces: 2,
+                        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                        style: {
+                            borderRadius: hp('1%'),
+                        },
+                        }}
+                        style={{
+                        marginVertical: hp('0.5%'),
+                        borderRadius: hp('2%'),
+                        }}
+                        accessor="percentage"
+                        backgroundColor="transparent"
+                        paddingLeft="8"
+                        absolute //for the absolute number remove if you want percentage
+                    />
+                </Animated.View>
 
             <Animated.View style={styles.categoryContainer}>
                 <FlatGrid style={{width:wp('100%')}}
                     itemDimension={120}
                     style={{flex:1}}
-                    //Brian
+                    //Brian --Done
                     data={getFieldFromCategories("name")}
                     renderItem={({ item }) => (
                     <View style={{justifyContent:'center',alignItems:'center'}}>
@@ -145,8 +182,6 @@ const Categories = ({navigation}) => {
                                     textAlign: 'center',
                                     color: 'white',
                                 }}
-                                //onPress={() => alert(item + ' Clicked!')}
-
                                 onPress={() => navigation.navigate('CategoricTransactions')}
                             >
                                 {item}
@@ -156,7 +191,7 @@ const Categories = ({navigation}) => {
                     )}
                 />
 
-                {/* Brian */}
+                {/* Brian -- done */}
                 <Animated.View style={styles.createCategoryContainer}>
                     <TouchableOpacity style={{paddingBottom: hp('1.5%')}}>
                         <Text
@@ -168,14 +203,14 @@ const Categories = ({navigation}) => {
                     </TouchableOpacity>
 
                     <Modal
-                        onBackdropPress={ ()=> toggleModal()}
+                        onBackdropPress={ () => toggleModal() }
                         isVisible={isModalVisible}
                         animationIn='fadeIn'
                         animationOut='fadeOut'
                     >
                         <View style={{
                             backgroundColor:'#407565',
-                            height: hp('39%'),
+                            height: hp('55%'),
                             width: wp('70%'),
                             alignSelf: 'center',
                             borderRadius: hp('1.5%')
@@ -192,6 +227,17 @@ const Categories = ({navigation}) => {
                             />
 
                             <Text style={styles.subMenuText}>
+                                New Category Budget
+                            </Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={setNewCategoryBudget}
+                                value={newCategoryBudget}
+                                placeholder="New Category Budget"
+                                keyboardType="default"
+                            />
+
+                            <Text style={styles.subMenuText}>
                                 Select Parent Category
                             </Text>
                             <Picker
@@ -199,22 +245,15 @@ const Categories = ({navigation}) => {
                                 style={styles.input}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                                 >
-                                <Picker.Item label="None" value="none" />
-                                <Picker.Item label="Groceries" value="groceries" />
-                                <Picker.Item label="Dining" value="dining" />
-                                <Picker.Item label="Shopping" value="shopping" />
-                                <Picker.Item label="Transport" value="transport" />
-                                <Picker.Item label="Travel" value="travel" />
-                                <Picker.Item label="Health" value="health" />
-                                <Picker.Item label="Insurance" value="insurance" />
-                                <Picker.Item label="Education" value="education" />
-                                <Picker.Item label="Utilities" value="utilities" />
-                                <Picker.Item label="Finance" value="finance" />
-                                <Picker.Item label="Fun-Money" value="funMoney" />
+                                <Picker.Item label={"None"} value={allCategories.budget ? allCategories.budget._id : null} key={allCategories.budget ? allCategories.budget._id : null}/>
+                                {allCategories.childCategories ? allCategories.childCategories.map((item) => {
+                                    return (<Picker.Item label={item.category.name} value={item.category._id} key={item.category._id}/>) //if you have a bunch of keys value pair
+                                }) : null}
                             </Picker>
 
                             <TouchableOpacity style={styles.submitStyling} onPress={toggleModal}>
                                 <Text
+                                    onPress={handleCreateCategory}
                                     style={{
                                         fontFamily: 'PierSans-Regular',
                                         fontSize: hp('2.25%'),

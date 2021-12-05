@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const request = async (method, body) => {
-  let res = await fetch('http://66.231.152.109/' + method, {
+  let res = await fetch('http://192.168.1.8:3000/' + method, {
     credentials: 'same-origin',
     headers: {
       accept: 'application/json, text/javascript, */*; q=0.01',
@@ -15,6 +15,7 @@ export const request = async (method, body) => {
     method: 'POST',
     mode: 'cors',
   });
+
   res = await res.json();
   return res;
 };
@@ -26,7 +27,7 @@ export const requestWithToken = async (method, body) => {
         body = { token: await fetchUserToken() };
     }
 
-    let res = await fetch('http://192.168.254.68:3000/' + method, {
+    let res = await fetch('http://192.168.1.8:3000/' + method, {
       credentials: 'same-origin',
       headers: {
         accept: 'application/json, text/javascript, */*; q=0.01',

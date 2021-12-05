@@ -42,7 +42,7 @@ category.use('/', async (req, res, next) => {
   }
 });
 
-// --- Create Preset Categories (returns head) To be called as user is created ---
+// --- Create Preset Categories. To be called as user is created ---
 
 const createPresets = async user => {
   try {
@@ -91,6 +91,12 @@ const createPresets = async user => {
       parent: saveHead,
       user: user,
     });
+    const Health = new Category({
+      name: 'Health',
+      budget: 0,
+      parent: saveHead,
+      user: user,
+    });
     const Utilities = new Category({
       name: 'Utilities',
       budget: 0,
@@ -123,28 +129,45 @@ const createPresets = async user => {
     });
 
     const saveShopping = await Shopping.save();
+    updateParent(saveHead, saveShopping);
     const saveEntertainment = await Entertainment.save();
+    updateParent(saveHead, saveEntertainment);
     const saveGroceries = await Groceries.save();
+    updateParent(saveHead, saveGroceries);
     const saveDining = await Dining.save();
+    updateParent(saveHead, saveDining);
     const saveTransit = await Transit.save();
+    updateParent(saveHead, saveTransit);
     const saveHousehold = await Household.save();
+    updateParent(saveHead, saveHousehold);
     const saveHealth = await Health.save();
+    updateParent(saveHead, saveHealth);
     const saveUtilities = await Utilities.save();
+    updateParent(saveHead, saveUtilities);
     const saveTravel = await Travel.save();
+    updateParent(saveHead, saveTravel);
     const saveFinance = await Finance.save();
+    updateParent(saveHead, saveFinance);
     const savePersonal = await Personal.save();
+    updateParent(saveHead, savePersonal);
     const saveOther = await Other.save();
+    updateParent(saveHead, saveOther);
 
     const updateUser = await User.updateOne(
       {_id: user._id},
       {$set: {categoryHead: saveHead}},
     );
-    return saveHead;
   } catch (err) {
     console.log(err);
-    return err;
   }
 };
+
+async function updateParent(parentId, childId) {
+    const updateParent = await Category.updateOne(
+      {_id: parentId},
+      {$push: {children: childId}},
+    );
+}
 
 // --- Create Category With Parent (returns new Category) ---
 // token
