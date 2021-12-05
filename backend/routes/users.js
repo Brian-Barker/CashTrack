@@ -54,10 +54,16 @@ user.post('/create', async (req, res) => {
   });
   try {
     const saveUser = await newUser.save((err,user) => {
-        if (err) res.json({message: err});
-        category.createHeader(user);
+        if (err) {
+            console.log(err)
+            res.json({message: err});
+        }
+        else {
+            category.createPresets(user);
+            res.json(saveUser);
+        }
     });
-    res.json(saveUser);
+
   } catch (err) {
     res.json({message: err});
   }
@@ -67,7 +73,6 @@ user.post('/create', async (req, res) => {
 
 user.get('/:userId', async (req, res) => {
   try {
-    console.log(req.params.userId);
     const users = await User.findById(req.params.userId);
     res.json(users);
   } catch (err) {

@@ -26,7 +26,6 @@ place.use('/', async (req, res, next) => {
 // token
 // coordinates (format: 'latitude,longitude')
 place.post('/', async (req, res) => {
-  console.log(req);
   const config = {
     // method: 'get',
     url:
@@ -40,24 +39,13 @@ place.post('/', async (req, res) => {
     headers: {},
   };
 
-  console.log(config);
-
   let result = await axios(config);
   let resJson = [];
   for (const placeEntry of result.data.results) {
     resJson.push(placeEntry);
-    console.log(placeEntry);
   }
 
   res.json(resJson);
-
-  // .then(res => {
-  //   res.json(JSON.stringify(res.data));
-  // })
-  // .catch(err => {
-  //   console.log(err);
-  //   res.json({error: err});
-  // });
 });
 
 export default place;
