@@ -15,7 +15,6 @@ export const request = async (method, body) => {
     method: 'POST',
     mode: 'cors',
   });
-
   res = await res.json();
   return res;
 };
@@ -45,12 +44,14 @@ export const requestWithToken = async (method, body) => {
     return res;
 };
 
+// -------- User Creation and Login ------------ //
+
+// Get user token from storage
 export const fetchUserToken = async () => {
   return await AsyncStorage.getItem('token');
 };
 
-// Login and store user token
-
+// Get user token from backend, place in storage
 export const loginUser = async (username, password) => {
   console.log(username, password);
   let res = await request('users/login', {
@@ -62,15 +63,7 @@ export const loginUser = async (username, password) => {
   return res;
 };
 
-export const fetchPlaceData = async (token, latitude, longitude) => {
-  console.log(token, latitude, longitude);
-  return await request('places', {
-    token: token,
-    latitude: latitude,
-    longitude: longitude,
-  });
-};
-
+// Create new user, return token
 export const createUser = async (
   firstname,
   lastname,
@@ -78,12 +71,27 @@ export const createUser = async (
   password,
   email,
 ) => {
-  let res = await request('users/create', {
+  return await request('users/create', {
     firstname: firstname,
     lastname: lastname,
     username: username,
     password: password,
     email: email,
   });
-  return res;
+};
+
+export const getUser = async () => {
+  let token = await fetchUserToken();
+  return await request('users/getUser', {
+    token: token,
+  });
+};
+
+export const fetchPlaceData = async (token, latitude, longitude) => {
+  console.log(token, latitude, longitude);
+  return await request('places', {
+    token: token,
+    latitude: latitude,
+    longitude: longitude,
+  });
 };

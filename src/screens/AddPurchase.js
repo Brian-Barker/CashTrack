@@ -60,54 +60,15 @@ const AddPurchase = ({navigation}) => {
           keyboardType="numeric"
         />
 
-
-            <Text style={styles.addPurchaseSubHeader}>
-                Category
-            </Text>
-            <Picker
-                selectedValue={selectedValue}
-                style={styles.input}
-                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                >
-                
-                <Picker.Item label="Groceries" value="groceries" />
-                <Picker.Item label="Dining" value="dining" />
-                <Picker.Item label="Shopping" value="shopping" />
-                <Picker.Item label="Transport" value="transport" />
-                <Picker.Item label="Travel" value="travel" />
-                <Picker.Item label="Health" value="health" />
-                <Picker.Item label="Insurance" value="insurance" />
-                <Picker.Item label="Education" value="education" />
-                <Picker.Item label="Utilities" value="utilities" />
-                <Picker.Item label="Finance" value="finance" />
-                <Picker.Item label="Fun-Money" value="funMoney" />
-            </Picker>
-
-
-            <Text style={styles.addPurchaseSubHeader}>
-                Purchase Amount
-            </Text>
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeNumber}
-                value={number}
-                placeholder="Enter Purchase Amount"
-                keyboardType="numeric"
-            />
-
-
-            <TouchableOpacity style={styles.submitContainer} onPress={() => alert('Your Purchase Has Been Added!')}>
-                <Text style={styles.submitText}>  
-                    Submit
-                </Text>
-            </TouchableOpacity>
-        
-            </Animated.View>
-
-        </View>
-    )
-}
-
+        <TouchableOpacity
+          style={styles.submitContainer}
+          onPress={() => alert('Your Purchase Has Been Added!')}>
+          <Text style={styles.submitText}>Submit</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    </View>
+  );
+};
 
 export default AddPurchase;
 

@@ -1,5 +1,5 @@
 import PushNotification from 'react-native-push-notification';
-import {fetchPlaceData, loginUser} from './Backend';
+import {fetchPlaceData, fetchUserToken, loginUser} from './Backend';
 
 module.exports = async taskData => {
   if (PushNotification.getChannels() === undefined) {
@@ -11,12 +11,17 @@ module.exports = async taskData => {
 
   console.log('Task Data', taskData);
 
-  let token = await loginUser('mdirocco', 'password');
-  let res = await fetchPlaceData(
-    token.token,
-    taskData.latitude,
-    taskData.longitude,
-  );
+  let token = await fetchUserToken();
+
+  console.log(token);
+
+  let res = await fetchPlaceData(token, taskData.latitude, taskData.longitude);
+
+  console.log('Res', res);
+
+  if (res[0] === undefined) {
+    return;
+  }
 
   PushNotification.cancelAllLocalNotifications();
 

@@ -1,5 +1,13 @@
-import React from 'react';
-import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  StatusBar,
+  ActivityIndicator,
+} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -10,8 +18,38 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getUser} from '../apis/Backend';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 const Settings = ({navigation}) => {
+  let [isLoading, setIsLoading] = useState(true);
+  let [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      let userInfo = await getUser();
+      setUserInfo(userInfo.getUser);
+      setIsLoading(false);
+    };
+    fetchUserInfo().done();
+  });
+
+  if (isLoading) {
+    return (
+      <Animated.View
+        style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <StatusBar
+          translucent={false}
+          backgroundColor="transparent"
+          barStyle={'dark-content'}
+        />
+        <Animated.View style={styles.loadingScreenContainer}>
+          <LoadingIndicator />
+        </Animated.View>
+      </Animated.View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       {/* <Text>Settings</Text>
@@ -21,7 +59,10 @@ const Settings = ({navigation}) => {
             /> */}
 
       <Animated.View style={styles.profilePicContainer}>
-        <Text style={styles.profilePicText}>CT</Text>
+        <Text style={styles.profilePicText}>
+          {userInfo.firstname[0]}
+          {userInfo.lastname[0]}
+        </Text>
       </Animated.View>
 
       <Animated.View style={styles.changePassContainer}>
@@ -31,8 +72,10 @@ const Settings = ({navigation}) => {
       </Animated.View>
 
       <Animated.View style={styles.placehold1Container}>
-        <TouchableOpacity style={{paddingTop: hp('1%')}}>
-          <Text style={styles.placehold1Text}>Placehold 1 ></Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('BudgetConfig')}
+          style={{paddingTop: hp('1%')}}>
+          <Text style={styles.placehold1Text}>Adjust Budget ></Text>
         </TouchableOpacity>
       </Animated.View>
 
@@ -40,7 +83,7 @@ const Settings = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Test')}
           style={{paddingTop: hp('1%')}}>
-          <Text style={styles.placehold2Text}>Placehold 2 ></Text>
+          <Text style={styles.placehold2Text}>Placehold 1 ></Text>
         </TouchableOpacity>
       </Animated.View>
 

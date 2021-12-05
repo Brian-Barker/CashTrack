@@ -121,7 +121,7 @@ let styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomWidth: 0.5,
     //borderColor:'black',
-    borderColor: '#002B19',
+    borderColor:'#002B19'
   },
 
   CurrentTab: {
@@ -211,20 +211,20 @@ let styles = StyleSheet.create({
     paddingLeft: hp('3%'),
     paddingBottom: hp('1.75%'),
   },
+
   recentPurchasesContainer: {
-    alignItems:'center',
-    width:wp('85%'),
-    backgroundColor:'white',
-    justifyContent:'center',
-    alignSelf:'center',
-    borderRadius:hp('1.5%'),
-    marginTop:hp('1.75%'),
-    marginBottom: hp('12%'),
+    alignItems: 'center',
+    width: wp('85%'),
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderRadius: hp('1.5%'),
+    marginTop: hp('1.75%'),
+    marginBottom: hp('1.75%'),
   },
-  RecentPurchsesHeaderText: 
-  {
-    alignSelf:'center',
-    color:'#002B19',
+  RecentPurchsesHeaderText: {
+    alignSelf: 'center',
+    color: '#002B19',
     fontSize: hp('3%'),
     fontFamily: 'PierSans-Regular',
     marginTop: hp('1%'),

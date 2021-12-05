@@ -23,11 +23,12 @@ DerivedData
 
 # Android/IntelliJ
 #
-*build/
+build/
 .idea
 .gradle
 local.properties
 *.iml
+*.hprof
 
 # node.js
 #
@@ -57,9 +58,4 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-
-# Backend
-*.env
-src/test/assets/1024_transparent_recolor.png
-src/test/assets/spinner_transparent_recolor.png
-android/java_pid21396.hprof
+backend/.env

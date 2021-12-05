@@ -9,6 +9,8 @@ import {
   FlatList,
   MaskedViewComponent,
   ImageBackground,
+  NativeModules,
+  PermissionsAndroid,
 } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -34,34 +36,69 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Image} from 'react-native';
 const {height, width} = Dimensions.get('window');
 
+//Pull from Database
 import {tempTransactions} from '../components/Purchases';
+import LoadingIndicator from '../components/LoadingIndicator';
 
-// let tempTransactions = [
-//   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-//   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-//   {name: 'Publix Super Markets', category: 'Groceries', amount: '69.42'},
-// ];
+const {GeolocationModule} = NativeModules;
 
 const Home = () => {
   const numOfTransactions = tempTransactions.length;
 
+  //Pull from Database
+  const budgetAmount = 900;
+
   let [isLoading, setIsLoading] = useState(true);
-  let [sunday, setSunday] = useState(new Date());
+  let [hasPermission, setHasPermission] = useState(false);
 
-  const translateY = useSharedValue(-500);
-  const slide = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: translateY.value}],
+  useEffect(() => {
+    GeolocationModule.startWorker();
+  }, []);
+
+  useEffect(() => {
+    const fetchPermissions = async () => {
+      const rationale = {
+        title: 'CashTrack Geolocation Tracking Permission',
+        message:
+          'CashTrack would like to keep track of the stores you visit in order to help you budget more efficiently.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      };
+      try {
+        const coarse = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+          rationale,
+        );
+        const fine = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          rationale,
+        );
+        const background = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION,
+          rationale,
+        );
+        if (
+          coarse === 'granted' &&
+          fine === 'granted' &&
+          background === 'granted'
+        ) {
+          console.log('We in the money');
+          setHasPermission(true);
+          setIsLoading(false);
+        } else {
+          console.log(coarse, fine, background);
+        }
+      } catch (err) {
+        console.warn(err);
+      }
     };
-  });
-
-  useEffect(() => {
-    translateY.value = withTiming(0, {duration: 2000});
-  });
-
-  useEffect(() => {
+    if (!hasPermission) {
+      fetchPermissions().done();
+    } else {
+      setIsLoading(false);
+    }
     console.log('Simulating fetch request...');
-    setTimeout(() => setIsLoading(false), 1000);
   }, []);
 
   if (isLoading) {
@@ -73,7 +110,7 @@ const Home = () => {
           barStyle={'dark-content'}
         />
         <Animated.View style={styles.loadingScreenContainer}>
-          <ActivityIndicator size={'large'} color={'#002b19'} />
+          <LoadingIndicator />
         </Animated.View>
       </Animated.View>
     );
@@ -81,8 +118,6 @@ const Home = () => {
 
   return (
     <View style={styles.homeContainer}>
-      {/* <ImageBackground source={require('../../assets/icons/Background,5.png')} style={{width: '110%', height: '110%'}}> */}
-
       <ScrollView>
         <Animated.View style={styles.dashboardContainer}>
           <Animated.View style={styles.remainingBalanceContainer}>
@@ -104,7 +139,13 @@ const Home = () => {
                   labels: ['Week 1', ' Week 2', 'Week 3', 'Week 4'],
                   datasets: [
                     {
-                      data: [900, 650, 340, 180],
+                      // data: [900, 650, 340, 180],
+                      data: [
+                        budgetAmount,
+                        (budgetAmount * 4) / 5,
+                        budgetAmount / 2,
+                        (budgetAmount * 3) / 9,
+                      ],
                     },
                   ],
                 }}
@@ -150,11 +191,13 @@ const Home = () => {
           <Animated.Text style={styles.RecentPurchsesHeaderText}>
             Recent Purchases
           </Animated.Text>
-        
+
           <View style={{marginBottom: 0}}>
-          {tempTransactions.slice(numOfTransactions-3,numOfTransactions).map((item, index) => (
-            <Transaction key={index} item={item} delay={index} />
-          ))}
+            {tempTransactions
+              .slice(numOfTransactions - 3, numOfTransactions)
+              .map((item, index) => (
+                <Transaction key={index} item={item} delay={index} />
+              ))}
           </View>
         </Animated.View>
       </ScrollView>

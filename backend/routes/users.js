@@ -11,7 +11,6 @@ const user = express.Router();
 // --- Return List of Current Users ---
 
 user.get('/', async (req, res) => {
-
   try {
     const users = await User.find();
     res.json(users);
@@ -45,6 +44,7 @@ user.post('/create', async (req, res) => {
     res.json({message: 'Password hashing failed.'});
     return;
   }
+
   const newUser = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,

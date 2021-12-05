@@ -12,8 +12,6 @@ target 'CashTrack' do
     :hermes_enabled => false
   )
 
-  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
-
   target 'CashTrackTests' do
     inherit! :complete
     # Pods for testing
@@ -27,5 +25,6 @@ target 'CashTrack' do
 
   post_install do |installer|
     react_native_post_install(installer)
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end

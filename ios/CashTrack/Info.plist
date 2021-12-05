@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,25 +51,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Montserrat-Black.otf</string>
-		<string>MontserratAlternates-Light.otf</string>
-		<string>MontserratAlternates-Medium.otf</string>
-		<string>MontserratAlternates-Regular.otf</string>
-		<string>MontserratAlternates-Thin.otf</string>
-		<string>Moon Bold.otf</string>
-		<string>Moon Light.otf</string>
-		<string>PierSans-Black.otf</string>
-		<string>PierSans-BlackItalic.otf</string>
-		<string>PierSans-Bold.otf</string>
-		<string>PierSans-BoldItalic.otf</string>
-		<string>PierSans-Italic.otf</string>
-		<string>PierSans-Light.otf</string>
-		<string>PierSans-LightItalic.otf</string>
-		<string>PierSans-Medium.otf</string>
-		<string>PierSans-MediumItalic.otf</string>
-		<string>PierSans-Regular.otf</string>
-	</array>
 </dict>
 </plist>

@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.work.ListenableWorker;
 import androidx.work.WorkerParameters;
 
-import com.agontuk.RNFusedLocation.FusedLocationProvider;
 import com.facebook.react.HeadlessJsTaskService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationAvailability;

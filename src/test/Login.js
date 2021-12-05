@@ -8,7 +8,8 @@ import Animated, {
   withDelay,
 } from 'react-native-reanimated';
 import styles from '../styles';
-import {Dimensions, StatusBar, TextInput, TouchableOpacity} from 'react-native';
+import {Dimensions, StatusBar, TextInput} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {fetchUserToken, loginUser} from '../apis/Backend';
 
 const {height, width} = Dimensions.get('window');
@@ -25,6 +26,15 @@ const Login = ({navigation}) => {
   const logoSpinnerHeight = useSharedValue(0);
   const logoSpinnerWidth = useSharedValue(0);
   const loginDivOpacity = useSharedValue(0);
+
+  const shiftTheFuckingRegisterView = useAnimatedStyle(() => {
+    return {
+      transform: [
+        // {translateX: height * 0.1},
+        {translateY: height * 0.2},
+      ],
+    };
+  });
 
   const logoPositionAnimation = useAnimatedStyle(() => {
     return {
@@ -102,14 +112,14 @@ const Login = ({navigation}) => {
           {position: 'absolute'},
         ]}>
         <Animated.Image
-          source={require('./assets/spinner_transparent_recolor.png')}
+          source={require('../../assets/spinner_transparent_recolor.png')}
           style={[
             logoSpinnerRotationAnimation,
             {height: height * 0.2, width: height * 0.2, position: 'absolute'},
           ]}
         />
         <Animated.Image
-          source={require('./assets/1024_transparent_recolor.png')}
+          source={require('../../assets/1024_transparent_recolor.png')}
           style={[
             logoCenterAnimation,
             {
@@ -199,13 +209,25 @@ const Login = ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
             translateY: height * 0.2,
-          }}>
+          }}
+        />
+        <Animated.View
+          style={[
+            shiftTheFuckingRegisterView,
+            {alignItems: 'center', justifyContent: 'center'},
+          ]}>
           <Animated.Text style={{color: 'black'}}>
             Don't have an account?
           </Animated.Text>
-          <Animated.Text style={{marginTop: height * 0.01, color: '#e5faf3'}}>
-            Register Now!
-          </Animated.Text>
+          <TouchableOpacity
+            style={{zIndex: 1}}
+            onPress={() => {
+              navigation.navigate('Register');
+            }}>
+            <Animated.Text style={{marginTop: height * 0.01, color: '#e5faf3'}}>
+              Register Now!
+            </Animated.Text>
+          </TouchableOpacity>
         </Animated.View>
       </Animated.View>
     </Animated.View>

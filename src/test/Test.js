@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import {createUser, fetchPlaceData, loginUser} from '../apis/Backend';
 import styles from '../styles';
-import Geolocation from 'react-native-geolocation-service';
 
 const {height, width} = Dimensions.get('window');
 
@@ -190,28 +189,28 @@ const Test = () => {
       <TouchableOpacity
         onPress={async () => {
           let token = await loginUser('mdirocco', 'password');
-          await Geolocation.getCurrentPosition(
-            async result => {
-              setLongitude(result.coords.longitude);
-              setLatitude(result.coords.latitude);
-              console.log(result);
-              let res = await fetchPlaceData(
-                token.token,
-                result.coords.latitude,
-                result.coords.longitude,
-              );
-              console.log(res);
-              setBackendResponse(res);
-              setModalVisible(true);
-            },
-            error => {
-              console.log(error);
-            },
-            {
-              enableHighAccuracy: true,
-              maximumAge: 0,
-            },
-          );
+          // await Geolocation.getCurrentPosition(
+          //   async result => {
+          //     setLongitude(result.coords.longitude);
+          //     setLatitude(result.coords.latitude);
+          //     console.log(result);
+          //     let res = await fetchPlaceData(
+          //       token.token,
+          //       result.coords.latitude,
+          //       result.coords.longitude,
+          //     );
+          //     console.log(res);
+          //     setBackendResponse(res);
+          //     setModalVisible(true);
+          //   },
+          //   error => {
+          //     console.log(error);
+          //   },
+          //   {
+          //     enableHighAccuracy: true,
+          //     maximumAge: 0,
+          //   },
+          // );
         }}
         style={{
           backgroundColor: '#333333',
